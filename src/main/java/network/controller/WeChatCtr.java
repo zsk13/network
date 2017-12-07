@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,13 +20,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import network.common.XmlToMap;
 import network.common.wechatUtil.TextMessage;
 import network.common.wechatUtil.WechatMessageUtil;
+import network.service.QuestionService;
+import network.service.UserService;
 
 @Controller
 @RequestMapping(value = "wechat")
 public class WeChatCtr {
     Log logger = LogFactory.getLog(WeChatCtr.class);
     
-    public static final String TOKEN = "wechat";  
+    public static final String TOKEN = "wechat";
+    
+    @Autowired
+    private QuestionService questionService;
     
     @RequestMapping(value = "validate", method = {RequestMethod.GET})
     public void validate(HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -69,21 +75,18 @@ public class WeChatCtr {
             String responseMessage = "success";
             // 对消息进行处理
             if (WechatMessageUtil.MESSAGE_TEXT.equals(msgType)) {// 文本消息
-                TextMessage textMessage = new TextMessage();
-                textMessage.setMsgType(WechatMessageUtil.MESSAGE_TEXT);
-                textMessage.setToUserName(fromUserName);
-                textMessage.setFromUserName(toUserName);
-                textMessage.setCreateTime(System.currentTimeMillis());
-                textMessage.setContent("我已经受到你发来的消息了");
-                responseMessage = WechatMessageUtil.textMessageToXml(textMessage);
+                questionService.dealCommitQuestion(map,out);
+                return;
             }else if (msgType.equals(WechatMessageUtil.MESSAGE_EVENT)) {  
                 // 事件KEY值，与创建自定义菜单时指定的KEY值对应  
+                
                 String eventKey = map.get("EventKey");  
                 String respContent = "默认";
                 if (eventKey.equals("11")) {  
                     respContent = "签到菜单项被点击！";  
                 } else if (eventKey.equals("12")) {  
-                    respContent = "课堂练习菜单项被点击！";  
+                    questionService.dealGetQuestion(map,out);
+                    return;
                 } 
                 TextMessage textMessage = new TextMessage();
                 textMessage.setMsgType(WechatMessageUtil.MESSAGE_TEXT);
