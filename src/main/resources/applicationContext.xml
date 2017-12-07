@@ -8,7 +8,7 @@
   
     <context:annotation-config />  
     <!-- 配置component所在的包，自动加载需要管理的Bean -->  
-    <context:component-scan base-package=""></context:component-scan>  
+    <context:component-scan base-package="network"></context:component-scan>  
     <import resource="spring-mybatis.xml" />  
   
 </beans>  

@@ -1,4 +1,4 @@
-package service.impl;
+package network.service.impl;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
+import network.common.PageInfo;
+import network.dao.UserDao;
+import network.model.User;
+import network.service.UserService;
 
-import common.PageInfo;
-import dao.UserDao;
-import model.User;
-import service.UserService;
+
 
 
 @Service

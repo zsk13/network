@@ -1,4 +1,4 @@
-package common;
+package network.common;
 /** 
  * @author wrp 
  * @Description com.wrpys.ssm.common.Common 

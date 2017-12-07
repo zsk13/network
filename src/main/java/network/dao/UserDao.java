@@ -1,8 +1,8 @@
-package dao;
-
-import model.User;
+package network.dao;
 
 import java.util.List;
+
+import network.model.User;
 
 public interface UserDao {
 

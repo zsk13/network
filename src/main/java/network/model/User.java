@@ -1,4 +1,4 @@
-package model;
+package network.model;
 
 public class User {
 

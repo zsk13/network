@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
-<mapper namespace="dao.UserDao" >  
+<mapper namespace="network.dao.UserDao" >  
   
     <sql id="inc_whereClause" >  
         <where>  
@@ -55,13 +55,13 @@
       where user_id = #{userId}  
     </update>  
   
-    <select id="findUserByParams" resultType="model.User">  
+    <select id="findUserByParams" resultType="network.model.User">  
 		SELECT user_id as userId, user_name as userName, password, sex, avatar_url as avatarUrl, email
         from user  
         <include refid="inc_whereClause"/>  
     </select>  
   
-	<select id="findUserByUserId" resultType="model.User">
+	<select id="findUserByUserId" resultType="network.model.User">
 		SELECT user_id as userId, user_name as userName, password, sex, avatar_url as avatarUrl, email
 		from user
 		<where>

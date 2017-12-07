@@ -1,4 +1,4 @@
-package controller;
+package network.controller;
 
 import java.util.List;
 
@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import common.Constants;
-import common.PageInfo;
-import common.ResultBean;
-import model.User;
-import service.UserService;
+import network.common.Constants;
+import network.common.PageInfo;
+import network.common.ResultBean;
+import network.model.User;
+import network.service.UserService;
+
+
 
 @Controller
 @RequestMapping(value = "user")
