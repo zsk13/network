@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="dao.UserDao" >  
+  
+    <sql id="inc_whereClause" >  
+        <where>  
+            <if test="userId!=null and userId!=''">  
+                and user_id = #{userId}  
+            </if>  
+            <if test="userName!=null and userName!=''">  
+                and user_name = #{userName}
+            </if>  
+            <if test="sex!=null">  
+                and sex = #{sex}  
+            </if>
+        </where>  
+    </sql>  
+  
+    <insert id="createUser">  
+        INSERT INTO user(user_name, sex, password,user_id,avatar_url,email) VALUES (#{userName, jdbcType=VARCHAR}, #{sex, jdbcType=INTEGER}, #{password, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{avatarUrl, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})  
+    </insert>  
+  
+    <delete id="deleteUser">  
+        DELETE FROM user  
+        <include refid="inc_whereClause"/>  
+    </delete>  
+  
+    <delete id="batchDeleteUser">  
+        DELETE FROM user  
+        where user_id in  
+        <foreach collection="list" item="userId" open="(" close=")" separator=",">  
+            #{userId}  
+        </foreach>  
+    </delete>  
+  
+    <update id="updateUser">  
+      UPDATE user  
+      <set>  
+          <if test="userName!=null">  
+              user_name = #{userName, jdbcType=VARCHAR},  
+          </if>  
+          <if test="sex!=null">  
+              sex = #{sex, jdbcType=INTEGER},  
+          </if>  
+          <if test="password!=null">  
+              password = #{password, jdbcType=VARCHAR},  
+          </if> 
+          <if test="avatarUrl!=null">  
+              avatar_url = #{avatarUrl, jdbcType=VARCHAR},  
+          </if> 
+          <if test="email!=null">  
+              email = #{email, jdbcType=VARCHAR},  
+          </if> 
+      </set>  
+      where user_id = #{userId}  
+    </update>  
+  
+    <select id="findUserByParams" resultType="model.User">  
+		SELECT user_id as userId, user_name as userName, password, sex, avatar_url as avatarUrl, email
+        from user  
+        <include refid="inc_whereClause"/>  
+    </select>  
+  
+	<select id="findUserByUserId" resultType="model.User">
+		SELECT user_id as userId, user_name as userName, password, sex, avatar_url as avatarUrl, email
+		from user
+		<where>
+		     user_id = #{userId}
+		</where>
+	</select>  
+  
+</mapper>  
