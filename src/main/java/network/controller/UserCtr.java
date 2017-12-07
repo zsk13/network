@@ -84,5 +84,12 @@ public class UserCtr {
     rb.setFlag(Constants.SUCCESS);
     return rb;
   }
+  
+  @RequestMapping(value = "find", method = {RequestMethod.GET, RequestMethod.POST})
+  @ResponseBody
+  public User findUserById(User user) {
+    User rb = userService.findUserById(user.getUserId());
+    return rb;
+  }
 
 }
