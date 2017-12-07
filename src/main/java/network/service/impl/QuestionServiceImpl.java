@@ -3,10 +3,13 @@ package network.service.impl;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import network.common.wechatUtil.TextMessage;
 import network.common.wechatUtil.WechatMessageUtil;
 import network.service.QuestionService;
 
+@Service
 public class QuestionServiceImpl implements QuestionService{
 
     public void dealGetQuestion(Map<String, String> map,PrintWriter out) {
