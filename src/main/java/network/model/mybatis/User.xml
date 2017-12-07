@@ -17,7 +17,7 @@
     </sql>  
   
     <insert id="createUser">  
-        INSERT INTO user(user_name, sex, password,user_id,avatar_url,email) VALUES (#{userName, jdbcType=VARCHAR}, #{sex, jdbcType=INTEGER}, #{password, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{avatarUrl, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})  
+        INSERT INTO user(user_name, sex, password,user_id,email) VALUES (#{userName, jdbcType=VARCHAR}, #{sex, jdbcType=INTEGER}, #{password, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})  
     </insert>  
   
     <delete id="deleteUser">  
@@ -44,10 +44,7 @@
           </if>  
           <if test="password!=null">  
               password = #{password, jdbcType=VARCHAR},  
-          </if> 
-          <if test="avatarUrl!=null">  
-              avatar_url = #{avatarUrl, jdbcType=VARCHAR},  
-          </if> 
+          </if>  
           <if test="email!=null">  
               email = #{email, jdbcType=VARCHAR},  
           </if> 
@@ -56,13 +53,13 @@
     </update>  
   
     <select id="findUserByParams" resultType="network.model.User">  
-		SELECT user_id as userId, user_name as userName, password, sex, avatar_url as avatarUrl, email
+		SELECT user_id as userId, user_name as userName, password, sex, email
         from user  
         <include refid="inc_whereClause"/>  
     </select>  
   
 	<select id="findUserByUserId" resultType="network.model.User">
-		SELECT user_id as userId, user_name as userName, password, sex, avatar_url as avatarUrl, email
+		SELECT user_id as userId, user_name as userName, password, sex, email
 		from user
 		<where>
 		     user_id = #{userId}
