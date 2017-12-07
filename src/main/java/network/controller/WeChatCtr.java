@@ -4,18 +4,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import network.common.XmlToMap;
+import network.common.wechatUtil.TextMessage;
+import network.common.wechatUtil.WechatMessageUtil;
+
 @Controller
 @RequestMapping(value = "wechat")
 public class WeChatCtr {
+    Log logger = LogFactory.getLog(WeChatCtr.class);
+    
     public static final String TOKEN = "wechat";  
     
     @RequestMapping(value = "validate", method = {RequestMethod.GET})
@@ -39,6 +48,38 @@ public class WeChatCtr {
             if (signature.equals(sign)) {  
                 response.getWriter().print(echostr);  
             }  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+    }
+    
+    @RequestMapping(value = "validate", method = {RequestMethod.POST})
+    public void process(PrintWriter out,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        try {  
+            // 开发者提交信息后，微信服务器将发送GET请求到填写的服务器地址URL上，GET请求携带参数  
+            Map<String, String> map = XmlToMap.xmlToMap(request);
+            logger.info(map);
+            // 发送方帐号（一个OpenID）
+            String fromUserName = map.get("FromUserName");
+            // 开发者微信号
+            String toUserName = map.get("ToUserName");
+            // 消息类型
+            String msgType = map.get("MsgType");
+            // 默认回复一个"success"
+            String responseMessage = "success";
+            // 对消息进行处理
+            if (WechatMessageUtil.MESSAGE_TEXT.equals(msgType)) {// 文本消息
+                TextMessage textMessage = new TextMessage();
+                textMessage.setMsgType(WechatMessageUtil.MESSAGE_TEXT);
+                textMessage.setToUserName(fromUserName);
+                textMessage.setFromUserName(toUserName);
+                textMessage.setCreateTime(System.currentTimeMillis());
+                textMessage.setContent("我已经受到你发来的消息了");
+                responseMessage = WechatMessageUtil.textMessageToXml(textMessage);
+            }
+            logger.info(responseMessage);
+            out.print(responseMessage);
+            out.flush();
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
