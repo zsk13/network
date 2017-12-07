@@ -12,9 +12,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-	<!--Maven依赖 需要更换可以到http://mvnrepository.com进行查询 -->
 	<dependencies>
 
+		<!--Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>

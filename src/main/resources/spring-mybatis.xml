@@ -52,7 +52,7 @@
     </bean>  
   
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="dao" />  
+        <property name="basePackage" value="network.dao" />  
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>  
   
@@ -82,7 +82,7 @@
     <!-- 配置AOP事务 -->  
     <aop:config>  
         <!-- 配置事务切点 -->  
-        <aop:pointcut expression="execution(* service.*Service.*(..))"  
+        <aop:pointcut expression="execution(* network.service.*Service.*(..))"  
                       id="appPoint" />  
         <!-- 结合事务切点与切面 -->  
         <aop:advisor advice-ref="appAdvice" pointcut-ref="appPoint" />  

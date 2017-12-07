@@ -10,8 +10,6 @@ public class User {
 
   private Integer sex;
 
-  private String avatarUrl;
-
   private String email;
 
   public String getUserId() {
@@ -44,14 +42,6 @@ public class User {
 
   public void setSex(Integer sex) {
     this.sex = sex;
-  }
-
-  public String getAvatarUrl() {
-    return avatarUrl;
-  }
-
-  public void setAvatarUrl(String avatarUrl) {
-    this.avatarUrl = avatarUrl;
   }
 
   public String getEmail() {
