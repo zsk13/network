@@ -76,10 +76,10 @@ public class WeChatCtr {
                 textMessage.setCreateTime(System.currentTimeMillis());
                 textMessage.setContent("我已经受到你发来的消息了");
                 responseMessage = WechatMessageUtil.textMessageToXml(textMessage);
-            }else if (msgType.equals(WechatMessageUtil.MESSAGE_EVENT_CLICK)) {  
+            }else if (msgType.equals(WechatMessageUtil.MESSAGE_EVENT)) {  
                 // 事件KEY值，与创建自定义菜单时指定的KEY值对应  
                 String eventKey = map.get("EventKey");  
-                String respContent = "";
+                String respContent = "默认";
                 if (eventKey.equals("11")) {  
                     respContent = "签到菜单项被点击！";  
                 } else if (eventKey.equals("12")) {  
@@ -90,7 +90,7 @@ public class WeChatCtr {
                 textMessage.setToUserName(fromUserName);
                 textMessage.setFromUserName(toUserName);
                 textMessage.setCreateTime(System.currentTimeMillis());
-                textMessage.setContent("我已经受到你发来的消息了");
+                textMessage.setContent(respContent);
                 responseMessage = WechatMessageUtil.textMessageToXml(textMessage);
             }  
             logger.info(responseMessage);
