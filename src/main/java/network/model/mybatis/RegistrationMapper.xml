@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="network.dao.RegistrationMapper" >
+  <resultMap id="BaseResultMap" type="network.model.Registration" >
+    <id column="r_id" property="rId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="location_x" property="locationX" jdbcType="REAL" />
+    <result column="location_y" property="locationY" jdbcType="REAL" />
+    <result column="s_time" property="sTime" jdbcType="TIMESTAMP" />
+    <result column="e_time" property="eTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    r_id, name, location_x, location_y, s_time, e_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.RegistrationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from registration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from registration
+    where r_id = #{rId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from registration
+    where r_id = #{rId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="network.model.RegistrationExample" >
+    delete from registration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="network.model.Registration" >
+    insert into registration (r_id, name, location_x, 
+      location_y, s_time, e_time
+      )
+    values (#{rId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{locationX,jdbcType=REAL}, 
+      #{locationY,jdbcType=REAL}, #{sTime,jdbcType=TIMESTAMP}, #{eTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="network.model.Registration" >
+    insert into registration
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        r_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="locationX != null" >
+        location_x,
+      </if>
+      <if test="locationY != null" >
+        location_y,
+      </if>
+      <if test="sTime != null" >
+        s_time,
+      </if>
+      <if test="eTime != null" >
+        e_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        #{rId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="locationX != null" >
+        #{locationX,jdbcType=REAL},
+      </if>
+      <if test="locationY != null" >
+        #{locationY,jdbcType=REAL},
+      </if>
+      <if test="sTime != null" >
+        #{sTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eTime != null" >
+        #{eTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="network.model.RegistrationExample" resultType="java.lang.Integer" >
+    select count(*) from registration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update registration
+    <set >
+      <if test="record.rId != null" >
+        r_id = #{record.rId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationX != null" >
+        location_x = #{record.locationX,jdbcType=REAL},
+      </if>
+      <if test="record.locationY != null" >
+        location_y = #{record.locationY,jdbcType=REAL},
+      </if>
+      <if test="record.sTime != null" >
+        s_time = #{record.sTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.eTime != null" >
+        e_time = #{record.eTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update registration
+    set r_id = #{record.rId,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      location_x = #{record.locationX,jdbcType=REAL},
+      location_y = #{record.locationY,jdbcType=REAL},
+      s_time = #{record.sTime,jdbcType=TIMESTAMP},
+      e_time = #{record.eTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="network.model.Registration" >
+    update registration
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="locationX != null" >
+        location_x = #{locationX,jdbcType=REAL},
+      </if>
+      <if test="locationY != null" >
+        location_y = #{locationY,jdbcType=REAL},
+      </if>
+      <if test="sTime != null" >
+        s_time = #{sTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eTime != null" >
+        e_time = #{eTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where r_id = #{rId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="network.model.Registration" >
+    update registration
+    set name = #{name,jdbcType=VARCHAR},
+      location_x = #{locationX,jdbcType=REAL},
+      location_y = #{locationY,jdbcType=REAL},
+      s_time = #{sTime,jdbcType=TIMESTAMP},
+      e_time = #{eTime,jdbcType=TIMESTAMP}
+    where r_id = #{rId,jdbcType=BIGINT}
+  </update>
+</mapper>

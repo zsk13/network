@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="network.dao.RollcallMapper" >
+  <resultMap id="BaseResultMap" type="network.model.Rollcall" >
+    <id column="rc_id" property="rcId" jdbcType="BIGINT" />
+    <result column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="r_id" property="rId" jdbcType="BIGINT" />
+    <result column="location_x" property="locationX" jdbcType="REAL" />
+    <result column="location_y" property="locationY" jdbcType="REAL" />
+    <result column="location_name" property="locationName" jdbcType="VARCHAR" />
+    <result column="r_time" property="rTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rc_id, u_id, r_id, location_x, location_y, location_name, r_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.RollcallExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rollcall
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rollcall
+    where rc_id = #{rcId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rollcall
+    where rc_id = #{rcId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="network.model.RollcallExample" >
+    delete from rollcall
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="network.model.Rollcall" >
+    insert into rollcall (rc_id, u_id, r_id, 
+      location_x, location_y, location_name, 
+      r_time)
+    values (#{rcId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{rId,jdbcType=BIGINT}, 
+      #{locationX,jdbcType=REAL}, #{locationY,jdbcType=REAL}, #{locationName,jdbcType=VARCHAR}, 
+      #{rTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="network.model.Rollcall" >
+    insert into rollcall
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rcId != null" >
+        rc_id,
+      </if>
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="rId != null" >
+        r_id,
+      </if>
+      <if test="locationX != null" >
+        location_x,
+      </if>
+      <if test="locationY != null" >
+        location_y,
+      </if>
+      <if test="locationName != null" >
+        location_name,
+      </if>
+      <if test="rTime != null" >
+        r_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rcId != null" >
+        #{rcId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="rId != null" >
+        #{rId,jdbcType=BIGINT},
+      </if>
+      <if test="locationX != null" >
+        #{locationX,jdbcType=REAL},
+      </if>
+      <if test="locationY != null" >
+        #{locationY,jdbcType=REAL},
+      </if>
+      <if test="locationName != null" >
+        #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="rTime != null" >
+        #{rTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="network.model.RollcallExample" resultType="java.lang.Integer" >
+    select count(*) from rollcall
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rollcall
+    <set >
+      <if test="record.rcId != null" >
+        rc_id = #{record.rcId,jdbcType=BIGINT},
+      </if>
+      <if test="record.uId != null" >
+        u_id = #{record.uId,jdbcType=BIGINT},
+      </if>
+      <if test="record.rId != null" >
+        r_id = #{record.rId,jdbcType=BIGINT},
+      </if>
+      <if test="record.locationX != null" >
+        location_x = #{record.locationX,jdbcType=REAL},
+      </if>
+      <if test="record.locationY != null" >
+        location_y = #{record.locationY,jdbcType=REAL},
+      </if>
+      <if test="record.locationName != null" >
+        location_name = #{record.locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rTime != null" >
+        r_time = #{record.rTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rollcall
+    set rc_id = #{record.rcId,jdbcType=BIGINT},
+      u_id = #{record.uId,jdbcType=BIGINT},
+      r_id = #{record.rId,jdbcType=BIGINT},
+      location_x = #{record.locationX,jdbcType=REAL},
+      location_y = #{record.locationY,jdbcType=REAL},
+      location_name = #{record.locationName,jdbcType=VARCHAR},
+      r_time = #{record.rTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="network.model.Rollcall" >
+    update rollcall
+    <set >
+      <if test="uId != null" >
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="rId != null" >
+        r_id = #{rId,jdbcType=BIGINT},
+      </if>
+      <if test="locationX != null" >
+        location_x = #{locationX,jdbcType=REAL},
+      </if>
+      <if test="locationY != null" >
+        location_y = #{locationY,jdbcType=REAL},
+      </if>
+      <if test="locationName != null" >
+        location_name = #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="rTime != null" >
+        r_time = #{rTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rc_id = #{rcId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="network.model.Rollcall" >
+    update rollcall
+    set u_id = #{uId,jdbcType=BIGINT},
+      r_id = #{rId,jdbcType=BIGINT},
+      location_x = #{locationX,jdbcType=REAL},
+      location_y = #{locationY,jdbcType=REAL},
+      location_name = #{locationName,jdbcType=VARCHAR},
+      r_time = #{rTime,jdbcType=TIMESTAMP}
+    where rc_id = #{rcId,jdbcType=BIGINT}
+  </update>
+</mapper>
