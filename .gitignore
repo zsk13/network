@@ -91,4 +91,4 @@ buildNumber.properties
 .settings
 .metadata
 
-.iml
+*.iml
