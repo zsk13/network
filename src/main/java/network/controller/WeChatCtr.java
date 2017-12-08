@@ -82,8 +82,10 @@ public class WeChatCtr {
                 
                 String eventKey = map.get("EventKey");  
                 String respContent = "默认";
-                if (eventKey.equals("11")) {  
-                    respContent = "签到菜单项被点击！";  
+                if (eventKey.equals("11")) {
+
+                    respContent = "签到菜单项被点击！";
+
                 } else if (eventKey.equals("12")) {  
                     questionService.dealGetQuestion(map,out);
                     return;
