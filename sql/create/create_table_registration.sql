@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `registration`;
 CREATE TABLE `registration` (
-  `r_id` bigint(20) NOT NULL,
+  `r_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `location_x` float DEFAULT NULL,
   `location_y` float DEFAULT NULL,

@@ -3,7 +3,7 @@
 -- ----------------------------
 DROP TABLE IF EXISTS `rollcall`;
 CREATE TABLE `rollcall` (
-  `rc_id` bigint(20) NOT NULL,
+  `rc_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `u_id` bigint(20) NOT NULL,
   `r_id` bigint(20) NOT NULL,
   `location_x` float DEFAULT NULL,
