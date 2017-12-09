@@ -6,9 +6,10 @@ import java.util.Map;
 
 import network.dao.QuestionMapper;
 import network.model.Question;
+
 import network.model.QuestionExample;
-import network.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import network.common.wechatUtil.TextMessage;
@@ -16,7 +17,11 @@ import network.common.wechatUtil.WechatMessageUtil;
 import network.service.QuestionService;
 
 @Service
-public class QuestionServiceImpl extends BaseService implements QuestionService{
+
+public class QuestionServiceImpl implements QuestionService{
+
+    BaseService baseService = new BaseService();
+
     @Autowired
     QuestionMapper questionMapper;
 
@@ -78,7 +83,7 @@ public class QuestionServiceImpl extends BaseService implements QuestionService{
 
     @Override
     public int insert(Question record) {
-        return getSqlMapper(QuestionMapper.class).insert(record);
+        return baseService.getSqlMapper(QuestionMapper.class).insert(record);
     }
 
 }
