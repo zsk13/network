@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import network.model.User;
 import network.model.Users;
+import network.service.FollowService;
 import network.service.UsersService;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.logging.Log;
@@ -35,7 +36,7 @@ public class WeChatCtr {
     
     @Autowired
     private QuestionService questionService;
-    private UsersService usersService;
+    private FollowService followService;
     
     @RequestMapping(value = "validate", method = {RequestMethod.GET})
     public void validate(HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -77,17 +78,12 @@ public class WeChatCtr {
             String msgType = map.get("MsgType");
             // 默认回复一个"success"
             String responseMessage = "success";
+            //消息内容
+            String content = map.get("Content");
             // 对消息进行处理
             if (WechatMessageUtil.MESSAGE_TEXT.equals(msgType)) {// 文本消息
-                String content = map.get("Content");
                 if (content.startsWith("学号：")) {
-                    int index = content.indexOf(",");
-                    String sno = content.substring(3, index);
-                    String name = content.substring(index + 4);
-                    Users users = new Users();
-                    users.setSno(sno);
-                    users.setName(name);
-                    usersService.createUser(users);
+                    followService.follow(content);
                     return;
                 }
                 questionService.dealCommitQuestion(map,out);
