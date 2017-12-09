@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="network.dao.UsersMapper" >
+<mapper namespace="network.dao.UsersDao" >
   <resultMap id="BaseResultMap" type="network.model.Users" >
     <id column="u_id" property="uId" jdbcType="INTEGER" />
     <result column="u_open_id" property="uOpenId" jdbcType="BIGINT" />
@@ -89,6 +89,12 @@
     <include refid="Base_Column_List" />
     from users
     where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from users
+    where u_open_id = #{uOpenId,jdbcType=String}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from users

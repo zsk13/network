@@ -6,6 +6,7 @@ import network.model.Question;
 import network.service.QuestionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class QuestionCtr {
     Log logger = LogFactory.getLog(QuestionCtr.class);
 
+    @Autowired
     QuestionService questionservice;
 
 
