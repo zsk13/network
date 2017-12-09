@@ -1,5 +1,7 @@
 package network.service.impl;
 
+import network.dao.UsersDao;
+import network.model.Users;
 import network.service.UsersService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,7 +26,7 @@ public class UsersServiceImpl implements UsersService {
         usersDao.updateByPrimaryKey(user);
     }
 
-    public Users findUserById(Integer userId) {
+    public Users findUserById(Long userId) {
         Users user = usersDao.selectByPrimaryKey(userId);
         return user;
     }

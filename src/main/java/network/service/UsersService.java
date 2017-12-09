@@ -1,5 +1,7 @@
 package network.service;
 
+import network.model.Users;
+
 public interface UsersService {
     void createUser(Users user);
 
@@ -7,6 +9,6 @@ public interface UsersService {
 
     void updateUser(Users user);
 
-    Users findUserById(Integer userId);
+    Users findUserById(Long userId);
 
 }
