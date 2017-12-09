@@ -1,11 +1,12 @@
 package network.dao;
 
+import java.util.Date;
 import java.util.List;
 import network.model.Registration;
 import network.model.RegistrationExample;
 import org.apache.ibatis.annotations.Param;
 
-public interface RegistrationMapper {
+public interface RegistrationDao {
     int countByExample(RegistrationExample example);
 
     int deleteByExample(RegistrationExample example);
@@ -19,6 +20,8 @@ public interface RegistrationMapper {
     List<Registration> selectByExample(RegistrationExample example);
 
     Registration selectByPrimaryKey(Long rId);
+
+    Registration selectByClass(@Param("className")String className,@Param("time")Date time);
 
     int updateByExampleSelective(@Param("record") Registration record, @Param("example") RegistrationExample example);
 

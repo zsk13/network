@@ -7,13 +7,13 @@ public class Registration {
 
     private String name;
 
-    private Float locationX;
-
-    private Float locationY;
+    private Long lId;
 
     private Date sTime;
 
     private Date eTime;
+
+    private String className;
 
     public Long getrId() {
         return rId;
@@ -31,20 +31,12 @@ public class Registration {
         this.name = name == null ? null : name.trim();
     }
 
-    public Float getLocationX() {
-        return locationX;
+    public Long getlId() {
+        return lId;
     }
 
-    public void setLocationX(Float locationX) {
-        this.locationX = locationX;
-    }
-
-    public Float getLocationY() {
-        return locationY;
-    }
-
-    public void setLocationY(Float locationY) {
-        this.locationY = locationY;
+    public void setlId(Long lId) {
+        this.lId = lId;
     }
 
     public Date getsTime() {
@@ -61,5 +53,13 @@ public class Registration {
 
     public void seteTime(Date eTime) {
         this.eTime = eTime;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className == null ? null : className.trim();
     }
 }

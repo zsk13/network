@@ -1,7 +1,7 @@
 package network.model;
 
 public class Users {
-    private Integer uId;
+    private Long uId;
 
     private Long uOpenId;
 
@@ -13,11 +13,11 @@ public class Users {
 
     private String classname;
 
-    public Integer getuId() {
+    public Long getuId() {
         return uId;
     }
 
-    public void setuId(Integer uId) {
+    public void setuId(Long uId) {
         this.uId = uId;
     }
 

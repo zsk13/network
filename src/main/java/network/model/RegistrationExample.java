@@ -235,123 +235,63 @@ public class RegistrationExample {
             return (Criteria) this;
         }
 
-        public Criteria andLocationXIsNull() {
-            addCriterion("location_x is null");
+        public Criteria andLIdIsNull() {
+            addCriterion("l_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXIsNotNull() {
-            addCriterion("location_x is not null");
+        public Criteria andLIdIsNotNull() {
+            addCriterion("l_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXEqualTo(Float value) {
-            addCriterion("location_x =", value, "locationX");
+        public Criteria andLIdEqualTo(Long value) {
+            addCriterion("l_id =", value, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXNotEqualTo(Float value) {
-            addCriterion("location_x <>", value, "locationX");
+        public Criteria andLIdNotEqualTo(Long value) {
+            addCriterion("l_id <>", value, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXGreaterThan(Float value) {
-            addCriterion("location_x >", value, "locationX");
+        public Criteria andLIdGreaterThan(Long value) {
+            addCriterion("l_id >", value, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXGreaterThanOrEqualTo(Float value) {
-            addCriterion("location_x >=", value, "locationX");
+        public Criteria andLIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("l_id >=", value, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXLessThan(Float value) {
-            addCriterion("location_x <", value, "locationX");
+        public Criteria andLIdLessThan(Long value) {
+            addCriterion("l_id <", value, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXLessThanOrEqualTo(Float value) {
-            addCriterion("location_x <=", value, "locationX");
+        public Criteria andLIdLessThanOrEqualTo(Long value) {
+            addCriterion("l_id <=", value, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXIn(List<Float> values) {
-            addCriterion("location_x in", values, "locationX");
+        public Criteria andLIdIn(List<Long> values) {
+            addCriterion("l_id in", values, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXNotIn(List<Float> values) {
-            addCriterion("location_x not in", values, "locationX");
+        public Criteria andLIdNotIn(List<Long> values) {
+            addCriterion("l_id not in", values, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXBetween(Float value1, Float value2) {
-            addCriterion("location_x between", value1, value2, "locationX");
+        public Criteria andLIdBetween(Long value1, Long value2) {
+            addCriterion("l_id between", value1, value2, "lId");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXNotBetween(Float value1, Float value2) {
-            addCriterion("location_x not between", value1, value2, "locationX");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYIsNull() {
-            addCriterion("location_y is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYIsNotNull() {
-            addCriterion("location_y is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYEqualTo(Float value) {
-            addCriterion("location_y =", value, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYNotEqualTo(Float value) {
-            addCriterion("location_y <>", value, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYGreaterThan(Float value) {
-            addCriterion("location_y >", value, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYGreaterThanOrEqualTo(Float value) {
-            addCriterion("location_y >=", value, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYLessThan(Float value) {
-            addCriterion("location_y <", value, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYLessThanOrEqualTo(Float value) {
-            addCriterion("location_y <=", value, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYIn(List<Float> values) {
-            addCriterion("location_y in", values, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYNotIn(List<Float> values) {
-            addCriterion("location_y not in", values, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYBetween(Float value1, Float value2) {
-            addCriterion("location_y between", value1, value2, "locationY");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationYNotBetween(Float value1, Float value2) {
-            addCriterion("location_y not between", value1, value2, "locationY");
+        public Criteria andLIdNotBetween(Long value1, Long value2) {
+            addCriterion("l_id not between", value1, value2, "lId");
             return (Criteria) this;
         }
 
@@ -472,6 +412,76 @@ public class RegistrationExample {
 
         public Criteria andETimeNotBetween(Date value1, Date value2) {
             addCriterion("e_time not between", value1, value2, "eTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameIsNull() {
+            addCriterion("class_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameIsNotNull() {
+            addCriterion("class_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameEqualTo(String value) {
+            addCriterion("class_name =", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameNotEqualTo(String value) {
+            addCriterion("class_name <>", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameGreaterThan(String value) {
+            addCriterion("class_name >", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameGreaterThanOrEqualTo(String value) {
+            addCriterion("class_name >=", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameLessThan(String value) {
+            addCriterion("class_name <", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameLessThanOrEqualTo(String value) {
+            addCriterion("class_name <=", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameLike(String value) {
+            addCriterion("class_name like", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameNotLike(String value) {
+            addCriterion("class_name not like", value, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameIn(List<String> values) {
+            addCriterion("class_name in", values, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameNotIn(List<String> values) {
+            addCriterion("class_name not in", values, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameBetween(String value1, String value2) {
+            addCriterion("class_name between", value1, value2, "className");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassNameNotBetween(String value1, String value2) {
+            addCriterion("class_name not between", value1, value2, "className");
             return (Criteria) this;
         }
     }

@@ -9,9 +9,9 @@ public class Rollcall {
 
     private Long rId;
 
-    private Float locationX;
+    private Double locationX;
 
-    private Float locationY;
+    private Double locationY;
 
     private String locationName;
 
@@ -41,19 +41,19 @@ public class Rollcall {
         this.rId = rId;
     }
 
-    public Float getLocationX() {
+    public Double getLocationX() {
         return locationX;
     }
 
-    public void setLocationX(Float locationX) {
+    public void setLocationX(Double locationX) {
         this.locationX = locationX;
     }
 
-    public Float getLocationY() {
+    public Double getLocationY() {
         return locationY;
     }
 
-    public void setLocationY(Float locationY) {
+    public void setLocationY(Double locationY) {
         this.locationY = locationY;
     }
 

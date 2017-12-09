@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="network.dao.RegistrationMapper" >
+<mapper namespace="network.dao.RegistrationDao" >
   <resultMap id="BaseResultMap" type="network.model.Registration" >
     <id column="r_id" property="rId" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="location_x" property="locationX" jdbcType="REAL" />
-    <result column="location_y" property="locationY" jdbcType="REAL" />
+    <result column="l_id" property="lId" jdbcType="BIGINT" />
     <result column="s_time" property="sTime" jdbcType="TIMESTAMP" />
     <result column="e_time" property="eTime" jdbcType="TIMESTAMP" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    r_id, name, location_x, location_y, s_time, e_time
+    r_id, name, l_id, s_time, e_time, class_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.RegistrationExample" >
     select
@@ -90,6 +90,14 @@
     from registration
     where r_id = #{rId,jdbcType=BIGINT}
   </select>
+  <select id="selectByClass" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from registration
+    where class_name = #{className,jdbcType=String}
+    and #{time,jdbcType=TIMESTAMP} between s_time and e_time
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from registration
     where r_id = #{rId,jdbcType=BIGINT}
@@ -101,11 +109,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="network.model.Registration" >
-    insert into registration (r_id, name, location_x, 
-      location_y, s_time, e_time
+    insert into registration (r_id, name, l_id, 
+      s_time, e_time, class_name
       )
-    values (#{rId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{locationX,jdbcType=REAL}, 
-      #{locationY,jdbcType=REAL}, #{sTime,jdbcType=TIMESTAMP}, #{eTime,jdbcType=TIMESTAMP}
+    values (#{rId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{lId,jdbcType=BIGINT}, 
+      #{sTime,jdbcType=TIMESTAMP}, #{eTime,jdbcType=TIMESTAMP}, #{className,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="network.model.Registration" >
@@ -117,17 +125,17 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="locationX != null" >
-        location_x,
-      </if>
-      <if test="locationY != null" >
-        location_y,
+      <if test="lId != null" >
+        l_id,
       </if>
       <if test="sTime != null" >
         s_time,
       </if>
       <if test="eTime != null" >
         e_time,
+      </if>
+      <if test="className != null" >
+        class_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -137,17 +145,17 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="locationX != null" >
-        #{locationX,jdbcType=REAL},
-      </if>
-      <if test="locationY != null" >
-        #{locationY,jdbcType=REAL},
+      <if test="lId != null" >
+        #{lId,jdbcType=BIGINT},
       </if>
       <if test="sTime != null" >
         #{sTime,jdbcType=TIMESTAMP},
       </if>
       <if test="eTime != null" >
         #{eTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,17 +174,17 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.locationX != null" >
-        location_x = #{record.locationX,jdbcType=REAL},
-      </if>
-      <if test="record.locationY != null" >
-        location_y = #{record.locationY,jdbcType=REAL},
+      <if test="record.lId != null" >
+        l_id = #{record.lId,jdbcType=BIGINT},
       </if>
       <if test="record.sTime != null" >
         s_time = #{record.sTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.eTime != null" >
         e_time = #{record.eTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.className != null" >
+        class_name = #{record.className,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -187,10 +195,10 @@
     update registration
     set r_id = #{record.rId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      location_x = #{record.locationX,jdbcType=REAL},
-      location_y = #{record.locationY,jdbcType=REAL},
+      l_id = #{record.lId,jdbcType=BIGINT},
       s_time = #{record.sTime,jdbcType=TIMESTAMP},
-      e_time = #{record.eTime,jdbcType=TIMESTAMP}
+      e_time = #{record.eTime,jdbcType=TIMESTAMP},
+      class_name = #{record.className,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -201,11 +209,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="locationX != null" >
-        location_x = #{locationX,jdbcType=REAL},
-      </if>
-      <if test="locationY != null" >
-        location_y = #{locationY,jdbcType=REAL},
+      <if test="lId != null" >
+        l_id = #{lId,jdbcType=BIGINT},
       </if>
       <if test="sTime != null" >
         s_time = #{sTime,jdbcType=TIMESTAMP},
@@ -213,16 +218,19 @@
       <if test="eTime != null" >
         e_time = #{eTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
     </set>
     where r_id = #{rId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="network.model.Registration" >
     update registration
     set name = #{name,jdbcType=VARCHAR},
-      location_x = #{locationX,jdbcType=REAL},
-      location_y = #{locationY,jdbcType=REAL},
+      l_id = #{lId,jdbcType=BIGINT},
       s_time = #{sTime,jdbcType=TIMESTAMP},
-      e_time = #{eTime,jdbcType=TIMESTAMP}
+      e_time = #{eTime,jdbcType=TIMESTAMP},
+      class_name = #{className,jdbcType=VARCHAR}
     where r_id = #{rId,jdbcType=BIGINT}
   </update>
 </mapper>

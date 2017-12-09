@@ -295,52 +295,52 @@ public class RollcallExample {
             return (Criteria) this;
         }
 
-        public Criteria andLocationXEqualTo(Float value) {
+        public Criteria andLocationXEqualTo(Double value) {
             addCriterion("location_x =", value, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXNotEqualTo(Float value) {
+        public Criteria andLocationXNotEqualTo(Double value) {
             addCriterion("location_x <>", value, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXGreaterThan(Float value) {
+        public Criteria andLocationXGreaterThan(Double value) {
             addCriterion("location_x >", value, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXGreaterThanOrEqualTo(Float value) {
+        public Criteria andLocationXGreaterThanOrEqualTo(Double value) {
             addCriterion("location_x >=", value, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXLessThan(Float value) {
+        public Criteria andLocationXLessThan(Double value) {
             addCriterion("location_x <", value, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXLessThanOrEqualTo(Float value) {
+        public Criteria andLocationXLessThanOrEqualTo(Double value) {
             addCriterion("location_x <=", value, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXIn(List<Float> values) {
+        public Criteria andLocationXIn(List<Double> values) {
             addCriterion("location_x in", values, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXNotIn(List<Float> values) {
+        public Criteria andLocationXNotIn(List<Double> values) {
             addCriterion("location_x not in", values, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXBetween(Float value1, Float value2) {
+        public Criteria andLocationXBetween(Double value1, Double value2) {
             addCriterion("location_x between", value1, value2, "locationX");
             return (Criteria) this;
         }
 
-        public Criteria andLocationXNotBetween(Float value1, Float value2) {
+        public Criteria andLocationXNotBetween(Double value1, Double value2) {
             addCriterion("location_x not between", value1, value2, "locationX");
             return (Criteria) this;
         }
@@ -355,52 +355,52 @@ public class RollcallExample {
             return (Criteria) this;
         }
 
-        public Criteria andLocationYEqualTo(Float value) {
+        public Criteria andLocationYEqualTo(Double value) {
             addCriterion("location_y =", value, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYNotEqualTo(Float value) {
+        public Criteria andLocationYNotEqualTo(Double value) {
             addCriterion("location_y <>", value, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYGreaterThan(Float value) {
+        public Criteria andLocationYGreaterThan(Double value) {
             addCriterion("location_y >", value, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYGreaterThanOrEqualTo(Float value) {
+        public Criteria andLocationYGreaterThanOrEqualTo(Double value) {
             addCriterion("location_y >=", value, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYLessThan(Float value) {
+        public Criteria andLocationYLessThan(Double value) {
             addCriterion("location_y <", value, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYLessThanOrEqualTo(Float value) {
+        public Criteria andLocationYLessThanOrEqualTo(Double value) {
             addCriterion("location_y <=", value, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYIn(List<Float> values) {
+        public Criteria andLocationYIn(List<Double> values) {
             addCriterion("location_y in", values, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYNotIn(List<Float> values) {
+        public Criteria andLocationYNotIn(List<Double> values) {
             addCriterion("location_y not in", values, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYBetween(Float value1, Float value2) {
+        public Criteria andLocationYBetween(Double value1, Double value2) {
             addCriterion("location_y between", value1, value2, "locationY");
             return (Criteria) this;
         }
 
-        public Criteria andLocationYNotBetween(Float value1, Float value2) {
+        public Criteria andLocationYNotBetween(Double value1, Double value2) {
             addCriterion("location_y not between", value1, value2, "locationY");
             return (Criteria) this;
         }

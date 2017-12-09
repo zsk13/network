@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="network.dao.UsersDao" >
   <resultMap id="BaseResultMap" type="network.model.Users" >
-    <id column="u_id" property="uId" jdbcType="INTEGER" />
+    <id column="u_id" property="uId" jdbcType="BIGINT" />
     <result column="u_open_id" property="uOpenId" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="CHAR" />
@@ -84,11 +84,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from users
-    where u_id = #{uId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=BIGINT}
   </select>
   <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -96,9 +96,9 @@
     from users
     where u_open_id = #{uOpenId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from users
-    where u_id = #{uId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="network.model.UsersExample" >
     delete from users
@@ -109,7 +109,7 @@
   <insert id="insert" parameterType="network.model.Users" >
     insert into users (u_id, u_open_id, name, 
       type, sno, className)
-    values (#{uId,jdbcType=INTEGER}, #{uOpenId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+    values (#{uId,jdbcType=BIGINT}, #{uOpenId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
       #{type,jdbcType=CHAR}, #{sno,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="network.model.Users" >
@@ -136,7 +136,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uId != null" >
-        #{uId,jdbcType=INTEGER},
+        #{uId,jdbcType=BIGINT},
       </if>
       <if test="uOpenId != null" >
         #{uOpenId,jdbcType=BIGINT},
@@ -165,7 +165,7 @@
     update users
     <set >
       <if test="record.uId != null" >
-        u_id = #{record.uId,jdbcType=INTEGER},
+        u_id = #{record.uId,jdbcType=BIGINT},
       </if>
       <if test="record.uOpenId != null" >
         u_open_id = #{record.uOpenId,jdbcType=BIGINT},
@@ -189,7 +189,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update users
-    set u_id = #{record.uId,jdbcType=INTEGER},
+    set u_id = #{record.uId,jdbcType=BIGINT},
       u_open_id = #{record.uOpenId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=CHAR},
@@ -218,7 +218,7 @@
         className = #{classname,jdbcType=VARCHAR},
       </if>
     </set>
-    where u_id = #{uId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="network.model.Users" >
     update users
@@ -227,6 +227,6 @@
       type = #{type,jdbcType=CHAR},
       sno = #{sno,jdbcType=VARCHAR},
       className = #{classname,jdbcType=VARCHAR}
-    where u_id = #{uId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=BIGINT}
   </update>
 </mapper>

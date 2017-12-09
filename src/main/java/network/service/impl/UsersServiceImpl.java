@@ -1,7 +1,5 @@
 package network.service.impl;
 
-import network.dao.UsersDao;
-import network.model.Users;
 import network.service.UsersService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

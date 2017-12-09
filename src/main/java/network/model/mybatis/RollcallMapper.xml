@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="network.dao.RollcallMapper" >
+<mapper namespace="network.dao.RollcallDao" >
   <resultMap id="BaseResultMap" type="network.model.Rollcall" >
     <id column="rc_id" property="rcId" jdbcType="BIGINT" />
     <result column="u_id" property="uId" jdbcType="BIGINT" />
     <result column="r_id" property="rId" jdbcType="BIGINT" />
-    <result column="location_x" property="locationX" jdbcType="REAL" />
-    <result column="location_y" property="locationY" jdbcType="REAL" />
+    <result column="location_x" property="locationX" jdbcType="DOUBLE" />
+    <result column="location_y" property="locationY" jdbcType="DOUBLE" />
     <result column="location_name" property="locationName" jdbcType="VARCHAR" />
     <result column="r_time" property="rTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -106,7 +106,7 @@
       location_x, location_y, location_name, 
       r_time)
     values (#{rcId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{rId,jdbcType=BIGINT}, 
-      #{locationX,jdbcType=REAL}, #{locationY,jdbcType=REAL}, #{locationName,jdbcType=VARCHAR}, 
+      #{locationX,jdbcType=DOUBLE}, #{locationY,jdbcType=DOUBLE}, #{locationName,jdbcType=VARCHAR}, 
       #{rTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="network.model.Rollcall" >
@@ -145,10 +145,10 @@
         #{rId,jdbcType=BIGINT},
       </if>
       <if test="locationX != null" >
-        #{locationX,jdbcType=REAL},
+        #{locationX,jdbcType=DOUBLE},
       </if>
       <if test="locationY != null" >
-        #{locationY,jdbcType=REAL},
+        #{locationY,jdbcType=DOUBLE},
       </if>
       <if test="locationName != null" >
         #{locationName,jdbcType=VARCHAR},
@@ -177,10 +177,10 @@
         r_id = #{record.rId,jdbcType=BIGINT},
       </if>
       <if test="record.locationX != null" >
-        location_x = #{record.locationX,jdbcType=REAL},
+        location_x = #{record.locationX,jdbcType=DOUBLE},
       </if>
       <if test="record.locationY != null" >
-        location_y = #{record.locationY,jdbcType=REAL},
+        location_y = #{record.locationY,jdbcType=DOUBLE},
       </if>
       <if test="record.locationName != null" >
         location_name = #{record.locationName,jdbcType=VARCHAR},
@@ -198,8 +198,8 @@
     set rc_id = #{record.rcId,jdbcType=BIGINT},
       u_id = #{record.uId,jdbcType=BIGINT},
       r_id = #{record.rId,jdbcType=BIGINT},
-      location_x = #{record.locationX,jdbcType=REAL},
-      location_y = #{record.locationY,jdbcType=REAL},
+      location_x = #{record.locationX,jdbcType=DOUBLE},
+      location_y = #{record.locationY,jdbcType=DOUBLE},
       location_name = #{record.locationName,jdbcType=VARCHAR},
       r_time = #{record.rTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -216,10 +216,10 @@
         r_id = #{rId,jdbcType=BIGINT},
       </if>
       <if test="locationX != null" >
-        location_x = #{locationX,jdbcType=REAL},
+        location_x = #{locationX,jdbcType=DOUBLE},
       </if>
       <if test="locationY != null" >
-        location_y = #{locationY,jdbcType=REAL},
+        location_y = #{locationY,jdbcType=DOUBLE},
       </if>
       <if test="locationName != null" >
         location_name = #{locationName,jdbcType=VARCHAR},
@@ -234,8 +234,8 @@
     update rollcall
     set u_id = #{uId,jdbcType=BIGINT},
       r_id = #{rId,jdbcType=BIGINT},
-      location_x = #{locationX,jdbcType=REAL},
-      location_y = #{locationY,jdbcType=REAL},
+      location_x = #{locationX,jdbcType=DOUBLE},
+      location_y = #{locationY,jdbcType=DOUBLE},
       location_name = #{locationName,jdbcType=VARCHAR},
       r_time = #{rTime,jdbcType=TIMESTAMP}
     where rc_id = #{rcId,jdbcType=BIGINT}

@@ -1,10 +1,5 @@
 package network.service;
 
-import network.model.User;
-import network.model.Users;
-
-import java.util.List;
-
 public interface UsersService {
     void createUser(Users user);
 
