@@ -32,10 +32,15 @@ public class QuestionCtr {
     }
 
     @RequestMapping(value = "/add.do")
-    public void add(Long qid,Long teacher_id,String question,String answer,String status,HttpServletResponse res){
+    public void add(Long teacher_id,String question,String answer,String status,HttpServletResponse res){
+
+
+        teacher_id = Long.valueOf(1);
+
+        status ="0" ;
 
         Question que=new Question();
-        que.setQid(qid);
+        que.setQid(Long.valueOf(java.util.UUID.randomUUID().toString()));
         que.setAnswer(answer);
         que.setQuestion(question);
         que.setStatus(status);
@@ -46,6 +51,7 @@ public class QuestionCtr {
         //String responseMessage = WechatMessageUtil.textMessageToXml(que);
 
 
+        JSON.parse(String.valueOf(que));
 
     }
 

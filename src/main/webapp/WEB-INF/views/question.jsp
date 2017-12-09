@@ -31,16 +31,7 @@
 <div class="page">
     <div class="page__bd">
         <form id="formData" action="">
-            <div class="weui-cells">
-                <div class="weui-cell">
-                    <div class="weui-cell__hd"><label class="weui-label">课程名称</label></div>
-                    <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" id="txtCourseName" name="course"
-                               placeholder="必填" required readonly  />
-                    </div>
-                </div>
 
-            </div>
 
             <div class="weui-cells__title">问题内容</div>
             <div class="weui-cells weui-cells_form">
@@ -53,10 +44,21 @@
                 </div>
             </div>
 
+            <div class="weui-cells__title">问题答案</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="问题答案（必填）" id="answer" name="ans"
+                                  rows="3" required maxlength="100" required> </textarea>
+
+                    </div>
+                </div>
+            </div>
+
         </form>
 
         <div class="weui-btn-area">
-            <a href="javascript:;" class="button button-fill" id="btnSubmit">提交</a>
+            <a href="javascript:;" class="button button-fill" style="" id="btnSubmit">提交</a>
         </div>
     </div>
 </div>
