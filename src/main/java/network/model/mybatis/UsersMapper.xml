@@ -90,7 +90,7 @@
     from users
     where u_id = #{uId,jdbcType=INTEGER}
   </select>
-  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.STRING" >
+  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from users
