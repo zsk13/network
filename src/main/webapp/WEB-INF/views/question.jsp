@@ -31,7 +31,11 @@
 <div class="page">
     <div class="page__bd">
         <form id="formData" action="">
-
+            <div class="buttons-tab">
+                <a href="#tab1" class="tab-link active button" style="font-size: medium;">提问</a>
+                <a href="#tab2" class="tab-link button" style="font-size: medium;">问题列表</a>
+                <a href="#tab3" class="tab-link button" style="font-size: medium;">答案统计</a>
+            </div>
 
             <div class="weui-cells__title">问题内容</div>
             <div class="weui-cells weui-cells_form">
@@ -58,7 +62,7 @@
         </form>
 
         <div class="weui-btn-area">
-            <a href="javascript:;" class="button button-fill" style="" id="btnSubmit">提交</a>
+            <a href="javascript:;" class="button button-fill" style="margin: auto;" id="btnSubmit">提交</a>
         </div>
     </div>
 </div>
