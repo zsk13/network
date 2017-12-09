@@ -3,6 +3,9 @@ package network.service.impl;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import network.dao.QuestionMapper;
+import network.model.Question;
+import network.service.BaseService;
 import org.springframework.stereotype.Service;
 
 import network.common.wechatUtil.TextMessage;
@@ -10,7 +13,7 @@ import network.common.wechatUtil.WechatMessageUtil;
 import network.service.QuestionService;
 
 @Service
-public class QuestionServiceImpl implements QuestionService{
+public class QuestionServiceImpl extends BaseService implements QuestionService{
 
     public void dealGetQuestion(Map<String, String> map,PrintWriter out) {
         // TODO Auto-generated method stub
@@ -50,6 +53,11 @@ public class QuestionServiceImpl implements QuestionService{
         responseMessage = WechatMessageUtil.textMessageToXml(textMessage);
         out.print(responseMessage);
         out.flush();
+    }
+
+    @Override
+    public int insert(Question record) {
+        return getSqlMapper(QuestionMapper.class).insert(record);
     }
 
 }
