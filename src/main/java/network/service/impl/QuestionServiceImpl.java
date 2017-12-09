@@ -1,11 +1,15 @@
 package network.service.impl;
 
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import network.dao.QuestionMapper;
 import network.model.Question;
-import network.service.BaseService;
+
+import network.model.QuestionExample;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import network.common.wechatUtil.TextMessage;
@@ -13,11 +17,28 @@ import network.common.wechatUtil.WechatMessageUtil;
 import network.service.QuestionService;
 
 @Service
-public class QuestionServiceImpl extends BaseService implements QuestionService{
+
+public class QuestionServiceImpl implements QuestionService{
+
+    BaseService baseService = new BaseService();
+
+    @Autowired
+    QuestionMapper questionMapper;
+
+    public List<Question> getQuestion(){
+        QuestionExample questionExample = new QuestionExample();
+        QuestionExample.Criteria criteria = questionExample.createCriteria();
+        criteria.andStatusEqualTo("0");
+        return  questionMapper.selectByExample(questionExample);
+    }
 
     public void dealGetQuestion(Map<String, String> map,PrintWriter out) {
         // TODO Auto-generated method stub
-        String question = "1+1=?";
+        String question = "";
+        List<Question> listQuestions = getQuestion();
+        for (Question t : listQuestions) {
+            question = t.getQuestion();
+        }
         String fromUserName = map.get("FromUserName");
         String toUserName = map.get("ToUserName");
         TextMessage textMessage = new TextMessage();
@@ -37,6 +58,7 @@ public class QuestionServiceImpl extends BaseService implements QuestionService{
         String toUserName = map.get("ToUserName");
         String answer = map.get("Content");
         String responseMessage = "默认";
+        String correctAnswer = "";
         
         TextMessage textMessage = new TextMessage();
         textMessage.setMsgType(WechatMessageUtil.MESSAGE_TEXT);
@@ -44,7 +66,11 @@ public class QuestionServiceImpl extends BaseService implements QuestionService{
         textMessage.setFromUserName(toUserName);
         textMessage.setCreateTime(System.currentTimeMillis());
         String respContent = "";
-        if(answer.equals("2")){
+        List<Question> listQuestions = getQuestion();
+        for (Question t : listQuestions) {
+            correctAnswer = t.getAnswer();
+        }
+        if(answer.equals(correctAnswer)){
             respContent = "回答正确";
         }else{
             respContent = "回答错误";
@@ -57,7 +83,7 @@ public class QuestionServiceImpl extends BaseService implements QuestionService{
 
     @Override
     public int insert(Question record) {
-        return getSqlMapper(QuestionMapper.class).insert(record);
+        return baseService.getSqlMapper(QuestionMapper.class).insert(record);
     }
 
 }

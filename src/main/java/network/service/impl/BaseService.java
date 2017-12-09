@@ -1,4 +1,4 @@
-package network.service;
+package network.service.impl;
 
 
 import java.util.Map;
