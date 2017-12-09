@@ -35,5 +35,5 @@ public class AnswerServiceImpl implements AnswerService{
         num.add(wrongNum);
         return  num;
     }
-    
+
 }
