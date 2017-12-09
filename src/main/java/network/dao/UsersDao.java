@@ -20,7 +20,7 @@ public interface UsersDao {
 
     Users selectByPrimaryKey(Integer uId);
 
-    Users selectByOpenId(Integer uOpenId);
+    Users selectByOpenId(String uOpenId);
 
     int updateByExampleSelective(@Param("record") Users record, @Param("example") UsersExample example);
 
