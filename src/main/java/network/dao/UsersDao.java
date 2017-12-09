@@ -5,7 +5,7 @@ import network.model.Users;
 import network.model.UsersExample;
 import org.apache.ibatis.annotations.Param;
 
-public interface UsersMapper {
+public interface UsersDao {
     int countByExample(UsersExample example);
 
     int deleteByExample(UsersExample example);
@@ -19,6 +19,8 @@ public interface UsersMapper {
     List<Users> selectByExample(UsersExample example);
 
     Users selectByPrimaryKey(Integer uId);
+
+    Users selectByOpenId(Integer uOpenId);
 
     int updateByExampleSelective(@Param("record") Users record, @Param("example") UsersExample example);
 
