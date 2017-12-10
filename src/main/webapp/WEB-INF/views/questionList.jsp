@@ -1,13 +1,20 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: yangyicheng
+  Date: 17/12/9
+  Time: 下午4:49
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
 
-<script type="text/javascript" src="${ctx}/js/answer.js"></script>
+<script type="text/javascript" src="${ctx}/js/questionList.js"></script>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 
-    <title> 答案统计</title>
+    <title> 发布问题 </title>
 
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css"/>
 
@@ -30,11 +37,14 @@
                 <a href="#tab3" class="tab-link button" style="font-size: medium;">答案统计</a>
             </div>
 
-
-
+            <div class="list-block" style="margin-top: 10px;">
+                <ul>
+                    <div id="list"></div>
+                </ul>
+            </div>
         </form>
 
-
+        
     </div>
 </div>
 
