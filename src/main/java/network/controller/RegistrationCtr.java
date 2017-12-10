@@ -3,7 +3,6 @@ package network.controller;
 import net.sf.json.JSONObject;
 import network.common.HttpXmlClient;
 import network.service.RegistrationService;
-import network.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +19,6 @@ import java.util.*;
 public class RegistrationCtr {
     @Autowired
     private RegistrationService registrationService;
-    @Autowired
-    private RollcallService rollcallService;
     @RequestMapping(value = "/redirect")
     public String wechatRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
