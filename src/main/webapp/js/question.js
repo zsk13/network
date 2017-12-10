@@ -23,9 +23,12 @@ function Submit() {
 
    var question=$("#question").val();
    var answer=$("#answer").val();
+   var teacher_id = 1 ;
+   var status = "0";
 
     $.ajax({
-        url: _ctx + '/question/add.do',
+        // url: _ctx + '/question/add.do',
+        url:'localhost:8080/question/add.do',
         type: 'POST',
         dataType: "JSON",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
@@ -41,7 +44,7 @@ function Submit() {
 
         },
         error: function (request) {
-            console.error(xhr)
+            console.error()
             alert('fail: 提交失败');
         }
     });

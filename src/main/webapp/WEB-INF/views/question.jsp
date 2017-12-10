@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
 
-<script type="text/javascript" src="${ctx}/js/question.js"></script>
+
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -84,6 +84,13 @@
 </body>
 <script type="text/javascript" src="http://g.alicdn.com/msui/sm/0.6.2/js/sm.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js" charset="utf-8"></script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="${ctx}/js/question.js"></script>
+
 </html>
 
 
