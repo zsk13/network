@@ -86,9 +86,9 @@
 <script type="text/javascript" src="http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js" charset="utf-8"></script>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>--%>
 
-
+<script src="/network/js/jquery.min.js"></script>
 <%--<script type="text/javascript" src="${ctx}/WEB-INF/js/question.js"></script>--%>
 
 <script type="text/javascript" src="/network/js/question.js"></script>
