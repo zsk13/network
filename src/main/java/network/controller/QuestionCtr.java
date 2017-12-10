@@ -49,7 +49,7 @@ public class QuestionCtr {
         String createtime = formatfirst.format(first);
 
         Question que=new Question();
-        que.setQid(Long.valueOf(createtime));
+        que.setQid(first.getTime());
         que.setAnswer(answer);
         que.setQuestion(question);
         que.setStatus(status);
