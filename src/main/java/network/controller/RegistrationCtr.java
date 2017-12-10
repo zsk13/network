@@ -1,7 +1,10 @@
 package network.controller;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import network.common.HttpXmlClient;
+import network.common.wechatUtil.Token;
+import network.common.wechatUtil.TokenUtil;
+import network.common.wechatUtil.WeixinUtil;
 import network.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 
 @Controller
@@ -20,6 +26,7 @@ import java.util.*;
 public class RegistrationCtr {
     @Autowired
     private RegistrationService registrationService;
+
     @RequestMapping(value = "/redirect.do")
     public String wechatRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
@@ -37,42 +44,46 @@ public class RegistrationCtr {
         Map<String, String> idparams = new HashMap<String, String>();
         idparams.put("appid", APPID);
         idparams.put("secret", SECRET);
-        idparams.put("code",CODE);
-        idparams.put("grant_type","authorization_code");
+        idparams.put("code", CODE);
+        idparams.put("grant_type", "authorization_code");
         //URLConnectionHelper是一个模拟发送http请求的类
-        String idXml = HttpXmlClient.post("https://api.weixin.qq.com/sns/oauth2/access_token", idparams);
-        JSONObject idJsonMap = JSONObject.fromObject(idXml);
-        String openid = idJsonMap.get("openid").toString();
+//        String idXml = HttpXmlClient.post("https://api.weixin.qq.com/sns/oauth2/access_token", idparams);
+//        JSONObject idJsonMap = JSONObject.fromObject(idXml);
+        JSONObject jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token", "GET", JSONObject.toJSONString(idparams));
+        String openid = jsonObject.get("openid").toString();
 
         ModelAndView mav = new ModelAndView("registration");
         //获取access_token
+        Token token = TokenUtil.getToken();
+        String access_token = token.getAccessToken();
         Map<String, String> params = new HashMap<String, String>();
-        params.put("appid", APPID);
-        params.put("secret", SECRET);
-        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential", params);
-        JSONObject jsonMap = JSONObject.fromObject(xml);
-        Map<String, String> map = new HashMap<String, String>();
-        Iterator<String> it = jsonMap.keys();
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            String u = jsonMap.get(key).toString();
-            map.put(key, u);
-        }
-        String access_token = map.get("access_token");
+//        params.put("appid", APPID);
+//        params.put("secret", SECRET);
+//        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential", params);
+//        JSONObject jsonMap = JSONObject.fromObject(xml);
+//        Map<String, String> map = new HashMap<String, String>();
+//        Iterator<String> it = jsonMap.keys();
+//        while (it.hasNext()) {
+//            String key = (String) it.next();
+//            String u = jsonMap.get(key).toString();
+//            map.put(key, u);
+//        }
+//        String access_token = map.get("access_token");
 
         //获取ticket
         params.put("access_token", access_token);
         params.put("type", "jsapi");
-        xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket", params);
-        jsonMap = JSONObject.fromObject(xml);
-        map = new HashMap<String, String>();
-        it = jsonMap.keys();
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            String u = jsonMap.get(key).toString();
-            map.put(key, u);
-        }
-        String jsapi_ticket = map.get("ticket");
+//        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket", params);
+//        net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
+//        Map<String, String> map = new HashMap<String, String>();
+//        Iterator<String> it = jsonMap.keys();
+//        while (it.hasNext()) {
+//            String key = (String) it.next();
+//            String u = jsonMap.get(key).toString();
+//            map.put(key, u);
+//        }
+        jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
+        String jsapi_ticket = jsonObject.get("ticket").toString();
 
 
         //获取签名signature
@@ -92,13 +103,15 @@ public class RegistrationCtr {
         mav.addObject("timestamp", timestamp);
         mav.addObject("noncestr", noncestr);
         mav.addObject("appId", APPID);
-        mav.addObject("openId",openid);
+        mav.addObject("openId", openid);
         return mav;
 
     }
-    @RequestMapping(value="/addRegistration.do")
-    public @ResponseBody Map<String,Object> login(HttpServletRequest request, HttpServletResponse response){
-        Map<String,Object> map = new HashMap<String,Object>();
+
+    @RequestMapping(value = "/addRegistration.do")
+    public @ResponseBody
+    Map<String, Object> login(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> map = new HashMap<String, Object>();
         String openId = request.getParameter("openId").toString();
         double location_x = Double.parseDouble(request.getParameter("lcoation_x"));
         double location_y = Double.parseDouble(request.getParameter("lcoation_y"));
@@ -106,13 +119,13 @@ public class RegistrationCtr {
         Date date = null;
         try {
             date = sdf.parse(request.getParameter("date").toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        int state = registrationService.registration(location_x,location_x,openId,date);
+        int state = registrationService.registration(location_x, location_x, openId, date);
 
-            map.put("state",state);
-            return map;
+        map.put("state", state);
+        return map;
     }
 
 }
