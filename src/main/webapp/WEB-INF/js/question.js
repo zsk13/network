@@ -28,7 +28,7 @@ function Submit() {
 
     $.ajax({
         // url: _ctx + '/question/add.do',
-        url:'localhost:8080/question/add.do',
+        url:'http://47.100.116.100/network/question/add.do',
         type: 'POST',
         dataType: "JSON",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
@@ -39,7 +39,7 @@ function Submit() {
             if (info.success) {
                alert("提交成功");
             } else {
-                alert(info.msg)
+                //alert(info.msg)
             }
 
         },
