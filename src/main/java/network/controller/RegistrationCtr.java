@@ -75,14 +75,14 @@ public class RegistrationCtr {
         params.put("access_token", access_token);
         params.put("type", "jsapi");
         String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket", params);
-        net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
+        JSONObject jsonMap = JSONObject.parseObject(xml);
         Map<String, String> map = new HashMap<String, String>();
-        Iterator<String> it = jsonMap.keys();
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            String u = jsonMap.get(key).toString();
-            map.put(key, u);
-        }
+//        Iterator<String> it = jsonMap.keys();
+//        while (it.hasNext()) {
+//            String key = (String) it.next();
+//            String u = jsonMap.get(key).toString();
+//            map.put(key, u);
+//        }
         // jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
         String jsapi_ticket = map.get("ticket").toString();
 

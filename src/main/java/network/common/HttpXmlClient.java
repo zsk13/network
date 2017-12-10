@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -102,52 +101,53 @@ public class HttpXmlClient {
     public static void main(String[] args) {
 
         //获取access_token
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("appid","wx5f24fa0db1819ea2");
-        params.put("secret","uQtWzF0bQtl2KRHX0amekjpq8L0aO96LSpSNfctOBLRbuYPO4DUBhMn0_v2jHS-9");
-        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential",params);
-        JSONObject jsonMap  = JSONObject.fromObject(xml);
-        Map<String, String> map = new HashMap<String, String>();
-        Iterator<String> it = jsonMap.keys();
-        while(it.hasNext()) {
-            String key = (String) it.next();
-            String u = jsonMap.get(key).toString();
-            map.put(key, u);
-        }
-        String access_token = map.get("access_token");
-        System.out.println("access_token=" + access_token);
-
-        //获取ticket
-        params.put("access_token",access_token);
-        params.put("type","jsapi");
-        xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket",params);
-        jsonMap  = JSONObject.fromObject(xml);
-        map = new HashMap<String, String>();
-        it = jsonMap.keys();
-        while(it.hasNext()) {
-            String key = (String) it.next();
-            String u = jsonMap.get(key).toString();
-            map.put(key, u);
-        }
-        String jsapi_ticket = map.get("ticket");
-        System.out.println("jsapi_ticket=" + jsapi_ticket);
-
-        //获取签名signature
-        String noncestr = UUID.randomUUID().toString();
-        String timestamp = Long.toString(System.currentTimeMillis() / 1000);
-        String url="http://mp.weixin.qq.com?params=value";
-        String str = "jsapi_ticket=" + jsapi_ticket +
-                "&noncestr=" + noncestr +
-                "&timestamp=" + timestamp +
-                "&url=" + url;
-        //sha1加密
-        String signature = SHA1(str);
-        System.out.println("noncestr=" + noncestr);
-        System.out.println("timestamp=" + timestamp);
-        System.out.println("signature=" + signature);
-        //最终获得调用微信js接口验证需要的三个参数noncestr、timestamp、signature
+//        Map<String, String> params = new HashMap<String, String>();
+//        params.put("appid","wx5f24fa0db1819ea2");
+//        params.put("secret","uQtWzF0bQtl2KRHX0amekjpq8L0aO96LSpSNfctOBLRbuYPO4DUBhMn0_v2jHS-9");
+//        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential",params);
+//        JSONObject jsonMap  = JSONObject.fromObject(xml);
+//        System.out.println(xml);
+//        Map<String, String> map = new HashMap<String, String>();
+//        Iterator<String> it = jsonMap.keys();
+//        while(it.hasNext()) {
+//            String key = (String) it.next();
+//            String u = jsonMap.get(key).toString();
+//            map.put(key, u);
+//        }
+//        String access_token = map.get("access_token");
+//        System.out.println("access_token=" + access_token);
+//
+//        //获取ticket
+//        params.put("access_token",access_token);
+//        params.put("type","jsapi");
+//        xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket",params);
+//        jsonMap  = JSONObject.fromObject(xml);
+//        map = new HashMap<String, String>();
+//        it = jsonMap.keys();
+//        while(it.hasNext()) {
+//            String key = (String) it.next();
+//            String u = jsonMap.get(key).toString();
+//            map.put(key, u);
+//        }
+//        String jsapi_ticket = map.get("ticket");
+//        System.out.println("jsapi_ticket=" + jsapi_ticket);
+//
+//        //获取签名signature
+//        String noncestr = UUID.randomUUID().toString();
+//        String timestamp = Long.toString(System.currentTimeMillis() / 1000);
+//        String url="http://mp.weixin.qq.com?params=value";
+//        String str = "jsapi_ticket=" + jsapi_ticket +
+//                "&noncestr=" + noncestr +
+//                "&timestamp=" + timestamp +
+//                "&url=" + url;
+//        //sha1加密
+//        String signature = SHA1(str);
+//        System.out.println("noncestr=" + noncestr);
+//        System.out.println("timestamp=" + timestamp);
+//        System.out.println("signature=" + signature);
+//        //最终获得调用微信js接口验证需要的三个参数noncestr、timestamp、signature
     }
-
+//
    /**
      * @description： SHA、SHA1加密
      * @parameter：   str：待加密字符串
