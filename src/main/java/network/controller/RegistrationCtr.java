@@ -49,7 +49,7 @@ public class RegistrationCtr {
         //URLConnectionHelper是一个模拟发送http请求的类
 //        String idXml = HttpXmlClient.post("https://api.weixin.qq.com/sns/oauth2/access_token", idparams);
 //        JSONObject idJsonMap = JSONObject.fromObject(idXml);
-        JSONObject jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token", "GET", JSONObject.toJSONString(idparams));
+        JSONObject jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APPID+"&secret="+SECRET+"&code="+CODE+"&grant_type=authorization_code ", "POST", null);
         String openid = jsonObject.get("openid").toString();
 
         ModelAndView mav = new ModelAndView("registration");
