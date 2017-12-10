@@ -15,10 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
 @Controller
@@ -77,17 +74,17 @@ public class RegistrationCtr {
         //获取ticket
         params.put("access_token", access_token);
         params.put("type", "jsapi");
-//        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket", params);
-//        net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
-//        Map<String, String> map = new HashMap<String, String>();
-//        Iterator<String> it = jsonMap.keys();
-//        while (it.hasNext()) {
-//            String key = (String) it.next();
-//            String u = jsonMap.get(key).toString();
-//            map.put(key, u);
-//        }
-        jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
-        String jsapi_ticket = jsonObject.get("ticket").toString();
+        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket", params);
+        net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
+        Map<String, String> map = new HashMap<String, String>();
+        Iterator<String> it = jsonMap.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            String u = jsonMap.get(key).toString();
+            map.put(key, u);
+        }
+       // jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
+        String jsapi_ticket = map.get("ticket").toString();
 
 
         //获取签名signature
