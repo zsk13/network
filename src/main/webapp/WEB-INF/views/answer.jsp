@@ -35,6 +35,35 @@
                     答案统计
                 </div>
             </div>
+            <div class="weui-cells" style="padding-top: 60px;">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">答对人数</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="truenum" name="truepeople"
+                                required readonly  />
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">答错人数</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="wrongnum" name="wrongpeople"
+                               required readonly   />
+                    </div>
+                </div>
+
+                <div class="weui-cells__title">统计图展示</div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                        <textarea class="weui-textarea"  id="show" name="ansshow"> </textarea>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
 
 
         </div>
