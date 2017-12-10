@@ -30,14 +30,25 @@
 <body>
 <div class="page">
     <div class="page__bd">
-        <form id="formData" action="">
-            <div class="buttons-tab">
-                <a href="#tab1" class="tab-link active button" style="font-size: medium;">提问</a>
-                <a href="#tab2" class="tab-link button" style="font-size: medium;">问题列表</a>
-                <a href="#tab3" class="tab-link button" style="font-size: medium;">答案统计</a>
-            </div>
 
-            <div class="weui-cells__title">问题内容</div>
+            <div class="weui-tab">
+                <div class="weui-navbar">
+                    <div class="weui-navbar__item weui-bar__item_on">
+                        提问
+                    </div>
+                    <div class="weui-navbar__item">
+                        问题列表
+                    </div>
+                    <div class="weui-navbar__item">
+                        答案统计
+                    </div>
+                </div>
+                <%--<div class="weui-tab__panel">--%>
+
+                <%--</div>--%>
+
+
+            <div class="weui-cells__title" style="padding-top: 60px;">问题内容</div>
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
@@ -59,11 +70,12 @@
                 </div>
             </div>
 
-        </form>
+
 
         <div class="weui-btn-area">
             <a href="javascript:;" class="button button-fill" style="margin: auto;" id="btnSubmit">提交</a>
         </div>
+            </div>
     </div>
 </div>
 
