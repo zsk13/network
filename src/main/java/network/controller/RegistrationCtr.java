@@ -49,7 +49,7 @@ public class RegistrationCtr {
         JSONObject jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + SECRET + "&code=" + CODE + "&grant_type=authorization_code ", "POST", null);
         String openid = null;
         if (jsonObject.get("openid") != null) {
-             openid = jsonObject.get("openid").toString();
+            openid = jsonObject.get("openid").toString();
         }
 
 
@@ -83,7 +83,7 @@ public class RegistrationCtr {
             String u = jsonMap.get(key).toString();
             map.put(key, u);
         }
-       // jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
+        // jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
         String jsapi_ticket = map.get("ticket").toString();
 
 
@@ -91,9 +91,34 @@ public class RegistrationCtr {
         String noncestr = UUID.randomUUID().toString();
         String timestamp = Long.toString(System.currentTimeMillis() / 1000);
         //获取请求url
-        String path = request.getContextPath();
+
+        StringBuffer uri = request.getRequestURL();
+        String url = uri.toString();
+        //获取所有请求,返回Map集合,遍历
+        Map<String, String[]> paramMap = request.getParameterMap();
+        Set<Map.Entry<String, String[]>> entry = paramMap.entrySet();
+        Iterator<Map.Entry<String, String[]>> iterator = entry.iterator();
+
+        //遍历集合
+        StringBuffer sb = new StringBuffer();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String[]> item = iterator.next();
+            //请求名
+            String key = item.getKey();
+            //请求值
+            for (String value : item.getValue()) {
+                //拼接每个请求参数   key=value&
+                sb.append(key + "=" + value + "&");
+            }
+        }
+
+        String string = sb.toString();
+        //拼接URL,   URL?key=value&key=value&   并且去掉最后一个&
+        url = url + "?" + string.substring(0, string.lastIndexOf("&"));
+
+        // String path = request.getContextPath();
         //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
-        String url = request.getScheme() + "://" + request.getServerName() + path;
+        // String url = request.getScheme() + "://" + request.getServerName() + path;
         mav.addObject("url", url);
         String str = "jsapi_ticket=" + jsapi_ticket +
                 "&noncestr=" + noncestr +
@@ -129,5 +154,6 @@ public class RegistrationCtr {
         map.put("state", state);
         return map;
     }
+
 
 }
