@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
 
-<script type="text/javascript" src="${ctx}/WEB-INF/js/questionList.js/questionList.js"></script>
+<script type="text/javascript" src="${ctx}/WEB-INF/js/questionList.js"></script>
 
 <!DOCTYPE html>
 <html lang="zh-CN">

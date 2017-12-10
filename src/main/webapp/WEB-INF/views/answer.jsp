@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
 
-<script type="text/javascript" src="${ctx}/WEB-INF/js/answer.js/answer.js"></script>
+<script type="text/javascript" src="${ctx}/WEB-INF/js/answer.js"></script>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
