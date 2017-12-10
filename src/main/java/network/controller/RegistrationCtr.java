@@ -140,8 +140,8 @@ public class RegistrationCtr {
     Map<String, Object> login(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> map = new HashMap<String, Object>();
         String openId = request.getParameter("openId").toString();
-        double location_x = Double.parseDouble(request.getParameter("lcoation_x"));
-        double location_y = Double.parseDouble(request.getParameter("lcoation_y"));
+        double location_x = Double.parseDouble(request.getParameter("location_x"));
+        double location_y = Double.parseDouble(request.getParameter("location_y"));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
         try {
