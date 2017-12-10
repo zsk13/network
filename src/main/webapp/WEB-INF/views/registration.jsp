@@ -8,8 +8,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <link rel="stylesheet" href="./css/weui.css">
-    <link rel="stylesheet" href="./css/example.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/example.css">
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
     <script>
@@ -45,7 +45,7 @@
                 alert("获取地理位置成功，经纬度为：（" + res.latitude + "，" + res.longitude + "）");
                 $.ajax({
                     type: "POST",
-                    url: "./addRegistration",
+                    url: "./addRegistration.do",
                     data: {
                         openId: $("#openId").val(),
                         location_x: res.latitude,
