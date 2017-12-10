@@ -94,7 +94,7 @@
     select
     <include refid="Base_Column_List" />
     from registration
-    where class_name = #{className,jdbcType=String}
+    where class_name = #{className,jdbcType=VARCHAR}
     and #{time,jdbcType=TIMESTAMP} between s_time and e_time
 
   </select>
