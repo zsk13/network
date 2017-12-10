@@ -91,7 +91,7 @@
 
 <%--<script type="text/javascript" src="${ctx}/WEB-INF/js/question.js"></script>--%>
 
-<script type="text/javascript" src="/js/question.js"></script>
+<script type="text/javascript" src="/network/js/question.js"></script>
 </html>
 
 
