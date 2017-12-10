@@ -27,7 +27,7 @@ function Submit() {
    var status = "0";
 
     $.ajax({
-        // url: _ctx + '/question/add.do',
+        // url: _ctx + '/question/add.do',   http://47.100.116.100/network/question/add.do
         url:'http://47.100.116.100/network/question/add.do',
         type: 'POST',
         dataType: "JSON",
