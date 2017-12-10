@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "question")
@@ -41,8 +44,12 @@ public class QuestionCtr {
 
         //status ="0" ;
 
+        Date first = new Date();
+        DateFormat formatfirst = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createtime = formatfirst.format(first);
+
         Question que=new Question();
-        que.setQid(Long.valueOf(java.util.UUID.randomUUID().toString()));
+        que.setQid(Long.valueOf(createtime));
         que.setAnswer(answer);
         que.setQuestion(question);
         que.setStatus(status);
