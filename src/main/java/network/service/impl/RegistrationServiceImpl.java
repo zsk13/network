@@ -2,6 +2,7 @@ package network.service.impl;
 
 import network.dao.LocationDao;
 import network.dao.RegistrationDao;
+import network.dao.RollcallDao;
 import network.dao.UsersDao;
 import network.model.Location;
 import network.model.Registration;
@@ -21,6 +22,8 @@ public class RegistrationServiceImpl implements RegistrationService{
     private RegistrationDao registrationDao;
     @Autowired
     private LocationDao locationDao;
+    @Autowired
+    private RollcallDao rollcallDao;
     public int registration(double location_x, double location_y, String openId, Date time){
       int code = 0;
       Users users = usersDao.selectByOpenId(openId);
@@ -28,6 +31,11 @@ public class RegistrationServiceImpl implements RegistrationService{
         if(registration==null){
             code = 1;
         return code;
+        }
+        Rollcall test = rollcallDao.check(users.getuId(),registration.getrId());
+        if(test != null) {
+            code = 4;
+            return code;
         }
       Location location = this.locationDao.selectByPrimaryKey(registration.getlId());
       if(location_x<location.getMinLcationX() || location_x>location.getMaxLcationX() || location_y<location.getMinLcationY() || location_y>location.getMaxLocationY())

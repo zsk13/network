@@ -61,6 +61,9 @@
                             case 3:
                                 alert("签到成功！")
                                 break;
+                            case 4:
+                                alert("您已签到，请勿重复签到！")
+                                break;
                         }
                     }
 
