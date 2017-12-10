@@ -31,6 +31,8 @@
 <body>
 <a href="javascript:submitOrderInfoClick();" class="weui-btn weui-btn_mini weui-btn_primary">按钮</a>
 <input type="hidden" name="openId" id="openId" value="${openId}">
+<input type="hidden" name="url" id="url" value="${url}">
+
 <button id="getBBS" style="width:1000px;height:600px;font-size:150px;" onclick="submitOrderInfoClick();">获取地理位置</button>
 </body>
 <script type="text/javascript">

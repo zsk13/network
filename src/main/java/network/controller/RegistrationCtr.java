@@ -94,6 +94,7 @@ public class RegistrationCtr {
         String path = request.getContextPath();
         //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
         String url = request.getScheme() + "://" + request.getServerName() + path + "/";
+        mav.addObject("url", url);
         String str = "jsapi_ticket=" + jsapi_ticket +
                 "&noncestr=" + noncestr +
                 "&timestamp=" + timestamp +
