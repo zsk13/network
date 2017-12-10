@@ -56,6 +56,9 @@
                     success: function (data) {
                         switch (data.code) {
                             case 1:
+                                alert("您还没有注册，无法签到！")
+                                break;
+                            case 1:
                                 alert("签到失败，当前时间内没有课程！")
                                 break;
                             case 2:

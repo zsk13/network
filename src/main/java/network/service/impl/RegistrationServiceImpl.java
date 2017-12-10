@@ -27,6 +27,8 @@ public class RegistrationServiceImpl implements RegistrationService{
     public int registration(double location_x, double location_y, String openId, Date time){
       int code = 0;
       Users users = usersDao.selectByOpenId(openId);
+      if(users == null)
+          return 0;
       Registration registration = registrationDao.selectByClass(users.getClassname(),time);
         if(registration==null){
             code = 1;
