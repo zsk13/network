@@ -39,7 +39,7 @@ function Submit() {
             if (info.success) {
                alert("提交成功");
             } else {
-                alert(info.msg)
+                //alert(info.msg)
             }
 
         },
