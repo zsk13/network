@@ -83,7 +83,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public int insert(Question record) {
-        return baseService.getSqlMapper(QuestionMapper.class).insert(record);
+        return questionMapper.insert(record);
     }
 
 }
