@@ -28,7 +28,7 @@ function Submit() {
 
     $.ajax({
         // url: _ctx + '/question/add.do',
-        url:'localhost:8080/question/add.do',
+        url:'127.0.0.1:8080/question/add.do',
         type: 'POST',
         dataType: "JSON",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",

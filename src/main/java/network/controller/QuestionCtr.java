@@ -37,9 +37,9 @@ public class QuestionCtr {
     public void add(Long teacher_id,String question,String answer,String status,HttpServletResponse res){
 
 
-        teacher_id = Long.valueOf(1);
+        //teacher_id = Long.valueOf(1);
 
-        status ="0" ;
+        //status ="0" ;
 
         Question que=new Question();
         que.setQid(Long.valueOf(java.util.UUID.randomUUID().toString()));
