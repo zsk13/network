@@ -16,18 +16,19 @@ import java.util.*;
 
 
 @Controller
+@RequestMapping(value = "registration")
 public class RegistrationCtr {
     @Autowired
     private RegistrationService registrationService;
-    @RequestMapping(value = "/redirect")
+    @RequestMapping(value = "/redirect.do")
     public String wechatRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=wx39b5d81dba20a59e&" +
-                "redirect_uri=http://47.100.116.100:80/registration" +
+                "redirect_uri=http://47.100.116.100:80/registration/registration.do" +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
     }
 
-    @RequestMapping("/registration")
+    @RequestMapping("/registration.do")
     public ModelAndView registration(HttpServletRequest request) {
         String CODE = request.getParameter("code");
         String APPID = "wx39b5d81dba20a59e";
@@ -102,7 +103,7 @@ public class RegistrationCtr {
         return mav;
 
     }
-    @RequestMapping(value="/addRegistration")
+    @RequestMapping(value="/addRegistration.do")
     public @ResponseBody Map<String,Object> login(HttpServletRequest request, HttpServletResponse response){
         Map<String,Object> map = new HashMap<String,Object>();
         String openId = request.getParameter("openId").toString();
