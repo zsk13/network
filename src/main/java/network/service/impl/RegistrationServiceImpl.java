@@ -12,6 +12,7 @@ import network.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
@@ -29,13 +30,12 @@ public class RegistrationServiceImpl implements RegistrationService{
       Users users = usersDao.selectByOpenId(openId);
       if(users == null)
           return 0;
-      System.out.println("uid0000:"+users.getuOpenId());
-      Registration registration = registrationDao.selectByClass(users.getClassname(),time);
-        if(registration==null){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Registration registration = registrationDao.selectByClass(users.getClassname(),time);
+        if(registration == null){
             code = 1;
         return code;
         }
-        System.out.println("rId0000:"+registration.getrId());
         Rollcall test = rollcallDao.check(users.getuId(),registration.getrId());
         if(test != null) {
             code = 4;
