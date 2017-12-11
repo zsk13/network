@@ -27,10 +27,11 @@ public class FollowServiceImpl implements FollowService{
 
     @Override
     public void follow(Map<String, String> map, PrintWriter out, String content) {
+        String[] ss  = content.split(" ");
         String fromUserName = map.get("FromUserName");
         int index = content.indexOf(",");
-        String sno = content.substring(3, index);
-        String name = content.substring(index + 4);
+        String sno = ss[1];
+        String name = ss[3];
         Users users = new Users();
         users.setuOpenId(fromUserName);
         users.setSno(sno);

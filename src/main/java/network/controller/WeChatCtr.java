@@ -58,10 +58,11 @@ public class WeChatCtr {
             // 开发者获得加密后的字符串可与signature对比，标识该请求来源于微信  
             if (signature.equals(sign)) {  
                 response.getWriter().print(echostr);  
-            }  
+            }
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
+        
     }
     
     @RequestMapping(value = "validate", method = {RequestMethod.POST})
@@ -82,7 +83,7 @@ public class WeChatCtr {
             String content = map.get("Content");
             // 对消息进行处理
             if (WechatMessageUtil.MESSAGE_TEXT.equals(msgType)) {// 文本消息
-                if (content.startsWith("学号：")) {
+                if (content.startsWith("学号")) {
                     followService.follow(map,out,content);
                     return;
                 }
