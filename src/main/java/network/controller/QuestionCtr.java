@@ -68,7 +68,6 @@ public class QuestionCtr {
         //String responseMessage = WechatMessageUtil.textMessageToXml(que);
 
 
-        JSON.parse(String.valueOf(que));
         //System.out.println("a");
 
     }
