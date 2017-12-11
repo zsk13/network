@@ -30,14 +30,13 @@ public class RegistrationServiceImpl implements RegistrationService{
       Users users = usersDao.selectByOpenId(openId);
       if(users == null)
           return 0;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Registration registration = registrationDao.selectByClass(users.getClassname(),time);
         if(registration == null){
             code = 1;
         return code;
         }
         Rollcall test = rollcallDao.check(users.getuId(),registration.getrId());
-        if(test != null) {
+        if(test == null) {
             code = 4;
             return code;
         }
