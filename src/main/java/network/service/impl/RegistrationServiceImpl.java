@@ -30,16 +30,12 @@ public class RegistrationServiceImpl implements RegistrationService{
       Users users = usersDao.selectByOpenId(openId);
       if(users == null)
           return 0;
-      System.out.println("uid0000:"+users.getuOpenId());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println("time0000:"+sdf.format(time));
-        System.out.println("className0000:"+users.getClassname());
         Registration registration = registrationDao.selectByClass(users.getClassname(),time);
-        if(registration==null){
+        if(registration == null){
             code = 1;
         return code;
         }
-        System.out.println("rId0000:"+registration.getrId());
         Rollcall test = rollcallDao.check(users.getuId(),registration.getrId());
         if(test != null) {
             code = 4;
