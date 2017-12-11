@@ -26,6 +26,7 @@
         });
 
         wx.error(function (res) {
+            alert("获取位置失败！请检查定位是否打开！")
         });
     </script>
 </head>
