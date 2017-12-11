@@ -13,7 +13,7 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
     <script>
-        alert(location.href.split('#')[0]);
+    //    alert(location.href.split('#')[0]);
         wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '${appId}', // 必填，企业号的唯一标识，此处填写企业号corpid
@@ -30,12 +30,10 @@
     </script>
 </head>
 <body>
-<a href="javascript:submitOrderInfoClick();" class="weui-btn weui-btn_mini weui-btn_primary">按钮</a>
 <input type="hidden" name="openId" id="openId" value="${openId}">
-${url}
-<input type="hidden" name="url" id="url" value="${url}">
-
-<button id="getBBS" style="width:1000px;height:600px;font-size:150px;" onclick="submitOrderInfoClick();">获取地理位置</button>
+${openId}
+${idXml}
+<button id="getBBS" style="width:800px;height:500px;font-size:150px;" onclick="submitOrderInfoClick();">获取地理位置</button>
 </body>
 <script type="text/javascript">
     function submitOrderInfoClick() {
@@ -43,7 +41,7 @@ ${url}
         wx.getLocation({
             type: 'gcj02',
             success: function (res) {
-                alert("获取地理位置成功，经纬度为：（" + res.latitude + "，" + res.longitude + "）");
+             //   alert("获取地理位置成功，经纬度为：（" + res.latitude + "，" + res.longitude + "）");
                 $.ajax({
                     type: "POST",
                     url: "./addRegistration.do",
@@ -55,7 +53,7 @@ ${url}
                     },
                     dataType: "json",
                     error: function (data) {
-                        alert("出错了！！:" + data.msg);
+                        alert("签到失败，请稍后重试！:");
                     },
                     success: function (data) {
                         alert(data.state);
