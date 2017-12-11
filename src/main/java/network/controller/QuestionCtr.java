@@ -2,7 +2,6 @@ package network.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import network.model.Question;
+import network.service.AnswerService;
 import network.service.QuestionService;
 
 @Controller
@@ -27,6 +27,9 @@ public class QuestionCtr {
 
     @Autowired
     QuestionService questionservice;
+    
+    @Autowired
+    AnswerService answerservice;
 
 
     @RequestMapping(value = "/addquestion.do")
@@ -42,6 +45,17 @@ public class QuestionCtr {
         mv.setViewName("questionList");
         List<Question> qs = questionservice.getQuestions();
         mv.addObject("qs", qs);
+        return mv;
+    }
+    
+    @RequestMapping(value = "/answer.do")
+    public ModelAndView AnswerView(Long qid,HttpServletResponse res, HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("answer");
+        List<Integer> qs = answerservice.getAnswerNum(qid);
+        mv.addObject("total", qs.get(0));
+        mv.addObject("correct", qs.get(1));
+        mv.addObject("wrong", qs.get(2));
         return mv;
     }
 

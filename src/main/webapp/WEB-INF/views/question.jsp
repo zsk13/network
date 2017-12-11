@@ -34,13 +34,10 @@
             <div class="weui-tab">
                 <div class="weui-navbar">
                     <div class="weui-navbar__item weui-bar__item_on" id = "tab1">
-                        提问
+                        	<a href="./addquestion">提问</a>
                     </div>
                     <div class="weui-navbar__item" id="tab2">
                        <a href="./questionlist.do">问题列表</a>
-                    </div>
-                    <div class="weui-navbar__item" id = "tab3">
-                        答案统计
                     </div>
                 </div>
                 <%--<div class="weui-tab__panel">--%>

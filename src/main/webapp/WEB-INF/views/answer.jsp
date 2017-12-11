@@ -25,22 +25,19 @@
     <div class="page__bd">
         <div class="weui-tab">
             <div class="weui-navbar">
-                <div class="weui-navbar__item " id="tab1">
-                    提问
-                </div>
-                <div class="weui-navbar__item" id = "tab2">
-                    问题列表
-                </div>
-                <div class="weui-navbar__item weui-bar__item_on" id ="tab3">
-                    答案统计
-                </div>
+                    <div class="weui-navbar__item weui-bar__item_on" id = "tab1">
+                        	<a href="./addquestion">提问</a>
+                    </div>
+                    <div class="weui-navbar__item" id="tab2">
+                       <a href="./questionlist.do">问题列表</a>
+                    </div>
             </div>
             <div class="weui-cells" style="padding-top: 60px;">
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">答对人数 </label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" type="text" id="truenum" name="truepeople"
-                                required readonly  />
+                                required readonly value="${correct}" />
                     </div>
                 </div>
 
@@ -48,7 +45,7 @@
                     <div class="weui-cell__hd"><label class="weui-label">答错人数 </label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" type="text" id="wrongnum" name="wrongpeople"
-                               required readonly   />
+                               required readonly  value="${wrong}" />
                     </div>
                 </div>
 
