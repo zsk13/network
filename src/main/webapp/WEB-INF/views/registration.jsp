@@ -53,7 +53,11 @@
                         date: date
                     },
                     dataType: "json",
+                    error: function (data) {
+                        alert("出错了！！:" + data.msg);
+                    },
                     success: function (data) {
+                        alert(data);
                         switch (data.code) {
                             case 1:
                                 alert("您还没有注册，无法签到！")
