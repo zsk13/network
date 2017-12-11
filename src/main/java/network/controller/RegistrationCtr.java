@@ -160,8 +160,7 @@ public class RegistrationCtr {
       // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
         try {
-             SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.CHINA);
-             date = (Date) sdf.parse(request.getParameter("date").toString());
+             date = new Date(Long.parseLong(request.getParameter("date")));
            // date = sdf.parse(request.getParameter("date").toString());
         } catch (Exception e) {
             e.printStackTrace();
