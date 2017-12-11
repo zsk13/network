@@ -3,7 +3,7 @@
 <mapper namespace="network.dao.UsersDao" >
   <resultMap id="BaseResultMap" type="network.model.Users" >
     <id column="u_id" property="uId" jdbcType="BIGINT" />
-    <result column="u_open_id" property="uOpenId" jdbcType="BIGINT" />
+    <result column="u_open_id" property="uOpenId" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="CHAR" />
     <result column="sno" property="sno" jdbcType="VARCHAR" />
@@ -90,7 +90,7 @@
     from users
     where u_id = #{uId,jdbcType=BIGINT}
   </select>
-  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByOpenId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from users
@@ -109,7 +109,7 @@
   <insert id="insert" parameterType="network.model.Users" >
     insert into users (u_id, u_open_id, name, 
       type, sno, className)
-    values (#{uId,jdbcType=BIGINT}, #{uOpenId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+    values (#{uId,jdbcType=BIGINT}, #{uOpenId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{type,jdbcType=CHAR}, #{sno,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="network.model.Users" >
@@ -139,7 +139,7 @@
         #{uId,jdbcType=BIGINT},
       </if>
       <if test="uOpenId != null" >
-        #{uOpenId,jdbcType=BIGINT},
+        #{uOpenId,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -168,7 +168,7 @@
         u_id = #{record.uId,jdbcType=BIGINT},
       </if>
       <if test="record.uOpenId != null" >
-        u_open_id = #{record.uOpenId,jdbcType=BIGINT},
+        u_open_id = #{record.uOpenId,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -190,7 +190,7 @@
   <update id="updateByExample" parameterType="map" >
     update users
     set u_id = #{record.uId,jdbcType=BIGINT},
-      u_open_id = #{record.uOpenId,jdbcType=BIGINT},
+      u_open_id = #{record.uOpenId,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=CHAR},
       sno = #{record.sno,jdbcType=VARCHAR},
@@ -203,7 +203,7 @@
     update users
     <set >
       <if test="uOpenId != null" >
-        u_open_id = #{uOpenId,jdbcType=BIGINT},
+        u_open_id = #{uOpenId,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -222,7 +222,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="network.model.Users" >
     update users
-    set u_open_id = #{uOpenId,jdbcType=BIGINT},
+    set u_open_id = #{uOpenId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=CHAR},
       sno = #{sno,jdbcType=VARCHAR},
