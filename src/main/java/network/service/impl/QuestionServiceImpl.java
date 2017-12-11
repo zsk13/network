@@ -101,6 +101,12 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public int insert(Question record) {
+        List<Question> questions = getQuestion();
+        for(Question q : questions){
+            q.setStatus("1");
+            questionMapper.updateByPrimaryKey(q);
+        }
+        
         return questionMapper.insert(record);
     }
 
