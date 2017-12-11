@@ -12,6 +12,7 @@ import network.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
@@ -30,7 +31,9 @@ public class RegistrationServiceImpl implements RegistrationService{
       if(users == null)
           return 0;
       System.out.println("uid0000:"+users.getuOpenId());
-      Registration registration = registrationDao.selectByClass(users.getClassname(),time);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("time0000:"+sdf.format(time));
+        Registration registration = registrationDao.selectByClass(users.getClassname(),time);
         if(registration==null){
             code = 1;
         return code;
