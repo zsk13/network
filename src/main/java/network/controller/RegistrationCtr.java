@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import network.common.HttpXmlClient;
 import network.common.wechatUtil.Token;
 import network.common.wechatUtil.TokenUtil;
-import network.common.wechatUtil.WeixinUtil;
 import network.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +75,7 @@ public class RegistrationCtr {
         params.put("type", "jsapi");
         String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket", params);
         JSONObject jsonMap = JSONObject.parseObject(xml);
-        Map<String, String> map = new HashMap<String, String>();
+//        Map<String, String> map = new HashMap<String, String>();
 //        Iterator<String> it = jsonMap.keys();
 //        while (it.hasNext()) {
 //            String key = (String) it.next();
@@ -84,7 +83,10 @@ public class RegistrationCtr {
 //            map.put(key, u);
 //        }
         // jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
-        String jsapi_ticket = map.get("ticket").toString();
+        String jsapi_ticket = null;
+        if (jsonMap.get("ticket") != null) {
+            jsapi_ticket = jsonMap.get("ticket").toString();
+        }
 
 
         //获取签名signature
@@ -114,7 +116,8 @@ public class RegistrationCtr {
 
         String string = sb.toString();
         //拼接URL,   URL?key=value&key=value&   并且去掉最后一个&
-        url = url + "?" + string.substring(0, string.lastIndexOf("&"));
+        if (string.contains("&"))
+            url = url + "?" + string.substring(0, string.lastIndexOf("&"));
 
         // String path = request.getContextPath();
         //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
@@ -154,6 +157,5 @@ public class RegistrationCtr {
         map.put("state", state);
         return map;
     }
-
 
 }
