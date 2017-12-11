@@ -174,52 +174,62 @@ public class UsersExample {
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdEqualTo(Long value) {
+        public Criteria andUOpenIdEqualTo(String value) {
             addCriterion("u_open_id =", value, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdNotEqualTo(Long value) {
+        public Criteria andUOpenIdNotEqualTo(String value) {
             addCriterion("u_open_id <>", value, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdGreaterThan(Long value) {
+        public Criteria andUOpenIdGreaterThan(String value) {
             addCriterion("u_open_id >", value, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andUOpenIdGreaterThanOrEqualTo(String value) {
             addCriterion("u_open_id >=", value, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdLessThan(Long value) {
+        public Criteria andUOpenIdLessThan(String value) {
             addCriterion("u_open_id <", value, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdLessThanOrEqualTo(Long value) {
+        public Criteria andUOpenIdLessThanOrEqualTo(String value) {
             addCriterion("u_open_id <=", value, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdIn(List<Long> values) {
+        public Criteria andUOpenIdLike(String value) {
+            addCriterion("u_open_id like", value, "uOpenId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUOpenIdNotLike(String value) {
+            addCriterion("u_open_id not like", value, "uOpenId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUOpenIdIn(List<String> values) {
             addCriterion("u_open_id in", values, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdNotIn(List<Long> values) {
+        public Criteria andUOpenIdNotIn(List<String> values) {
             addCriterion("u_open_id not in", values, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdBetween(Long value1, Long value2) {
+        public Criteria andUOpenIdBetween(String value1, String value2) {
             addCriterion("u_open_id between", value1, value2, "uOpenId");
             return (Criteria) this;
         }
 
-        public Criteria andUOpenIdNotBetween(Long value1, Long value2) {
+        public Criteria andUOpenIdNotBetween(String value1, String value2) {
             addCriterion("u_open_id not between", value1, value2, "uOpenId");
             return (Criteria) this;
         }

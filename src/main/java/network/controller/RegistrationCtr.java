@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -33,6 +34,8 @@ public class RegistrationCtr {
 
     @RequestMapping("/registration.do")
     public ModelAndView registration(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("registration");
+
         String CODE = request.getParameter("code");
         String APPID = "wx39b5d81dba20a59e";
         String SECRET = "14d2ceb14c372b064b286546c55a7f59";
@@ -40,10 +43,15 @@ public class RegistrationCtr {
         Map<String, String> idparams = new HashMap<String, String>();
         idparams.put("appid", APPID);
         idparams.put("secret", SECRET);
-        idparams.put("code", CODE);
+        try{
+            idparams.put("code", URLEncoder.encode(CODE,"UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         idparams.put("grant_type", "authorization_code");
         //URLConnectionHelper是一个模拟发送http请求的类
         String idXml = HttpXmlClient.post("https://api.weixin.qq.com/sns/oauth2/access_token", idparams);
+        mav.addObject("idXml", idXml);
         JSONObject idJsonMap = JSONObject.parseObject(idXml);
 //        JSONObject jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + SECRET + "&code=" + CODE + "&grant_type=authorization_code ", "POST", null);
         String openid = null;
@@ -52,7 +60,6 @@ public class RegistrationCtr {
         }
 
 
-        ModelAndView mav = new ModelAndView("registration");
         //获取access_token
         Token token = TokenUtil.getToken();
         String access_token = token.getAccessToken();
@@ -110,7 +117,11 @@ public class RegistrationCtr {
             //请求值
             for (String value : item.getValue()) {
                 //拼接每个请求参数   key=value&
-                sb.append(key + "=" + value + "&");
+                try {
+                    sb.append(key + "=" + URLEncoder.encode(value, "UTF-8") + "&");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -118,7 +129,8 @@ public class RegistrationCtr {
         //拼接URL,   URL?key=value&key=value&   并且去掉最后一个&
         if (string.contains("&"))
             url = url + "?" + string.substring(0, string.lastIndexOf("&"));
-
+        if (string.contains("#"))
+            url = url.substring(0, string.lastIndexOf("#"));
         // String path = request.getContextPath();
         //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
         // String url = request.getScheme() + "://" + request.getServerName() + path;

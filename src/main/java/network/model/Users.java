@@ -3,7 +3,7 @@ package network.model;
 public class Users {
     private Long uId;
 
-    private Long uOpenId;
+    private String uOpenId;
 
     private String name;
 
@@ -21,12 +21,12 @@ public class Users {
         this.uId = uId;
     }
 
-    public Long getuOpenId() {
+    public String getuOpenId() {
         return uOpenId;
     }
 
-    public void setuOpenId(Long uOpenId) {
-        this.uOpenId = uOpenId;
+    public void setuOpenId(String uOpenId) {
+        this.uOpenId = uOpenId == null ? null : uOpenId.trim();
     }
 
     public String getName() {
