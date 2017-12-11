@@ -81,6 +81,8 @@ public class WeChatCtr {
             String responseMessage = "success";
             //消息内容
             String content = map.get("Content");
+            logger.error("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm:" + msgType);
+            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm:" + msgType);
             // 对消息进行处理
             if (WechatMessageUtil.MESSAGE_TEXT.equals(msgType)) {// 文本消息
                 if (content.startsWith("学号")) {

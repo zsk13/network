@@ -61,6 +61,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     public void dealCommitQuestion(Map<String, String> map, PrintWriter out) {
         // TODO Auto-generated method stub
+        
         String fromUserName = map.get("FromUserName");
         String toUserName = map.get("ToUserName");
         String answer = map.get("Content");
