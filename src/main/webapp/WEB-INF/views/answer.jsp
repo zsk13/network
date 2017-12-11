@@ -23,15 +23,7 @@
 <body>
 	<div class="page">
 		<div class="page__bd">
-			<div class="weui-tab">
-				<div class="weui-navbar">
-					<div class="weui-navbar__item weui-bar__item_on" id="tab1">
-						<a href="./addquestion.do">提问</a>
-					</div>
-					<div class="weui-navbar__item" id="tab2">
-						<a href="./questionlist.do">问题列表</a>
-					</div>
-				</div>
+
 				<div class="weui-cells" style="padding-top: 60px;">
 					<div class="weui-cell">
 						<div class="weui-cell__hd">
@@ -39,7 +31,7 @@
 						</div>
 						<div class="weui-cell__bd">
 							<input class="weui-input" type="text" id="truenum"
-								name="truepeople" required readonly value="${correct}" />
+								name="truepeople" required readonly value="${correct}  人" />
 						</div>
 					</div>
 
@@ -49,7 +41,7 @@
 						</div>
 						<div class="weui-cell__bd">
 							<input class="weui-input" type="text" id="wrongnum"
-								name="wrongpeople" required readonly value="${wrong}" />
+								name="wrongpeople" required readonly value="${wrong}  人" />
 						</div>
 					</div>
 
@@ -58,7 +50,7 @@
 						<div class="weui-cell">
 							<div class="weui-cell__bd" >
 								<textarea class="weui-textarea" id="show" name="ansshow"> </textarea>
-								<div id="main" style="width: 600px; height: 400px; margin:20px auto"></div>
+								<div id="main" style="width: 600px; height: 400px; margin:20px auto" required readonly></div>
 
 
 							</div>
@@ -70,7 +62,6 @@
 
 
 
-			</div>
 
 
 		</div>
@@ -85,6 +76,7 @@
 	src="http://g.alicdn.com/msui/sm/0.6.2/js/sm.js" charset="utf-8"></script>
 <script type="text/javascript"
 	src="http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js" charset="utf-8"></script>
+
 
 <script src="/network/js/jquery.min.js"></script>
 <script src="/network/js/echarts.common.min.js"></script>

@@ -86,10 +86,9 @@
 
 
 <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>--%>
-
-<script src="/network/js/jquery.min.js"></script>
 <%--<script type="text/javascript" src="${ctx}/js/question.js"></script>--%>
 
+<script src="/network/js/jquery.min.js"></script>
 <script type="text/javascript" src="/network/js/question.js"></script>
 </html>
 

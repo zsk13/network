@@ -10,7 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%> 
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
 
-<%--<script type="text/javascript" src="${ctx}/WEB-INF/js/questionList.js"></script>--%>
+<%--<script type="text/javascript" src="${ctx}/js/questionList.js"></script>--%>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
