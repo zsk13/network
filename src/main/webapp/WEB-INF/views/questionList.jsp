@@ -10,7 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%> 
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
 
-<%--<script type="text/javascript" src="${ctx}/WEB-INF/js/questionList.js"></script>--%>
+<%--<script type="text/javascript" src="${ctx}/js/questionList.js"></script>--%>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -42,11 +42,11 @@
                     </div>
 				</div>
 
-				<div class="list-block">
+				<div class="list-block" style="margin-left: 10px">
 					<ul>
 						<c:forEach items="${qs }" var="q">
 							<li>
-								<a href="./answer.do?qid=${q.qid }">${q.question }</a>
+								<a href="./answer.do?qid=${q.qid }" style="height: 50px;font-size: medium;">${q.question }</a>
 							</li>
 						</c:forEach>
 					</ul>
