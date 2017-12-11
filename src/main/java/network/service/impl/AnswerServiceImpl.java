@@ -5,9 +5,12 @@ import network.model.Answer;
 import network.model.AnswerExample;
 import network.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class AnswerServiceImpl implements AnswerService{
     @Autowired
     AnswerMapper answerMapper;
@@ -18,7 +21,7 @@ public class AnswerServiceImpl implements AnswerService{
         return  answerMapper.selectByExample(answerExample);
     }
     public List<Integer> getAnswerNum(Long qid){
-        List<Integer> num = null;
+        List<Integer> num = new ArrayList<Integer>();
         List<Answer> listAnswer = getAnswer(qid);
         int total = listAnswer.size();
         num.add(total);
