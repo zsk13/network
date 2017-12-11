@@ -54,7 +54,7 @@
                     },
                     dataType: "json",
                     error: function (data) {
-                        alert("签到失败，请稍后重试！:");
+                        alert("签到失败，请稍后重试！");
                     },
                     success: function (data) {
                        // alert(data.state);

@@ -36,7 +36,7 @@ public class RegistrationServiceImpl implements RegistrationService{
         return code;
         }
         Rollcall test = rollcallDao.check(users.getuId(),registration.getrId());
-        if(test == null) {
+        if(test != null) {
             code = 4;
             return code;
         }
