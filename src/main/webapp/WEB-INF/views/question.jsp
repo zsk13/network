@@ -33,13 +33,13 @@
 
             <div class="weui-tab">
                 <div class="weui-navbar">
-                    <div class="weui-navbar__item weui-bar__item_on">
+                    <div class="weui-navbar__item weui-bar__item_on" id = "tab1">
                         提问
                     </div>
-                    <div class="weui-navbar__item">
+                    <div class="weui-navbar__item" id="tab2">
                         问题列表
                     </div>
-                    <div class="weui-navbar__item">
+                    <div class="weui-navbar__item" id = "tab3">
                         答案统计
                     </div>
                 </div>
@@ -73,7 +73,9 @@
 
 
         <div class="weui-btn-area">
-            <a href="javascript:;" class="button button-fill" style="margin: auto;" id="btnSubmit">提交</a>
+            <%--<a href="javascript:;" class="button button-fill" style="margin: auto;" id="btnSubmit">提交</a>--%>
+            <a href="javascript:;" class="weui-btn weui-btn_primary" id="btnSubmit">提交</a>
+
         </div>
             </div>
     </div>
@@ -89,7 +91,7 @@
 <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>--%>
 
 <script src="/network/js/jquery.min.js"></script>
-<%--<script type="text/javascript" src="${ctx}/WEB-INF/js/question.js"></script>--%>
+<%--<script type="text/javascript" src="${ctx}/js/question.js"></script>--%>
 
 <script type="text/javascript" src="/network/js/question.js"></script>
 </html>
