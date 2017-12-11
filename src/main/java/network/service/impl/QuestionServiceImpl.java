@@ -4,16 +4,18 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import network.dao.QuestionMapper;
-import network.model.Question;
-
-import network.model.QuestionExample;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import network.common.wechatUtil.TextMessage;
 import network.common.wechatUtil.WechatMessageUtil;
+import network.dao.AnswerMapper;
+import network.dao.QuestionMapper;
+import network.dao.UsersDao;
+import network.model.Answer;
+import network.model.Question;
+import network.model.QuestionExample;
+import network.model.Users;
 import network.service.QuestionService;
 
 @Service
@@ -24,6 +26,12 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Autowired
     QuestionMapper questionMapper;
+    
+    @Autowired
+    AnswerMapper answerMapper;
+    
+    @Autowired
+    UsersDao usersDao;
 
     public List<Question> getQuestion(){
         QuestionExample questionExample = new QuestionExample();
@@ -36,9 +44,8 @@ public class QuestionServiceImpl implements QuestionService{
         // TODO Auto-generated method stub
         String question = "";
         List<Question> listQuestions = getQuestion();
-        for (Question t : listQuestions) {
-            question = t.getQuestion();
-        }
+        question = listQuestions.get(0).getQuestion();
+        
         String fromUserName = map.get("FromUserName");
         String toUserName = map.get("ToUserName");
         TextMessage textMessage = new TextMessage();
@@ -67,14 +74,25 @@ public class QuestionServiceImpl implements QuestionService{
         textMessage.setCreateTime(System.currentTimeMillis());
         String respContent = "";
         List<Question> listQuestions = getQuestion();
-        for (Question t : listQuestions) {
-            correctAnswer = t.getAnswer();
-        }
+        Question question = listQuestions.get(0);
+        correctAnswer = question.getAnswer();
+        
+        Users user = usersDao.selectByOpenId(fromUserName);
+        Answer answer1 = new Answer();
+        answer1.setQid(question.getQid());
+        answer1.setContent(answer);
+        answer1.setUid(user.getuId());
+
         if(answer.equals(correctAnswer)){
+            answer1.setCorrect(true);
             respContent = "回答正确";
         }else{
+            answer1.setCorrect(false);
             respContent = "回答错误";
         }
+        
+        answerMapper.insert(answer1);
+        
         textMessage.setContent(respContent);
         responseMessage = WechatMessageUtil.textMessageToXml(textMessage);
         out.print(responseMessage);

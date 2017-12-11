@@ -83,7 +83,7 @@ public class WeChatCtr {
             // 对消息进行处理
             if (WechatMessageUtil.MESSAGE_TEXT.equals(msgType)) {// 文本消息
                 if (content.startsWith("学号：")) {
-                    followService.follow(content);
+                    followService.follow(map,out,content);
                     return;
                 }
                 questionService.dealCommitQuestion(map,out);
