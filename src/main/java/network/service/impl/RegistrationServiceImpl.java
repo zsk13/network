@@ -57,5 +57,8 @@ public class RegistrationServiceImpl implements RegistrationService{
         return code;
     }
 
+    public void add(Registration registration){
+        registrationDao.insertSelective(registration);
+    }
 
 }
