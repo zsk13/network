@@ -57,8 +57,8 @@
                         alert("出错了！！:" + data.msg);
                     },
                     success: function (data) {
-                        alert(data);
-                        switch (data.code) {
+                        alert(data.state);
+                        switch (data.state) {
                             case 1:
                                 alert("您还没有注册，无法签到！")
                                 break;
