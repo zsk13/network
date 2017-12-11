@@ -43,7 +43,11 @@ public class RegistrationCtr {
         Map<String, String> idparams = new HashMap<String, String>();
         idparams.put("appid", APPID);
         idparams.put("secret", SECRET);
-        idparams.put("code", CODE);
+        try{
+            idparams.put("code", URLEncoder.encode(CODE,"UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         idparams.put("grant_type", "authorization_code");
         //URLConnectionHelper是一个模拟发送http请求的类
         String idXml = HttpXmlClient.post("https://api.weixin.qq.com/sns/oauth2/access_token", idparams);

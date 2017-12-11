@@ -33,7 +33,9 @@
 <input type="hidden" name="openId" id="openId" value="${openId}">
 ${openId}
 ${idXml}
-<button id="getBBS" style="width:800px;height:500px;font-size:150px;" onclick="submitOrderInfoClick();">获取地理位置</button>
+<div align="center">
+<button id="getBBS" style="width:800px;height:500px;font-size:150px;" onclick="submitOrderInfoClick();">签到</button>
+</div>
 </body>
 <script type="text/javascript">
     function submitOrderInfoClick() {
