@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -110,7 +111,11 @@ public class RegistrationCtr {
             //请求值
             for (String value : item.getValue()) {
                 //拼接每个请求参数   key=value&
-                sb.append(key + "=" + value + "&");
+                try {
+                    sb.append(key + "=" + URLEncoder.encode(value,"UTF-8") + "&");
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
 
