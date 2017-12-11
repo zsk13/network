@@ -14,7 +14,6 @@
     <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
     <script>
         alert(location.href.split('#')[0]);
-        alert(document.getElementById("url").value);
         wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '${appId}', // 必填，企业号的唯一标识，此处填写企业号corpid
@@ -33,6 +32,7 @@
 <body>
 <a href="javascript:submitOrderInfoClick();" class="weui-btn weui-btn_mini weui-btn_primary">按钮</a>
 <input type="hidden" name="openId" id="openId" value="${openId}">
+${url}
 <input type="hidden" name="url" id="url" value="${url}">
 
 <button id="getBBS" style="width:1000px;height:600px;font-size:150px;" onclick="submitOrderInfoClick();">获取地理位置</button>
