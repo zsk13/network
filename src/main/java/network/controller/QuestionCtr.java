@@ -36,6 +36,14 @@ public class QuestionCtr {
         return mv;
     }
 
+    @RequestMapping(value = "/questionlist.do")
+    public ModelAndView QuestionListView(HttpServletResponse res, HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("questionList");
+        return mv;
+    }
+
     @RequestMapping(value = "/add.do")
     public void add(Long teacher_id,String question,String answer,String status,HttpServletResponse res){
 
@@ -61,7 +69,7 @@ public class QuestionCtr {
 
 
         JSON.parse(String.valueOf(que));
-        System.out.println("a");
+        //System.out.println("a");
 
     }
 
