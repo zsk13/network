@@ -33,6 +33,7 @@ public class RegistrationServiceImpl implements RegistrationService{
       System.out.println("uid0000:"+users.getuOpenId());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("time0000:"+sdf.format(time));
+        System.out.println("className0000:"+users.getClassname());
         Registration registration = registrationDao.selectByClass(users.getClassname(),time);
         if(registration==null){
             code = 1;
