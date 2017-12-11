@@ -13,7 +13,7 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
     <script>
-        var url1 = ${url};
+        var url1 = "${url}";
         alert(location.href.split('#')[0]);
         alert(url1);
         wx.config({
