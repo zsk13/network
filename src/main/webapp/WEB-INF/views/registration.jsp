@@ -50,7 +50,7 @@
                         openId: $("#openId").val(),
                         location_x: res.latitude,
                         location_y: res.longitude,
-                        date: date
+                        date: date.getTime()
                     },
                     dataType: "json",
                     error: function (data) {
