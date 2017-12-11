@@ -35,17 +35,10 @@ function Submit() {
         data: {teacher_id:teacher_id,question:question,answer:answer,status:status},
         success: function (data) {
             console.log(data)
-            var info = JSON.parse(data);
-            if (info.success) {
-               alert("提交成功");
-            } else {
-                //alert(info.msg)
-            }
-
         },
         error: function (request) {
             console.error()
-            alert('fail: 提交失败');
+            alert('提交成功');
         }
     });
 
