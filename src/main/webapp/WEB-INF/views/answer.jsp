@@ -24,7 +24,7 @@
 	<div class="page">
 		<div class="page__bd">
 
-				<div class="weui-cells" style="padding-top: 60px;">
+				<div class="weui-cells" >
 					<div class="weui-cell">
 						<div class="weui-cell__hd">
 							<label class="weui-label">答对人数 </label>

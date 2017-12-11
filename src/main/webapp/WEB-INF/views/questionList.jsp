@@ -42,11 +42,11 @@
                     </div>
 				</div>
 
-				<div class="list-block">
+				<div class="list-block" style="margin-left: 10px">
 					<ul>
 						<c:forEach items="${qs }" var="q">
 							<li>
-								<a href="./answer.do?qid=${q.qid }">${q.question }</a>
+								<a href="./answer.do?qid=${q.qid }" style="height: 50px;font-size: medium;">${q.question }</a>
 							</li>
 						</c:forEach>
 					</ul>
