@@ -1,24 +1,24 @@
 package network.controller;
 
-import com.alibaba.fastjson.JSON;
-import network.common.wechatUtil.WechatMessageUtil;
-import network.model.Question;
-import network.service.QuestionService;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import network.model.Question;
+import network.service.QuestionService;
 
 @Controller
 @RequestMapping(value = "question")
@@ -32,7 +32,6 @@ public class QuestionCtr {
     @RequestMapping(value = "/addquestion.do")
     public ModelAndView QuestionAddView(HttpServletResponse res, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-
         mv.setViewName("question");
         return mv;
     }
@@ -40,8 +39,9 @@ public class QuestionCtr {
     @RequestMapping(value = "/questionlist.do")
     public ModelAndView QuestionListView(HttpServletResponse res, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-
         mv.setViewName("questionList");
+        List<Question> qs = questionservice.getQuestions();
+        mv.addObject("qs", qs);
         return mv;
     }
 

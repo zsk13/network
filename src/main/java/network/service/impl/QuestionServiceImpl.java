@@ -86,4 +86,11 @@ public class QuestionServiceImpl implements QuestionService{
         return questionMapper.insert(record);
     }
 
+    @Override
+    public List<Question> getQuestions() {
+        QuestionExample questionExample = new QuestionExample();
+        QuestionExample.Criteria criteria = questionExample.createCriteria();
+        return  questionMapper.selectByExample(questionExample);
+    }
+
 }

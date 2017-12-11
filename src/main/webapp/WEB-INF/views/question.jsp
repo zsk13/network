@@ -37,7 +37,7 @@
                         提问
                     </div>
                     <div class="weui-navbar__item" id="tab2">
-                        问题列表
+                       <a href="./questionlist.do">问题列表</a>
                     </div>
                     <div class="weui-navbar__item" id = "tab3">
                         答案统计
