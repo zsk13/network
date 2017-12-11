@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -45,7 +46,8 @@ public class QuestionCtr {
     }
 
     @RequestMapping(value = "/add.do")
-    public void add(Long teacher_id,String question,String answer,String status,HttpServletResponse res){
+    @ResponseBody
+    public String add(Long teacher_id,String question,String answer,String status,HttpServletResponse res){
 
 
         //teacher_id = Long.valueOf(1);
@@ -64,6 +66,7 @@ public class QuestionCtr {
         que.setTeacherId(teacher_id);
 
         questionservice.insert(que);
+        return "success";
 
         //String responseMessage = WechatMessageUtil.textMessageToXml(que);
 
