@@ -118,7 +118,8 @@ public class RegistrationCtr {
         //拼接URL,   URL?key=value&key=value&   并且去掉最后一个&
         if (string.contains("&"))
             url = url + "?" + string.substring(0, string.lastIndexOf("&"));
-
+        if (string.contains("#"))
+            url = url.substring(0, string.lastIndexOf("#"));
         // String path = request.getContextPath();
         //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
         // String url = request.getScheme() + "://" + request.getServerName() + path;
