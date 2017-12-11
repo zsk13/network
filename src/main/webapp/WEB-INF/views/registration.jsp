@@ -57,7 +57,7 @@
                         alert("签到失败，请稍后重试！:");
                     },
                     success: function (data) {
-                        alert(data.state);
+                       // alert(data.state);
                         switch (data.state) {
                             case 0:
                                 alert("您还没有注册，无法签到！")
