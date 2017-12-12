@@ -41,19 +41,10 @@ public class RegistrationServiceImpl implements RegistrationService {
             return code;
         }
         Location location = this.locationDao.selectByPrimaryKey(registration.getlId());
-        System.out.println("lid:" + location.getlId());
-        System.out.println("x:" + location_x);
-        System.out.println("y:" + location_y);
         if (location_x < location.getMinLcationX() || location_x > location.getMaxLcationX() || location_y < location.getMinLcationY() || location_y > location.getMaxLocationY()) {
-            System.out.println("max_location_x:" + location.getMaxLcationX());
-            System.out.println("max_location_y:" + location.getMinLcationY());
             code = 2;
             return code;
         } else {
-            System.out.println("location_x:" + location.getMinLcationX());
-            System.out.println("location_y:" + location.getMinLcationY());
-
-
             Rollcall rollcall = new Rollcall();
             rollcall.setLocationX(location_x);
             rollcall.setLocationY(location_y);
