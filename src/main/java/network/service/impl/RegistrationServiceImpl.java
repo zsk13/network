@@ -51,6 +51,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             rollcall.setrId(registration.getrId());
             rollcall.setuId(users.getuId());
             rollcall.setrTime(time);
+            rollcallDao.insertSelective(rollcall);
             code = 3;
         }
 
