@@ -32,6 +32,7 @@
 </head>
 <body>
 <input type="hidden" name="openId" id="openId" value="${openId}">
+<input type="hidden" name="url" id="url" value="${openId}">
 <div align="center">
 <button id="getBBS" style="width:800px;height:500px;font-size:150px;" onclick="submitOrderInfoClick();">签到</button>
 </div>
@@ -80,7 +81,7 @@
                 });
             },
             fail: function (error) {
-                AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
+                alert("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
             }
         });
     }
