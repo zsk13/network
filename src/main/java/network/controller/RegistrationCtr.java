@@ -165,6 +165,7 @@ public class RegistrationCtr {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("x:"+location_x+"   y:"+location_y);
         int state = registrationService.registration(location_x, location_x, openId, date);
 
         map.put("state", state);
