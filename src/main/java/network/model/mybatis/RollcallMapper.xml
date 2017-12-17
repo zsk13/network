@@ -96,12 +96,12 @@
   <select id="getAll" resultMap = "BaseResultMap" >
   	SELECT
   	<include refid="Base_Column_List"/>
-  	FROM ROLLCALL
+  	FROM rollcall
   </select>
   <select id="getByRegistrationId" resultMap = "BaseResultMap" parameterType="java.lang.Long" >
   	SELECT
   	<include refid="Base_Column_List"/>
-  	FROM ROLLCALL WHERE r_id = #{r_id, jdbcType=BIGINT}
+  	FROM rollcall WHERE r_id = #{r_id, jdbcType=BIGINT}
   </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.RollcallExample" >
     select
