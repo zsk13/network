@@ -18,6 +18,8 @@ public interface RegistrationDao {
     int insertSelective(Registration record);
 
     List<Registration> selectByExample(RegistrationExample example);
+    
+    List<Registration> getAll();
 
     Registration selectByPrimaryKey(Long rId);
 

@@ -10,6 +10,14 @@
     <result column="location_name" property="locationName" jdbcType="VARCHAR" />
     <result column="r_time" property="rTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="RollcallDisplayMap" type="network.model.RollcallDisplay" >
+    <result column="sno" property="studentNumber" jdbcType="VARCHAR" />
+    <result column="pname" property="personName" jdbcType="VARCHAR" />
+    <result column="cname" property="className" jdbcType="VARCHAR" />
+    <result column="rname" property="registrationName" jdbcType="VARCHAR" />
+    <result column="lname" property="locationName" jdbcType="VARCHAR" />
+    <result column="rtime" property="rollcallTime" jdbcType="TIMESTAMP" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -71,6 +79,30 @@
   <sql id="Base_Column_List" >
     rc_id, u_id, r_id, location_x, location_y, location_name, r_time
   </sql>
+  
+  <select id="getAllRollcallDisplays" resultMap="RollcallDisplayMap" >
+  	SELECT users.sno AS sno, users.name AS pname, registration.class_name AS cname, registration.name AS rname, rollcall.location_name AS lname, rollcall.r_time AS rtime
+  	FROM rollcall,users, registration
+  	WHERE rollcall.r_id = registration.r_id
+  		AND rollcall.u_id = users.u_id
+  </select>
+  <select id="getAllRollcallDisplaysByRegistrationId" resultMap="RollcallDisplayMap" parameterType="java.lang.Long">
+  	SELECT users.sno AS sno, users.name AS pname, registration.class_name AS cname, registration.name AS rname, rollcall.location_name AS lname, rollcall.r_time AS rtime
+  	FROM rollcall,users, registration
+  	WHERE registration.r_id = #{r_id, jdbcType=BIGINT }
+  		AND rollcall.r_id = registration.r_id
+  		AND rollcall.u_id = users.u_id
+  </select>
+  <select id="getAll" resultMap = "BaseResultMap" >
+  	SELECT
+  	<include refid="Base_Column_List"/>
+  	FROM rollcall
+  </select>
+  <select id="getByRegistrationId" resultMap = "BaseResultMap" parameterType="java.lang.Long" >
+  	SELECT
+  	<include refid="Base_Column_List"/>
+  	FROM rollcall WHERE r_id = #{r_id, jdbcType=BIGINT}
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.RollcallExample" >
     select
     <if test="distinct" >
