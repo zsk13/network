@@ -15,12 +15,6 @@ function Submit() {
         return false;
     }
 
-    if ($("#answer").val().trim() == "") {
-        alert("请输入答案")
-        return false;
-    }
-
-
    var question=$("#question").val();
    var answer=$("#answer").val();
    var teacher_id = 1 ;
