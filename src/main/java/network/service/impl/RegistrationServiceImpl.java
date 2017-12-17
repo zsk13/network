@@ -48,6 +48,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             Rollcall rollcall = new Rollcall();
             rollcall.setLocationX(location_x);
             rollcall.setLocationY(location_y);
+            rollcall.setLocationName(location.getLocationName());
             rollcall.setrId(registration.getrId());
             rollcall.setuId(users.getuId());
             rollcall.setrTime(time);
