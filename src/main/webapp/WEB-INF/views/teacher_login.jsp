@@ -8,8 +8,8 @@
 </head>
 <body>
 <h1>欢迎${user.name} 老师</h1>
-<a href="display_registrations.jsp">我要查看历史点名情况</a>
+<a href="/network/rollcall/display_registrations.do">我要查看历史点名情况</a>
 <br>
-<a href = "start_a_registration.jsp">我要发布一次点名</a>
+<a href = "./start_add.do">我要发布一次点名</a>
 </body>
 </html>

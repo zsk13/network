@@ -84,6 +84,11 @@
       order by ${orderByClause}
     </if>
   </select>
+	<select id="getAll" resultMap = "BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM REGISTRATION ORDER BY r_id DESC
+	</select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

@@ -2,10 +2,19 @@ package network.dao;
 
 import java.util.List;
 import network.model.Rollcall;
+import network.model.RollcallDisplay;
 import network.model.RollcallExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface RollcallDao {
+	List<Rollcall> getAll();
+	
+	List<Rollcall> getByRegistrationId(Long rid);
+	
+	List<RollcallDisplay> getAllRollcallDisplays();
+	
+	List<RollcallDisplay> getAllRollcallDisplaysByRegistrationId(Long rid);
+	
     int countByExample(RollcallExample example);
 
     int deleteByExample(RollcallExample example);

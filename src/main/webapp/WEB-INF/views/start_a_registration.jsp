@@ -3,14 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 	function makeStringOutOfGradeEducationalBackgroundStudyClassAndRollCallCount(){
 		var grade = document.getElementById("grade").value;
 		var educational_background = document.getElementById("educational_background").value;
 		var study_class = document.getElementById("study_class").value;
 		var count = document.getElementById("count").value;
-		document.getElementById("makeString1").innerHTML=grade+"级"+educational_background+"生"+study_class+"班第"+count+"次点名";
+		document.getElementById("makeString1").value=grade+"级"+educational_background+"生"+study_class+"班第"+count+"次点名";
 	}
 	function formReset(){
 		document.getElementById("form1").reset();
@@ -20,8 +20,8 @@
 <title>发起点名</title>
 </head>
 <body>
-	<label id = "makeString1" name = "name" >label1</label>
-	<form id = "form1" action="./manage/add.do" method="post">
+	<form id = "form1" action="./add.do" method="post">
+		<input type = "text" id = "makeString1" name = "name" value = "" >label1</input>
 		<table>
 			<tr>
 				<th colspan = 2>发起点名</th>
@@ -59,7 +59,7 @@
 			<tr>
 				<td>位置：</td>
 				<td>
-					<select>
+					<select  name = "location_id">
 						<option value = "1">馆3</option>
 						<option value = "2">费彝民楼</option>
 						<option value = "3">教学楼</option>

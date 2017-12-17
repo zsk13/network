@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService{
@@ -61,5 +62,9 @@ public class RegistrationServiceImpl implements RegistrationService{
     public void add(Registration registration){
         registrationDao.insertSelective(registration);
     }
+
+	public List<Registration> getAll() {
+		return registrationDao.getAll();
+	}
 
 }
