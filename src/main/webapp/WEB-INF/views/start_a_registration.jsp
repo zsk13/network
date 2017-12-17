@@ -21,7 +21,7 @@
 </head>
 <body>
 	<form id = "form1" action="./add.do" method="post">
-		<input type = "text" id = "makeString1" name = "name" value = "" >label1</input>
+		<input type = "text" id = "makeString1" name = "name" value = ""  hidden="hidden"></input>
 		<table>
 			<tr>
 				<th colspan = 2>发起点名</th>
@@ -68,11 +68,11 @@
 			</tr>
 			<tr>
 				<td>开始时间：</td>
-				<td><input type = "text" name = "sTime"></input></td>
+				<td><input type = "text" name = "sTime">（时间格式：2011-11-11 11:11:11）</input></td>
 			</tr>
 			<tr>
 				<td>结束时间：</td>
-				<td><input type = "text" name = "eTime"></input></td>
+				<td><input type = "text" name = "eTime">（时间格式：2011-11-11 11:11:11）</input></td>
 			</tr>
 			<tr>
 				<td><input type = "submit" value = "提交"></input></td>
