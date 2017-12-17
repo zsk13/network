@@ -37,7 +37,7 @@ public class QuestionServiceImpl implements QuestionService{
         QuestionExample questionExample = new QuestionExample();
         QuestionExample.Criteria criteria = questionExample.createCriteria();
         criteria.andStatusEqualTo("1");
-        questionExample.setOrderByClause("qid desc");
+        questionExample.setOrderByClause("qid DESC");
         return  questionMapper.selectByExample(questionExample);
     }
 
@@ -112,7 +112,7 @@ public class QuestionServiceImpl implements QuestionService{
     public List<Question> getQuestions() {
         QuestionExample questionExample = new QuestionExample();
         QuestionExample.Criteria criteria = questionExample.createCriteria();
-        questionExample.setOrderByClause("qid desc");
+        questionExample.setOrderByClause("qid DESC");
         return  questionMapper.selectByExample(questionExample);
     }
 
