@@ -165,7 +165,7 @@ public class RegistrationCtr {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int state = registrationService.registration(location_x, location_x, openId, date);
+        int state = registrationService.registration(location_x, location_y, openId, date);
 
         map.put("state", state);
         return map;
