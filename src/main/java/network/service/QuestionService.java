@@ -11,4 +11,5 @@ public interface QuestionService {
     public void dealCommitQuestion(Map<String, String> map, PrintWriter out);
     int insert(Question record);
     public List<Question> getQuestions();
+    public void publishQuestion(Long qid);
 }

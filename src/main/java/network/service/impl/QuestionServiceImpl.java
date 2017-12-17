@@ -36,7 +36,8 @@ public class QuestionServiceImpl implements QuestionService{
     public List<Question> getQuestion(){
         QuestionExample questionExample = new QuestionExample();
         QuestionExample.Criteria criteria = questionExample.createCriteria();
-        criteria.andStatusEqualTo("0");
+        criteria.andStatusEqualTo("1");
+        questionExample.setOrderByClause("qid desc");
         return  questionMapper.selectByExample(questionExample);
     }
 
@@ -84,7 +85,7 @@ public class QuestionServiceImpl implements QuestionService{
         answer1.setContent(answer);
         answer1.setUid(user.getuId());
 
-        if(answer.equals(correctAnswer)){
+        if(correctAnswer==null || correctAnswer.equals("") ||answer.equals(correctAnswer)){
             answer1.setCorrect(true);
             respContent = "回答正确";
         }else{
@@ -102,11 +103,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public int insert(Question record) {
-        List<Question> questions = getQuestion();
-        for(Question q : questions){
-            q.setStatus("1");
-            questionMapper.updateByPrimaryKey(q);
-        }
+
         
         return questionMapper.insert(record);
     }
@@ -115,7 +112,21 @@ public class QuestionServiceImpl implements QuestionService{
     public List<Question> getQuestions() {
         QuestionExample questionExample = new QuestionExample();
         QuestionExample.Criteria criteria = questionExample.createCriteria();
+        questionExample.setOrderByClause("qid desc");
         return  questionMapper.selectByExample(questionExample);
+    }
+
+    @Override
+    public void publishQuestion(Long qid) {
+        Question q = questionMapper.selectByPrimaryKey(qid);
+        q.setStatus("1");
+        List<Question> questions = getQuestion();
+        for(Question q1 : questions){
+            q1.setStatus("2");
+            questionMapper.updateByPrimaryKey(q1);
+        }
+        questionMapper.updateByPrimaryKey(q);
+        
     }
 
 }

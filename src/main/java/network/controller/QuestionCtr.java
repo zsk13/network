@@ -88,6 +88,11 @@ public class QuestionCtr {
         //System.out.println("a");
 
     }
+    
+    @RequestMapping(value = "/publishQuestion.do")
+    public void publishQuestion(Long qid,HttpServletResponse res, HttpServletRequest request) throws Exception {
+        questionservice.publishQuestion(qid);
+    }
 
 
 
