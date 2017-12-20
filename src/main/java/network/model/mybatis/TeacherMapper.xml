@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="network.dao.QuestionMapper" >
-  <resultMap id="BaseResultMap" type="network.model.Question" >
-    <id column="qid" property="qid" jdbcType="BIGINT" />
-    <result column="course_id" property="courseId" jdbcType="BIGINT" />
-    <result column="question" property="question" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="teacher_id" property="teacherId" jdbcType="BIGINT" />
+<mapper namespace="network.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="network.model.Teacher" >
+    <id column="t_id" property="tId" jdbcType="BIGINT" />
+    <result column="t_name" property="tName" jdbcType="VARCHAR" />
+    <result column="t_password" property="tPassword" jdbcType="VARCHAR" />
+    <result column="t_number" property="tNumber" jdbcType="VARCHAR" />
+    <result column="t_mail" property="tMail" jdbcType="VARCHAR" />
+    <result column="t_phone" property="tPhone" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    qid, course_id, question, answer, status, teacher_id
+    t_id, t_name, t_password, t_number, t_mail, t_phone
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.QuestionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.TeacherExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from question
+    from teacher
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,96 +87,96 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from question
-    where qid = #{qid,jdbcType=BIGINT}
+    from teacher
+    where t_id = #{tId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from question
-    where qid = #{qid,jdbcType=BIGINT}
+    delete from teacher
+    where t_id = #{tId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="network.model.QuestionExample" >
-    delete from question
+  <delete id="deleteByExample" parameterType="network.model.TeacherExample" >
+    delete from teacher
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="network.model.Question" >
-    insert into question (qid, course_id, question, 
-      answer, status, teacher_id
+  <insert id="insert" parameterType="network.model.Teacher" >
+    insert into teacher (t_id, t_name, t_password, 
+      t_number, t_mail, t_phone
       )
-    values (#{qid,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{teacherId,jdbcType=BIGINT}
+    values (#{tId,jdbcType=BIGINT}, #{tName,jdbcType=VARCHAR}, #{tPassword,jdbcType=VARCHAR}, 
+      #{tNumber,jdbcType=VARCHAR}, #{tMail,jdbcType=VARCHAR}, #{tPhone,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="network.model.Question" >
-    insert into question
+  <insert id="insertSelective" parameterType="network.model.Teacher" >
+    insert into teacher
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="qid != null" >
-        qid,
+      <if test="tId != null" >
+        t_id,
       </if>
-      <if test="courseId != null" >
-        course_id,
+      <if test="tName != null" >
+        t_name,
       </if>
-      <if test="question != null" >
-        question,
+      <if test="tPassword != null" >
+        t_password,
       </if>
-      <if test="answer != null" >
-        answer,
+      <if test="tNumber != null" >
+        t_number,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="tMail != null" >
+        t_mail,
       </if>
-      <if test="teacherId != null" >
-        teacher_id,
+      <if test="tPhone != null" >
+        t_phone,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="qid != null" >
-        #{qid,jdbcType=BIGINT},
+      <if test="tId != null" >
+        #{tId,jdbcType=BIGINT},
       </if>
-      <if test="courseId != null" >
-        #{courseId,jdbcType=BIGINT},
+      <if test="tName != null" >
+        #{tName,jdbcType=VARCHAR},
       </if>
-      <if test="question != null" >
-        #{question,jdbcType=VARCHAR},
+      <if test="tPassword != null" >
+        #{tPassword,jdbcType=VARCHAR},
       </if>
-      <if test="answer != null" >
-        #{answer,jdbcType=VARCHAR},
+      <if test="tNumber != null" >
+        #{tNumber,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
+      <if test="tMail != null" >
+        #{tMail,jdbcType=VARCHAR},
       </if>
-      <if test="teacherId != null" >
-        #{teacherId,jdbcType=BIGINT},
+      <if test="tPhone != null" >
+        #{tPhone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="network.model.QuestionExample" resultType="java.lang.Integer" >
-    select count(*) from question
+  <select id="countByExample" parameterType="network.model.TeacherExample" resultType="java.lang.Integer" >
+    select count(*) from teacher
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update question
+    update teacher
     <set >
-      <if test="record.qid != null" >
-        qid = #{record.qid,jdbcType=BIGINT},
+      <if test="record.tId != null" >
+        t_id = #{record.tId,jdbcType=BIGINT},
       </if>
-      <if test="record.courseId != null" >
-        course_id = #{record.courseId,jdbcType=BIGINT},
+      <if test="record.tName != null" >
+        t_name = #{record.tName,jdbcType=VARCHAR},
       </if>
-      <if test="record.question != null" >
-        question = #{record.question,jdbcType=VARCHAR},
+      <if test="record.tPassword != null" >
+        t_password = #{record.tPassword,jdbcType=VARCHAR},
       </if>
-      <if test="record.answer != null" >
-        answer = #{record.answer,jdbcType=VARCHAR},
+      <if test="record.tNumber != null" >
+        t_number = #{record.tNumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=VARCHAR},
+      <if test="record.tMail != null" >
+        t_mail = #{record.tMail,jdbcType=VARCHAR},
       </if>
-      <if test="record.teacherId != null" >
-        teacher_id = #{record.teacherId,jdbcType=BIGINT},
+      <if test="record.tPhone != null" >
+        t_phone = #{record.tPhone,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -184,45 +184,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update question
-    set qid = #{record.qid,jdbcType=BIGINT},
-      course_id = #{record.courseId,jdbcType=BIGINT},
-      question = #{record.question,jdbcType=VARCHAR},
-      answer = #{record.answer,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      teacher_id = #{record.teacherId,jdbcType=BIGINT}
+    update teacher
+    set t_id = #{record.tId,jdbcType=BIGINT},
+      t_name = #{record.tName,jdbcType=VARCHAR},
+      t_password = #{record.tPassword,jdbcType=VARCHAR},
+      t_number = #{record.tNumber,jdbcType=VARCHAR},
+      t_mail = #{record.tMail,jdbcType=VARCHAR},
+      t_phone = #{record.tPhone,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="network.model.Question" >
-    update question
+  <update id="updateByPrimaryKeySelective" parameterType="network.model.Teacher" >
+    update teacher
     <set >
-      <if test="courseId != null" >
-        course_id = #{courseId,jdbcType=BIGINT},
+      <if test="tName != null" >
+        t_name = #{tName,jdbcType=VARCHAR},
       </if>
-      <if test="question != null" >
-        question = #{question,jdbcType=VARCHAR},
+      <if test="tPassword != null" >
+        t_password = #{tPassword,jdbcType=VARCHAR},
       </if>
-      <if test="answer != null" >
-        answer = #{answer,jdbcType=VARCHAR},
+      <if test="tNumber != null" >
+        t_number = #{tNumber,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=VARCHAR},
+      <if test="tMail != null" >
+        t_mail = #{tMail,jdbcType=VARCHAR},
       </if>
-      <if test="teacherId != null" >
-        teacher_id = #{teacherId,jdbcType=BIGINT},
+      <if test="tPhone != null" >
+        t_phone = #{tPhone,jdbcType=VARCHAR},
       </if>
     </set>
-    where qid = #{qid,jdbcType=BIGINT}
+    where t_id = #{tId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="network.model.Question" >
-    update question
-    set course_id = #{courseId,jdbcType=BIGINT},
-      question = #{question,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      teacher_id = #{teacherId,jdbcType=BIGINT}
-    where qid = #{qid,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="network.model.Teacher" >
+    update teacher
+    set t_name = #{tName,jdbcType=VARCHAR},
+      t_password = #{tPassword,jdbcType=VARCHAR},
+      t_number = #{tNumber,jdbcType=VARCHAR},
+      t_mail = #{tMail,jdbcType=VARCHAR},
+      t_phone = #{tPhone,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=BIGINT}
   </update>
 </mapper>

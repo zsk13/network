@@ -40,11 +40,14 @@
         </javaClientGenerator>
 
         <!-- table表生成对应的DoaminObject -->
-        <table tableName="answer" domainObjectName="Answer"></table>
+
+        <table tableName="course" domainObjectName="Course"></table>
+        <table tableName="course_student" domainObjectName="CourseStudent"></table>
         <table tableName="question" domainObjectName="Question"></table>
-        <table tableName="registration" domainObjectName="Registration"></table>
-        <table tableName="rollcall" domainObjectName="Rollcall"></table>
-        <table tableName="users" domainObjectName="Users"></table>
+        <table tableName="teacher" domainObjectName="Teacher"></table>
+
+
+
 
 
 

@@ -3,13 +3,15 @@ package network.model;
 public class Question {
     private Long qid;
 
-    private Long teacherId;
+    private Long courseId;
 
     private String question;
 
     private String answer;
 
     private String status;
+
+    private Long teacherId;
 
     public Long getQid() {
         return qid;
@@ -19,12 +21,12 @@ public class Question {
         this.qid = qid;
     }
 
-    public Long getTeacherId() {
-        return teacherId;
+    public Long getCourseId() {
+        return courseId;
     }
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
     }
 
     public String getQuestion() {
@@ -49,5 +51,13 @@ public class Question {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 }

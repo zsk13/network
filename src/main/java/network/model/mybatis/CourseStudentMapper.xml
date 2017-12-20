@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="network.dao.CourseStudentMapper" >
+  <resultMap id="BaseResultMap" type="network.model.CourseStudent" >
+    <id column="cs_id" property="csId" jdbcType="BIGINT" />
+    <result column="c_id" property="cId" jdbcType="BIGINT" />
+    <result column="s_id" property="sId" jdbcType="BIGINT" />
+    <result column="s_time" property="sTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cs_id, c_id, s_id, s_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.CourseStudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_student
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course_student
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="network.model.CourseStudentExample" >
+    delete from course_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="network.model.CourseStudent" >
+    insert into course_student (cs_id, c_id, s_id, 
+      s_time)
+    values (#{csId,jdbcType=BIGINT}, #{cId,jdbcType=BIGINT}, #{sId,jdbcType=BIGINT}, 
+      #{sTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="network.model.CourseStudent" >
+    insert into course_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="csId != null" >
+        cs_id,
+      </if>
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="sTime != null" >
+        s_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="csId != null" >
+        #{csId,jdbcType=BIGINT},
+      </if>
+      <if test="cId != null" >
+        #{cId,jdbcType=BIGINT},
+      </if>
+      <if test="sId != null" >
+        #{sId,jdbcType=BIGINT},
+      </if>
+      <if test="sTime != null" >
+        #{sTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="network.model.CourseStudentExample" resultType="java.lang.Integer" >
+    select count(*) from course_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_student
+    <set >
+      <if test="record.csId != null" >
+        cs_id = #{record.csId,jdbcType=BIGINT},
+      </if>
+      <if test="record.cId != null" >
+        c_id = #{record.cId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sId != null" >
+        s_id = #{record.sId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sTime != null" >
+        s_time = #{record.sTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_student
+    set cs_id = #{record.csId,jdbcType=BIGINT},
+      c_id = #{record.cId,jdbcType=BIGINT},
+      s_id = #{record.sId,jdbcType=BIGINT},
+      s_time = #{record.sTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="network.model.CourseStudent" >
+    update course_student
+    <set >
+      <if test="cId != null" >
+        c_id = #{cId,jdbcType=BIGINT},
+      </if>
+      <if test="sId != null" >
+        s_id = #{sId,jdbcType=BIGINT},
+      </if>
+      <if test="sTime != null" >
+        s_time = #{sTime,jdbcType=DATE},
+      </if>
+    </set>
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="network.model.CourseStudent" >
+    update course_student
+    set c_id = #{cId,jdbcType=BIGINT},
+      s_id = #{sId,jdbcType=BIGINT},
+      s_time = #{sTime,jdbcType=DATE}
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </update>
+</mapper>
