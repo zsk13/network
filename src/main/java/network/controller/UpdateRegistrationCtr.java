@@ -80,7 +80,7 @@ public class UpdateRegistrationCtr {
         	System.out.println(name1+"\t"+value1+"\t"+value2);
         }
 		*/
-    	if(req.getParameter("name") !=null ||  req.getParameter("name").length() >0) {
+    	if(req != null || req.getParameter("name") !=null ||  req.getParameter("name").length() >0) {
         Registration reg2 = new Registration();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
     	String name = req.getParameter("name");
