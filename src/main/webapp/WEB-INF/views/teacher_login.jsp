@@ -7,7 +7,7 @@
 <title>教师</title>
 </head>
 <body>
-<h1>欢迎${user.name} 老师</h1>
+<h1>欢迎${name} 老师</h1>
 <a href="/network/rollcall/display_registrations.do">我要查看历史点名情况</a>
 <br>
 <a href = "./start_add.do">我要发布一次点名</a>

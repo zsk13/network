@@ -81,7 +81,7 @@ public class UpdateRegistrationCtr {
         }
 		*/
         Registration reg2 = new Registration();
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
     	String name = req.getParameter("name");
     	//↓我们明明在能写utf-8的地方都写了utf-8，但是不知道哪个容器的哪个步骤将这些parameter用ISO-859-1进行编码了
     	name = new String(name.getBytes("ISO-8859-1"),"UTF-8");
@@ -90,8 +90,8 @@ public class UpdateRegistrationCtr {
         className = new String(className.getBytes("ISO-8859-1"),"UTF-8");
         
         Long locationId = Long.parseLong(req.getParameter("location_id"));
-        Date startTime = sdf.parse(req.getParameter("sTime"));
-        Date endTime = sdf.parse(req.getParameter("eTime"));
+        Date startTime = sdf.parse(req.getParameter("sTime").replaceAll("T", " "));
+        Date endTime = sdf.parse(req.getParameter("eTime").replaceAll("T", " "));
         reg2.setClassName(className);
         reg2.setName(name);
         reg2.setsTime(startTime);
