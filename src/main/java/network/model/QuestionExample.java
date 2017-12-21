@@ -164,6 +164,76 @@ public class QuestionExample {
             return (Criteria) this;
         }
 
+        public Criteria andQnameIsNull() {
+            addCriterion("qname is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameIsNotNull() {
+            addCriterion("qname is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameEqualTo(String value) {
+            addCriterion("qname =", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameNotEqualTo(String value) {
+            addCriterion("qname <>", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameGreaterThan(String value) {
+            addCriterion("qname >", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameGreaterThanOrEqualTo(String value) {
+            addCriterion("qname >=", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameLessThan(String value) {
+            addCriterion("qname <", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameLessThanOrEqualTo(String value) {
+            addCriterion("qname <=", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameLike(String value) {
+            addCriterion("qname like", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameNotLike(String value) {
+            addCriterion("qname not like", value, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameIn(List<String> values) {
+            addCriterion("qname in", values, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameNotIn(List<String> values) {
+            addCriterion("qname not in", values, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameBetween(String value1, String value2) {
+            addCriterion("qname between", value1, value2, "qname");
+            return (Criteria) this;
+        }
+
+        public Criteria andQnameNotBetween(String value1, String value2) {
+            addCriterion("qname not between", value1, value2, "qname");
+            return (Criteria) this;
+        }
+
         public Criteria andCourseIdIsNull() {
             addCriterion("course_id is null");
             return (Criteria) this;

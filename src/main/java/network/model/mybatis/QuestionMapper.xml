@@ -3,6 +3,7 @@
 <mapper namespace="network.dao.QuestionMapper" >
   <resultMap id="BaseResultMap" type="network.model.Question" >
     <id column="qid" property="qid" jdbcType="BIGINT" />
+    <result column="qname" property="qname" jdbcType="VARCHAR" />
     <result column="course_id" property="courseId" jdbcType="BIGINT" />
     <result column="question" property="question" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    qid, course_id, question, answer, status, teacher_id
+    qid, qname, course_id, question, answer, status, teacher_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.QuestionExample" >
     select
@@ -101,18 +102,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="network.model.Question" >
-    insert into question (qid, course_id, question, 
-      answer, status, teacher_id
-      )
-    values (#{qid,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{teacherId,jdbcType=BIGINT}
-      )
+    insert into question (qid, qname, course_id, 
+      question, answer, status, 
+      teacher_id)
+    values (#{qid,jdbcType=BIGINT}, #{qname,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT}, 
+      #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{teacherId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="network.model.Question" >
     insert into question
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="qid != null" >
         qid,
+      </if>
+      <if test="qname != null" >
+        qname,
       </if>
       <if test="courseId != null" >
         course_id,
@@ -133,6 +137,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="qid != null" >
         #{qid,jdbcType=BIGINT},
+      </if>
+      <if test="qname != null" >
+        #{qname,jdbcType=VARCHAR},
       </if>
       <if test="courseId != null" >
         #{courseId,jdbcType=BIGINT},
@@ -163,6 +170,9 @@
       <if test="record.qid != null" >
         qid = #{record.qid,jdbcType=BIGINT},
       </if>
+      <if test="record.qname != null" >
+        qname = #{record.qname,jdbcType=VARCHAR},
+      </if>
       <if test="record.courseId != null" >
         course_id = #{record.courseId,jdbcType=BIGINT},
       </if>
@@ -186,6 +196,7 @@
   <update id="updateByExample" parameterType="map" >
     update question
     set qid = #{record.qid,jdbcType=BIGINT},
+      qname = #{record.qname,jdbcType=VARCHAR},
       course_id = #{record.courseId,jdbcType=BIGINT},
       question = #{record.question,jdbcType=VARCHAR},
       answer = #{record.answer,jdbcType=VARCHAR},
@@ -198,6 +209,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="network.model.Question" >
     update question
     <set >
+      <if test="qname != null" >
+        qname = #{qname,jdbcType=VARCHAR},
+      </if>
       <if test="courseId != null" >
         course_id = #{courseId,jdbcType=BIGINT},
       </if>
@@ -218,7 +232,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="network.model.Question" >
     update question
-    set course_id = #{courseId,jdbcType=BIGINT},
+    set qname = #{qname,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=BIGINT},
       question = #{question,jdbcType=VARCHAR},
       answer = #{answer,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},

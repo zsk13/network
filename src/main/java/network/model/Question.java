@@ -3,6 +3,8 @@ package network.model;
 public class Question {
     private Long qid;
 
+    private String qname;
+
     private Long courseId;
 
     private String question;
@@ -19,6 +21,14 @@ public class Question {
 
     public void setQid(Long qid) {
         this.qid = qid;
+    }
+
+    public String getQname() {
+        return qname;
+    }
+
+    public void setQname(String qname) {
+        this.qname = qname == null ? null : qname.trim();
     }
 
     public Long getCourseId() {
