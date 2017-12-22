@@ -44,4 +44,16 @@
     </bean>
 
     <mvc:default-servlet-handler/>
+
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <!-- 配置登陆拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:mapping path="/question/**"/>
+            <mvc:mapping path="/manage/**"/>
+            <bean class="network.interceptor.LoginHandleInterceptor"></bean>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 </beans>

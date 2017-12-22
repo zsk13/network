@@ -90,6 +90,12 @@ public class AccessTokenUtil {
         return accessToken;
     }
 
+    /**
+     *获取jsapi
+     *
+     * @param accessToken
+     * @return
+     */
     public static JsApiTicket getJsApiTicket(String accessToken) {
         JsApiTicket jsApiTicket = null;
 
