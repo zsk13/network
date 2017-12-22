@@ -133,7 +133,7 @@
                                 location_x: res.latitude,
                                 location_y: res.longitude,
                                 date: date.getTime(),
-                                rId: $('#registrationSelect option:selected').text(),
+                                rId: $('#registrationSelect option:selected').val(),
 
                             },
                             dataType: "json",
