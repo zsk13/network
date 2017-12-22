@@ -67,7 +67,7 @@
     <link rel="stylesheet" href="../css/weui.css">
     <link rel="stylesheet" href="../css/example.css">
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <script>
     //    alert(location.href.split('#')[0]);
         wx.config({
@@ -94,6 +94,7 @@
             <div class="page__bd">
                 <div class="weui-cell weui-cell_select">
                     <div class="weui-cell__bd">
+                        <input type="hidden" name="openId" id="openId" value="${openId}">
                         <select class="weui-select" name="registrationSelect" id="registrationSelect">
                             <c:choose>
                                 <c:when test="${registrationList!=null && fn:length(registrationList) > 0}">    <!--如果数组为空 -->
@@ -112,10 +113,6 @@
             </div>
         </div>
     </div>
-</div>
-<input type="hidden" name="openId" id="openId" value="${openId}">
-<div align="center">
-<button id="getBBS" style="width:800px;height:500px;font-size:150px;" onclick="submitOrderInfoClick();">签到</button>
 </div>
 </body>
 <script type="text/javascript">
