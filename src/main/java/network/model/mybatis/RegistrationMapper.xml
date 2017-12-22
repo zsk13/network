@@ -95,7 +95,7 @@
     <include refid="Base_Column_List" />
     from registration
     WHERE c_id In(
-    SELECT c.c_id FROM course c,course_student cs WHERE cs.s_id=#{uId,jdbcType=BIGINT} AND c.c_state=1 AND c.c_id = cs.c_id)
+    SELECT c.c_id FROM course c,course_student cs WHERE cs.s_id=#{uId,jdbcType=BIGINT} AND c.c_state=1 AND c.c_id = cs.c_id) AND now() BETWEEN s_time and e_time
   </select>
   <select id="checkIsSelected" resultMap="BaseResultMap">
     select
