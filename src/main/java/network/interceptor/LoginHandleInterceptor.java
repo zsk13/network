@@ -26,10 +26,9 @@ public class LoginHandleInterceptor implements HandlerInterceptor {
         //说明处在编辑的页面
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-
         String usertype = (String) session.getAttribute("type");
         if (username != null) {
-            if (requestURI.contains("admin") && !usertype.equals("admin")) {
+            if (requestURI.contains("teacher") && !usertype.equals("admin")) {
                 response.sendRedirect(tempContextUrl + "network/adminLogin/adminLogin.do");
                 return false;
             }else {
@@ -38,10 +37,10 @@ public class LoginHandleInterceptor implements HandlerInterceptor {
             }
         } else {
             //没有登陆，转向登陆界面
-            if (requestURI.contains("admin"))
+            if (requestURI.contains("teacher"))
                 response.sendRedirect(tempContextUrl + "network/adminLogin/adminLogin.do");
             else
-                response.sendRedirect(tempContextUrl + "network/login/login.do");
+                response.sendRedirect(tempContextUrl + "network/manage/login.do");
             return false;
         }
     }

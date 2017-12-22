@@ -93,6 +93,9 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  <session-config>
+    <session-timeout>15</session-timeout>
+  </session-config>
   <!--<welcome-file-list>-->
     <!--<welcome-file>addquestion.do</welcome-file>-->
   <!--</welcome-file-list>-->

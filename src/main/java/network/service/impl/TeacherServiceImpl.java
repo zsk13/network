@@ -42,9 +42,11 @@ public class TeacherServiceImpl implements TeacherService {
         TeacherExample.Criteria criteria = teacherExample.createCriteria();
         criteria.andTNameEqualTo(teacherName);
         List<Teacher> teacherList = teacherMapper.selectByExample(teacherExample);
+        if (teacherList.size() <= 0)
+            return false;
         Teacher teacher = teacherList.get(0);
         if (teacher == null) {
-            return true;
+            return false;
         } else {
             if (password.equals(teacher.gettPassword())) {
                 return true;

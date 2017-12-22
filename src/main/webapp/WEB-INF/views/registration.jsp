@@ -92,21 +92,23 @@
     <div class="page home js_show">
         <div class="page list js_show">
             <div class="page__bd">
-                <div class="weui-cell weui-cell_select">
-                    <div class="weui-cell__bd">
-                        <input type="hidden" name="openId" id="openId" value="${openId}">
-                        <select class="weui-select" name="registrationSelect" id="registrationSelect">
-                            <c:choose>
-                                <c:when test="${registrationList!=null && fn:length(registrationList) > 0}">    <!--如果数组为空 -->
-                                    <c:forEach var="registration" items="${registrationList}">
-                                        <option value="${registration.cId}">${registration.cName}</option>
-                                    </c:forEach>
-                                </c:when>
-                                <c:otherwise>  <!--否则 -->
-                                    <option value="">目前暂时没有可签到课程</option>
-                                </c:otherwise>
-                            </c:choose>
-                        </select>
+                <div class="weui-cells">
+                    <div class="weui-cell weui-cell_select">
+                        <div class="weui-cell__bd">
+                            <input type="hidden" name="openId" id="openId" value="${openId}">
+                            <select class="weui-select" name="registrationSelect" id="registrationSelect">
+                                <c:choose>
+                                    <c:when test="${registrationList!=null && fn:length(registrationList) > 0}">    <!--如果数组为空 -->
+                                        <c:forEach var="registration" items="${registrationList}">
+                                            <option value="${registration.cId}">${registration.cName}</option>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>  <!--否则 -->
+                                        <option value="">目前暂时没有可签到课程</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <a href="javascript:;" id="registration" class="weui-btn weui-btn_plain-primary">签到</a>

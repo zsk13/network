@@ -49,9 +49,12 @@
         <!-- 多个拦截器，顺序执行 -->
         <!-- 配置登陆拦截器 -->
         <mvc:interceptor>
-            <mvc:mapping path="/admin/**"/>
-            <mvc:mapping path="/question/**"/>
-            <mvc:mapping path="/manage/**"/>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/registration/**" />
+            <mvc:exclude-mapping path="/manage/login.do" />
+            <mvc:exclude-mapping path="/manage/check.do" />
+            <mvc:exclude-mapping path="/adminLogin/check.do"/>
+
             <bean class="network.interceptor.LoginHandleInterceptor"></bean>
         </mvc:interceptor>
 
