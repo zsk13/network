@@ -41,7 +41,7 @@
 						<a href="./questionlist.do">问题列表</a>
 					</div>
 				</div>
-				<div class="weui-cells">
+				<div class="weui-cells" style="padding-top: 60px;">
 				<c:forEach items="${qs }" var="q">
 					<div class="weui-cell weui-cell_access">
 						
