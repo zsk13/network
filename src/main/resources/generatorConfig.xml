@@ -41,11 +41,11 @@
 
         <!-- table表生成对应的DoaminObject -->
 
+        <table tableName="registration" domainObjectName="Registration"></table>
         <table tableName="course" domainObjectName="Course"></table>
         <table tableName="course_student" domainObjectName="CourseStudent"></table>
         <table tableName="question" domainObjectName="Question"></table>
         <table tableName="teacher" domainObjectName="Teacher"></table>
-
 
 
 

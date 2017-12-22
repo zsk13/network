@@ -5,15 +5,15 @@ import java.util.Date;
 public class Registration {
     private Long rId;
 
-    private String name;
-
     private Long lId;
 
     private Date sTime;
 
     private Date eTime;
 
-    private String className;
+    private Long cId;
+
+    private String cName;
 
     public Long getrId() {
         return rId;
@@ -21,14 +21,6 @@ public class Registration {
 
     public void setrId(Long rId) {
         this.rId = rId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
     }
 
     public Long getlId() {
@@ -55,11 +47,19 @@ public class Registration {
         this.eTime = eTime;
     }
 
-    public String getClassName() {
-        return className;
+    public Long getcId() {
+        return cId;
     }
 
-    public void setClassName(String className) {
-        this.className = className == null ? null : className.trim();
+    public void setcId(Long cId) {
+        this.cId = cId;
+    }
+
+    public String getcName() {
+        return cName;
+    }
+
+    public void setcName(String cName) {
+        this.cName = cName == null ? null : cName.trim();
     }
 }

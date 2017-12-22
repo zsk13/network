@@ -1,9 +1,6 @@
 package network.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import network.common.HttpXmlClient;
-import network.common.wechatUtil.Token;
-import network.common.wechatUtil.TokenUtil;
+import network.common.*;
 import network.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -36,65 +32,24 @@ public class RegistrationCtr {
     public ModelAndView registration(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("registration");
 
+
+        //用code换取openid
         String CODE = request.getParameter("code");
-        String APPID = "wx39b5d81dba20a59e";
-        String SECRET = "14d2ceb14c372b064b286546c55a7f59";
-        //换取access_token 其中包含了openid
-        Map<String, String> idparams = new HashMap<String, String>();
-        idparams.put("appid", APPID);
-        idparams.put("secret", SECRET);
-        try{
-            idparams.put("code", URLEncoder.encode(CODE,"UTF-8"));
-        }catch (Exception e){
+        String openid = null;
+        try {
+            if(CODE != null)
+            openid = OpenIdUtil.getOpenId(URLEncoder.encode(CODE, "UTF-8"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        idparams.put("grant_type", "authorization_code");
-        //URLConnectionHelper是一个模拟发送http请求的类
-        String idXml = HttpXmlClient.post("https://api.weixin.qq.com/sns/oauth2/access_token", idparams);
-        mav.addObject("idXml", idXml);
-        JSONObject idJsonMap = JSONObject.parseObject(idXml);
-//        JSONObject jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + SECRET + "&code=" + CODE + "&grant_type=authorization_code ", "POST", null);
-        String openid = null;
-        if (idJsonMap.get("openid") != null) {
-            openid = idJsonMap.get("openid").toString();
-        }
-
-
         //获取access_token
-        Token token = TokenUtil.getToken();
-        String access_token = token.getAccessToken();
+        AccessToken accessToken = (AccessToken) ServletContextUtil.get().getAttribute("ACCESS_TOKEN");
+        String access_token = accessToken.getToken();
         Map<String, String> params = new HashMap<String, String>();
-//        params.put("appid", APPID);
-//        params.put("secret", SECRET);
-//        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential", params);
-//        JSONObject jsonMap = JSONObject.fromObject(xml);
-//        Map<String, String> map = new HashMap<String, String>();
-//        Iterator<String> it = jsonMap.keys();
-//        while (it.hasNext()) {
-//            String key = (String) it.next();
-//            String u = jsonMap.get(key).toString();
-//            map.put(key, u);
-//        }
-//        String access_token = map.get("access_token");
 
         //获取ticket
-        params.put("access_token", access_token);
-        params.put("type", "jsapi");
-        String xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket", params);
-        JSONObject jsonMap = JSONObject.parseObject(xml);
-//        Map<String, String> map = new HashMap<String, String>();
-//        Iterator<String> it = jsonMap.keys();
-//        while (it.hasNext()) {
-//            String key = (String) it.next();
-//            String u = jsonMap.get(key).toString();
-//            map.put(key, u);
-//        }
-        // jsonObject = WeixinUtil.httpRequest("https://api.weixin.qq.com/cgi-bin/ticket/getticket", "GET", JSONObject.toJSONString(params));
-        String jsapi_ticket = null;
-        if (jsonMap.get("ticket") != null) {
-            jsapi_ticket = jsonMap.get("ticket").toString();
-        }
-
+        JsApiTicket jsApiTicket = (JsApiTicket) ServletContextUtil.get().getAttribute("JSAPI_TICKET");
+        String jsapi_ticket = jsApiTicket.getTicket();
 
         //获取签名signature
         String noncestr = UUID.randomUUID().toString();
@@ -131,9 +86,6 @@ public class RegistrationCtr {
             url = url + "?" + string.substring(0, string.lastIndexOf("&"));
         if (string.contains("#"))
             url = url.substring(0, string.lastIndexOf("#"));
-        // String path = request.getContextPath();
-        //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
-        // String url = request.getScheme() + "://" + request.getServerName() + path;
         mav.addObject("url", url);
         String str = "jsapi_ticket=" + jsapi_ticket +
                 "&noncestr=" + noncestr +
@@ -144,8 +96,9 @@ public class RegistrationCtr {
         mav.addObject("signature", signature);
         mav.addObject("timestamp", timestamp);
         mav.addObject("noncestr", noncestr);
-        mav.addObject("appId", APPID);
+        mav.addObject("appId", AppUtil.getAppId());
         mav.addObject("openId", openid);
+        mav.addObject("registrationList",registrationService.getByOpenid(openid));
         return mav;
 
     }
@@ -157,15 +110,18 @@ public class RegistrationCtr {
         String openId = request.getParameter("openId").toString();
         double location_x = Double.parseDouble(request.getParameter("location_x"));
         double location_y = Double.parseDouble(request.getParameter("location_y"));
-      // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String id=request.getParameter("rId");
+        Long rId = null;
+        if(id != null || id.length()>0){
+            rId = Long.valueOf(id);
+        }
         Date date = null;
         try {
-             date = new Date(Long.parseLong(request.getParameter("date")));
-           // date = sdf.parse(request.getParameter("date").toString());
+            date = new Date(Long.parseLong(request.getParameter("date")));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int state = registrationService.registration(location_x, location_y, openId, date);
+        int state = registrationService.registration(rId,location_x, location_y, openId, date);
 
         map.put("state", state);
         return map;

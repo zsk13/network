@@ -6,7 +6,6 @@ import network.model.TeacherExample;
 import network.service.TeacherService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,9 +42,11 @@ public class TeacherServiceImpl implements TeacherService {
         TeacherExample.Criteria criteria = teacherExample.createCriteria();
         criteria.andTNameEqualTo(teacherName);
         List<Teacher> teacherList = teacherMapper.selectByExample(teacherExample);
+        if (teacherList.size() <= 0)
+            return false;
         Teacher teacher = teacherList.get(0);
         if (teacher == null) {
-            return true;
+            return false;
         } else {
             if (password.equals(teacher.gettPassword())) {
                 return true;
