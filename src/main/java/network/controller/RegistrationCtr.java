@@ -112,7 +112,7 @@ public class RegistrationCtr {
         double location_y = Double.parseDouble(request.getParameter("location_y"));
         String id=request.getParameter("rId");
         Long rId = null;
-        if(id != null || id.trim().length()>0){
+        if(id != null && id.trim().length()>0){
             rId = Long.valueOf(id);
         }
         Date date = null;
