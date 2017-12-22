@@ -56,7 +56,7 @@ function Submit() {
             console.log("success")
             console.log(data)
             if (data.message == "success") {
-                alert("添加成功");
+                //alert("添加成功");
                 location.href ="./teacherlist.do";
             } else {
                 //alert(info.msg)

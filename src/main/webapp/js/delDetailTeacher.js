@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
-    $('.del-btn').click(function () {
-        var id = $(this).attr('id')
+    $("#btnDel").click(function () {
+        var id = document.getElementById("tNumber").innerText;
         var msg = "您真的确定要删除吗？";
-        if (confirm(msg)==true){
-            Delete(id);
-        }
+            if (confirm(msg)==true){
+                Delete(id);
+            }
     })
 
 

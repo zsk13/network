@@ -56,12 +56,22 @@ public class TeacherServiceImpl implements TeacherService {
         }
     }
 
-    public Teacher findTeacher(String tNumber) {
+    public Teacher findTeacherBytNumber(String tNumber) {
         TeacherExample teacherExampleNumber = new TeacherExample();
         TeacherExample.Criteria criteriaNumber = teacherExampleNumber.createCriteria();
         criteriaNumber.andTNumberEqualTo(tNumber);
 
         List<Teacher> teacherList = teacherMapper.selectByExample(teacherExampleNumber);
+        Teacher teacher = teacherList.get(0);
+        return teacher;
+    }
+
+    public Teacher findTeacherBytName(String tName) {
+        TeacherExample teacherExampleName = new TeacherExample();
+        TeacherExample.Criteria criteriaName = teacherExampleName.createCriteria();
+        criteriaName.andTNameEqualTo(tName);
+
+        List<Teacher> teacherList = teacherMapper.selectByExample(teacherExampleName);
         Teacher teacher = teacherList.get(0);
         return teacher;
     }
