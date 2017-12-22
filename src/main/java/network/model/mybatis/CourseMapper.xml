@@ -208,13 +208,6 @@
       t_id = #{tId,jdbcType=BIGINT}
     where c_id = #{cId,jdbcType=BIGINT}
   </update>
-  <resultMap id="BaseResultMap" type="network.model.Course">
-    <id column="c_id" jdbcType="BIGINT" property="cId" />
-    <result column="c_name" jdbcType="VARCHAR" property="cName" />
-    <result column="c_password" jdbcType="VARCHAR" property="cPassword" />
-    <result column="c_state" jdbcType="INTEGER" property="cState" />
-    <result column="t_id" jdbcType="BIGINT" property="tId" />
-  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
