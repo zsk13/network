@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `course_student`;
 CREATE TABLE `course_student` (
-  `cs_id` bigint(20) NOT NULL,
+  `cs_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `c_id` bigint(20) DEFAULT NULL,
   `s_id` bigint(20) DEFAULT NULL,
   `s_time` date DEFAULT NULL,
