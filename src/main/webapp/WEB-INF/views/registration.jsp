@@ -100,7 +100,7 @@
                                 <c:choose>
                                     <c:when test="${registrationList!=null && fn:length(registrationList) > 0}">    <!--如果数组为空 -->
                                         <c:forEach var="registration" items="${registrationList}">
-                                            <option value="${registration.cId}">${registration.cName}</option>
+                                            <option value="${registration.rId}">${registration.cName}</option>
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>  <!--否则 -->
