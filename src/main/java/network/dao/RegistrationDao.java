@@ -20,6 +20,7 @@ public interface RegistrationDao {
     List<Registration> selectByExample(RegistrationExample example);
     
     List<Registration> getAll();
+    List<Registration> getByCourseId(Long cId);
 
     Registration selectByPrimaryKey(Long rId);
 
