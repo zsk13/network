@@ -1,5 +1,6 @@
 package network.controller;
 
+import network.service.AdminLoginService;
 import network.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value = "adminLogin")
 public class AdminLoginCtr {
     @Autowired
-    private LoginService loginService;
+    private AdminLoginService adminLoginService;
     @RequestMapping("/adminLogin.do")
     public String login(){
         return "admin_login";
@@ -22,13 +23,13 @@ public class AdminLoginCtr {
             attr.addFlashAttribute("msg", "用户名或密码不能为空！");
             return "redirect:./adminLogin.do";
         }
-        if(!loginService.check(name, password)) {
+        if(!adminLoginService.check(name, password)) {
             attr.addFlashAttribute("msg", "用户名或密码不正确！");
             return "redirect:./adminLogin.do";
         }else {
             attr.addFlashAttribute("name", name);
 
-            return "redirect:../manage/welcome.do";
+            return "redirect:../teacher/teacherlist.do";
         }
 
 
