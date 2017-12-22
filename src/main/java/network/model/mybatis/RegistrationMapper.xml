@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from registration
     where r_id = #{rId,jdbcType=BIGINT}
@@ -204,11 +204,11 @@
   <update id="updateByExample" parameterType="map" >
     update registration
     set r_id = #{record.rId,jdbcType=BIGINT},
-      l_id = #{record.lId,jdbcType=BIGINT},
-      s_time = #{record.sTime,jdbcType=TIMESTAMP},
-      e_time = #{record.eTime,jdbcType=TIMESTAMP},
-      c_id = #{record.cId,jdbcType=BIGINT},
-      c_name = #{record.cName,jdbcType=VARCHAR}
+    l_id = #{record.lId,jdbcType=BIGINT},
+    s_time = #{record.sTime,jdbcType=TIMESTAMP},
+    e_time = #{record.eTime,jdbcType=TIMESTAMP},
+    c_id = #{record.cId,jdbcType=BIGINT},
+    c_name = #{record.cName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

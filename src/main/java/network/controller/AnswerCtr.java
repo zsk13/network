@@ -1,7 +1,5 @@
 package network.controller;
 
-import network.model.Question;
-import network.service.QuestionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;

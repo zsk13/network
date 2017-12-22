@@ -1,7 +1,6 @@
 package network.controller;
 
 import network.model.Course;
-import network.model.Question;
 import network.service.CourseService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
