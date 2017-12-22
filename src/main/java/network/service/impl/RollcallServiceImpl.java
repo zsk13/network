@@ -24,12 +24,10 @@ public class RollcallServiceImpl implements RollcallService{
 		return rollcallDao.getByRegistrationId(rid);
 	}
 
-	@Override
 	public List<RollcallDisplay> getAllRollcallDisplays() {
 		return rollcallDao.getAllRollcallDisplays();
 	}
 
-	@Override
 	public List<RollcallDisplay> getAllRollcallDisplaysByRegistrationId(Long rid) {
 		return rollcallDao.getAllRollcallDisplaysByRegistrationId(rid);
 	}
