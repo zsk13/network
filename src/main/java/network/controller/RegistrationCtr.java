@@ -1,10 +1,6 @@
 package network.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import network.common.AccessToken;
-import network.common.HttpXmlClient;
-import network.common.JsApiTicket;
-import network.common.ServletContextUtil;
+import network.common.*;
 import network.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,40 +32,23 @@ public class RegistrationCtr {
     public ModelAndView registration(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("registration");
 
+
+        //用code换取openid
         String CODE = request.getParameter("code");
-        String APPID = "wx39b5d81dba20a59e";
-        String SECRET = "14d2ceb14c372b064b286546c55a7f59";
-        //换取access_token 其中包含了openid
-        Map<String, String> idparams = new HashMap<String, String>();
-        idparams.put("appid", APPID);
-        idparams.put("secret", SECRET);
-        try{
-            idparams.put("code", URLEncoder.encode(CODE,"UTF-8"));
-        }catch (Exception e){
+        String openid = null;
+        try {
+            openid = OpenIdUtil.getOpenId(URLEncoder.encode(CODE, "UTF-8"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        idparams.put("grant_type", "authorization_code");
-        //URLConnectionHelper是一个模拟发送http请求的类
-        String idXml = HttpXmlClient.post("https://api.weixin.qq.com/sns/oauth2/access_token", idparams);
-        mav.addObject("idXml", idXml);
-        JSONObject idJsonMap = JSONObject.parseObject(idXml);
-        String openid = null;
-        if (idJsonMap.get("openid") != null) {
-            openid = idJsonMap.get("openid").toString();
-        }
-
-
         //获取access_token
         AccessToken accessToken = (AccessToken) ServletContextUtil.get().getAttribute("ACCESS_TOKEN");
-
         String access_token = accessToken.getToken();
         Map<String, String> params = new HashMap<String, String>();
 
         //获取ticket
         JsApiTicket jsApiTicket = (JsApiTicket) ServletContextUtil.get().getAttribute("JSAPI_TICKET");
         String jsapi_ticket = jsApiTicket.getTicket();
-
-
 
         //获取签名signature
         String noncestr = UUID.randomUUID().toString();
@@ -116,8 +95,9 @@ public class RegistrationCtr {
         mav.addObject("signature", signature);
         mav.addObject("timestamp", timestamp);
         mav.addObject("noncestr", noncestr);
-        mav.addObject("appId", APPID);
+        mav.addObject("appId", AppUtil.getAppId());
         mav.addObject("openId", openid);
+        mav.addObject("registrationList",registrationService.getByOpenid(openid));
         return mav;
 
     }
@@ -129,13 +109,18 @@ public class RegistrationCtr {
         String openId = request.getParameter("openId").toString();
         double location_x = Double.parseDouble(request.getParameter("location_x"));
         double location_y = Double.parseDouble(request.getParameter("location_y"));
+        String id=request.getParameter("rId");
+        Long rId = null;
+        if(id != null || id.length()>0){
+            rId = Long.valueOf(id);
+        }
         Date date = null;
         try {
-             date = new Date(Long.parseLong(request.getParameter("date")));
+            date = new Date(Long.parseLong(request.getParameter("date")));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int state = registrationService.registration(location_x, location_y, openId, date);
+        int state = registrationService.registration(rId,location_x, location_y, openId, date);
 
         map.put("state", state);
         return map;

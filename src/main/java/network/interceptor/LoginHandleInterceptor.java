@@ -27,7 +27,7 @@ public class LoginHandleInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
 
-        String usertype = (String) session.getAttribute("usertype");
+        String usertype = (String) session.getAttribute("type");
         if (username != null) {
             if (requestURI.contains("admin") && !usertype.equals("admin")) {
                 response.sendRedirect(tempContextUrl + "network/adminLogin/adminLogin.do");

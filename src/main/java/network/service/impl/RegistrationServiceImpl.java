@@ -12,6 +12,7 @@ import network.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,12 +27,15 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     private RollcallDao rollcallDao;
 
-    public int registration(double location_x, double location_y, String openId, Date time) {
+    public int registration(Long rId, double location_x, double location_y, String openId, Date time) {
         int code = 0;
+        if (rId == null)
+            return 1;
         Users users = usersDao.selectByOpenId(openId);
         if (users == null)
             return 0;
-        Registration registration = registrationDao.selectByClass(users.getClassname(), time);
+        Registration registration = new Registration();
+        registration = registrationDao.checkIsSelected(rId, users.getuId());
         if (registration == null) {
             code = 1;
             return code;
@@ -64,8 +68,16 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationDao.insertSelective(registration);
     }
 
-	public List<Registration> getAll() {
-		return registrationDao.getAll();
-	}
+    public List<Registration> getAll() {
+        return registrationDao.getAll();
+    }
+
+    public List<Registration> getByOpenid(String openId) {
+        Users users = usersDao.selectByOpenId(openId);
+        List<Registration> registrationList = new ArrayList<Registration>();
+        registrationList = registrationDao.selectByUid(users.getuId());
+        return registrationList;
+    }
+
 
 }

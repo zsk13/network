@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="network.dao.QuestionMapper" >
-  <resultMap id="BaseResultMap" type="network.model.Question" >
-    <id column="qid" property="qid" jdbcType="BIGINT" />
-    <result column="qname" property="qname" jdbcType="VARCHAR" />
-    <result column="course_id" property="courseId" jdbcType="BIGINT" />
-    <result column="question" property="question" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="teacher_id" property="teacherId" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="network.dao.QuestionMapper">
+  <resultMap id="BaseResultMap" type="network.model.Question">
+    <id column="qid" jdbcType="BIGINT" property="qid" />
+    <result column="qname" jdbcType="VARCHAR" property="qname" />
+    <result column="course_id" jdbcType="BIGINT" property="courseId" />
+    <result column="question" jdbcType="VARCHAR" property="question" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="teacher_id" jdbcType="BIGINT" property="teacherId" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -39,25 +39,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -68,40 +68,40 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     qid, qname, course_id, question, answer, status, teacher_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.QuestionExample" >
+  <select id="selectByExample" parameterType="network.model.QuestionExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from question
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from question
     where qid = #{qid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from question
     where qid = #{qid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="network.model.QuestionExample" >
+  <delete id="deleteByExample" parameterType="network.model.QuestionExample">
     delete from question
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="network.model.Question" >
+  <insert id="insert" parameterType="network.model.Question">
     insert into question (qid, qname, course_id, 
       question, answer, status, 
       teacher_id)
@@ -109,91 +109,91 @@
       #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{teacherId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="network.model.Question" >
+  <insert id="insertSelective" parameterType="network.model.Question">
     insert into question
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="qid != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
         qid,
       </if>
-      <if test="qname != null" >
+      <if test="qname != null">
         qname,
       </if>
-      <if test="courseId != null" >
+      <if test="courseId != null">
         course_id,
       </if>
-      <if test="question != null" >
+      <if test="question != null">
         question,
       </if>
-      <if test="answer != null" >
+      <if test="answer != null">
         answer,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="teacherId != null" >
+      <if test="teacherId != null">
         teacher_id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="qid != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
         #{qid,jdbcType=BIGINT},
       </if>
-      <if test="qname != null" >
+      <if test="qname != null">
         #{qname,jdbcType=VARCHAR},
       </if>
-      <if test="courseId != null" >
+      <if test="courseId != null">
         #{courseId,jdbcType=BIGINT},
       </if>
-      <if test="question != null" >
+      <if test="question != null">
         #{question,jdbcType=VARCHAR},
       </if>
-      <if test="answer != null" >
+      <if test="answer != null">
         #{answer,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="teacherId != null" >
+      <if test="teacherId != null">
         #{teacherId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="network.model.QuestionExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="network.model.QuestionExample" resultType="java.lang.Integer">
     select count(*) from question
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update question
-    <set >
-      <if test="record.qid != null" >
+    <set>
+      <if test="record.qid != null">
         qid = #{record.qid,jdbcType=BIGINT},
       </if>
-      <if test="record.qname != null" >
+      <if test="record.qname != null">
         qname = #{record.qname,jdbcType=VARCHAR},
       </if>
-      <if test="record.courseId != null" >
+      <if test="record.courseId != null">
         course_id = #{record.courseId,jdbcType=BIGINT},
       </if>
-      <if test="record.question != null" >
+      <if test="record.question != null">
         question = #{record.question,jdbcType=VARCHAR},
       </if>
-      <if test="record.answer != null" >
+      <if test="record.answer != null">
         answer = #{record.answer,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null" >
+      <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
       </if>
-      <if test="record.teacherId != null" >
+      <if test="record.teacherId != null">
         teacher_id = #{record.teacherId,jdbcType=BIGINT},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update question
     set qid = #{record.qid,jdbcType=BIGINT},
       qname = #{record.qname,jdbcType=VARCHAR},
@@ -202,35 +202,274 @@
       answer = #{record.answer,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       teacher_id = #{record.teacherId,jdbcType=BIGINT}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="network.model.Question" >
+  <update id="updateByPrimaryKeySelective" parameterType="network.model.Question">
     update question
-    <set >
-      <if test="qname != null" >
+    <set>
+      <if test="qname != null">
         qname = #{qname,jdbcType=VARCHAR},
       </if>
-      <if test="courseId != null" >
+      <if test="courseId != null">
         course_id = #{courseId,jdbcType=BIGINT},
       </if>
-      <if test="question != null" >
+      <if test="question != null">
         question = #{question,jdbcType=VARCHAR},
       </if>
-      <if test="answer != null" >
+      <if test="answer != null">
         answer = #{answer,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="teacherId != null" >
+      <if test="teacherId != null">
         teacher_id = #{teacherId,jdbcType=BIGINT},
       </if>
     </set>
     where qid = #{qid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="network.model.Question" >
+  <update id="updateByPrimaryKey" parameterType="network.model.Question">
+    update question
+    set qname = #{qname,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=BIGINT},
+      question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=BIGINT}
+    where qid = #{qid,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="network.model.Question">
+    <id column="qid" jdbcType="BIGINT" property="qid" />
+    <result column="qname" jdbcType="VARCHAR" property="qname" />
+    <result column="course_id" jdbcType="BIGINT" property="courseId" />
+    <result column="question" jdbcType="VARCHAR" property="question" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="teacher_id" jdbcType="BIGINT" property="teacherId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    qid, qname, course_id, question, answer, status, teacher_id
+  </sql>
+  <select id="selectByExample" parameterType="network.model.QuestionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question
+    where qid = #{qid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from question
+    where qid = #{qid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="network.model.QuestionExample">
+    delete from question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="network.model.Question">
+    insert into question (qid, qname, course_id, 
+      question, answer, status, 
+      teacher_id)
+    values (#{qid,jdbcType=BIGINT}, #{qname,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT}, 
+      #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{teacherId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="network.model.Question">
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
+        qid,
+      </if>
+      <if test="qname != null">
+        qname,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="question != null">
+        question,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
+        #{qid,jdbcType=BIGINT},
+      </if>
+      <if test="qname != null">
+        #{qname,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="question != null">
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="network.model.QuestionExample" resultType="java.lang.Integer">
+    select count(*) from question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update question
+    <set>
+      <if test="record.qid != null">
+        qid = #{record.qid,jdbcType=BIGINT},
+      </if>
+      <if test="record.qname != null">
+        qname = #{record.qname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseId != null">
+        course_id = #{record.courseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.question != null">
+        question = #{record.question,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null">
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherId != null">
+        teacher_id = #{record.teacherId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update question
+    set qid = #{record.qid,jdbcType=BIGINT},
+      qname = #{record.qname,jdbcType=VARCHAR},
+      course_id = #{record.courseId,jdbcType=BIGINT},
+      question = #{record.question,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      teacher_id = #{record.teacherId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="network.model.Question">
+    update question
+    <set>
+      <if test="qname != null">
+        qname = #{qname,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="question != null">
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where qid = #{qid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="network.model.Question">
     update question
     set qname = #{qname,jdbcType=VARCHAR},
       course_id = #{courseId,jdbcType=BIGINT},
