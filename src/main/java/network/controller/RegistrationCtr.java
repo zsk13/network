@@ -37,6 +37,7 @@ public class RegistrationCtr {
         String CODE = request.getParameter("code");
         String openid = null;
         try {
+            if(CODE != null)
             openid = OpenIdUtil.getOpenId(URLEncoder.encode(CODE, "UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();

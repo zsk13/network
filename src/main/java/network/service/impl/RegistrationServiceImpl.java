@@ -73,8 +73,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     public List<Registration> getByOpenid(String openId) {
-        Users users = usersDao.selectByOpenId(openId);
         List<Registration> registrationList = new ArrayList<Registration>();
+        Users users = usersDao.selectByOpenId(openId);
+        if(users == null)
+            return registrationList;
         registrationList = registrationDao.selectByUid(users.getuId());
         return registrationList;
     }
