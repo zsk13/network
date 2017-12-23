@@ -1,7 +1,9 @@
 package network.controller;
 
+import network.model.Course;
 import network.model.Registration;
 import network.model.Rollcall;
+import network.model.Teacher;
 import network.service.RegistrationService;
 import network.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "manage")
@@ -33,9 +36,9 @@ public class UpdateRegistrationCtr {
     @RequestMapping(value = "/display_registrations.do")
     public ModelAndView displayRegistrations(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	List<Registration> list1 = registrationService.getAll();
-    	ModelAndView mv = new ModelAndView("display_registrations");
-    	mv.addObject("registrationList",list1);
-    	return mv;
+    	ModelAndView mav = new ModelAndView("display_registrations");
+    	mav.addObject("registrationList",list1);
+    	return mav;
     }
     
     @RequestMapping(value = "/display_registration_records.do")
@@ -51,9 +54,20 @@ public class UpdateRegistrationCtr {
     }
     
     @RequestMapping(value = "/start_add.do")
-    public String add(Registration registration) {
-        return "start_a_registration";
-
+    public ModelAndView add(HttpServletRequest request) {
+    	ModelAndView mav = new ModelAndView("start_a_registration");
+    	HttpSession session = request.getSession();
+    	Teacher teacher = (Teacher) session.getAttribute("teacher");
+    	
+    	List<Course> courseList1 = null;
+    	if(teacher !=null && teacher.gettId()!=0) {
+    		courseList1 = registrationService.getValidCoursesByTeacherId(teacher.gettId());
+    	}else{
+    		courseList1 = registrationService.getAllCourses();
+    	}
+    	mav.addObject("clist",courseList1);
+    	
+        return mav;
     }
     
     @RequestMapping(value = "/welcome.do")
