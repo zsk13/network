@@ -18,6 +18,9 @@ public interface RegistrationDao {
 
     List<Registration> selectByExample(RegistrationExample example);
 
+    
+    List<Registration> getAll();
+    List<Registration> getByCourseId(Long cId);
     Registration selectByPrimaryKey(Long rId);
 
     int updateByExampleSelective(@Param("record") Registration record, @Param("example") RegistrationExample example);
@@ -32,5 +35,4 @@ public interface RegistrationDao {
 
     Registration checkIsSelected(@Param("rId") Long rId,@Param("uId") Long uId);
 
-    List<Registration> getAll();
 }

@@ -3,6 +3,7 @@ package network.model;
 import java.util.Date;
 
 public class Registration {
+
     private Long rId;
 
     private Long lId;

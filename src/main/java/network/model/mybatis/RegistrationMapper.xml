@@ -6,7 +6,7 @@
     <result column="l_id" property="lId" jdbcType="BIGINT" />
     <result column="s_time" property="sTime" jdbcType="TIMESTAMP" />
     <result column="e_time" property="eTime" jdbcType="TIMESTAMP" />
-    <result column="c_id" property="cId" jdbcType="BIGINT" />
+    <result column="c_id" property="cId" jdbcType="BIGINT"/>
     <result column="c_name" property="cName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -84,6 +84,17 @@
       order by ${orderByClause}
     </if>
   </select>
+	<select id="getAll" resultMap = "BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM registration ORDER BY r_id DESC
+	</select>
+	<select id="getByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM registration 
+		WHERE c_id = #{cId, jdbcType=BIGINT}
+	</select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />

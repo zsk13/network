@@ -83,6 +83,20 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="getAll" resultMap="BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	FROM course 
+  </select>
+  <select id="getValidCoursesByTeacherId" resultMap="BaseResultMap" parameterType="Java.lang.Long">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	FROM course 
+  	WHERE t_id = #{tId, jdbcType=BIGINT}
+  		AND c_state = 1
+  </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

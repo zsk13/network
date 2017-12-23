@@ -17,6 +17,10 @@ public interface CourseMapper {
     int insertSelective(Course record);
 
     List<Course> selectByExample(CourseExample example);
+    
+    List<Course> getAll();
+    
+    List<Course> getValidCoursesByTeacherId(long tId);
 
     Course selectByPrimaryKey(Long cId);
 
