@@ -1,7 +1,9 @@
 package network.controller;
 
+import com.github.pagehelper.PageInfo;
 import network.model.Registration;
 import network.model.Rollcall;
+import network.service.RegistrationPageService;
 import network.service.RegistrationService;
 import network.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +32,23 @@ public class UpdateRegistrationCtr {
     private RegistrationService registrationService;
     @Autowired
     private RollcallService rollCallService;
+    @Autowired
+    private RegistrationPageService registrationPageService;
     @RequestMapping(value = "/display_registrations.do")
-    public ModelAndView displayRegistrations(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	List<Registration> list1 = registrationService.getAll();
+    public ModelAndView displayRegistrations(Integer registrationId,Integer pageNo,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PageInfo<Registration> page = registrationPageService.queryByPage(pageNo,10);
+        //List<Registration> list1 = registrationService.getAll();
     	ModelAndView mv = new ModelAndView("display_registrations");
-    	mv.addObject("registrationList",list1);
+    	System.out.println("size:"+page.getList().size());
+    	mv.addObject("registrationList",page.getList());
+    	mv.addObject("totalPage",page.getPages());
+    	mv.addObject("currentPage",page.getPageNum());
+    	mv.addObject("registrationId",registrationId);
     	return mv;
     }
     
     @RequestMapping(value = "/display_registration_records.do")
     public ModelAndView displayRegistrationInDetail(HttpServletRequest request, HttpServletResponse response) {
-    	System.out.println("Here is DRID");
     	Long rid = Long.parseLong(request.getParameter("registrationId"));
     	System.out.println(rid);
     	List<Rollcall> list = rollCallService.getAll();

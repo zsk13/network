@@ -16,7 +16,7 @@
 				<div class="page__bd">
 					<div class="weui-cells__title">欢迎${name} 老师</div>
 					<div class="weui-cells">
-						<a class="weui-cell weui-cell_access" href="/network/rollcall/display_registrations.do">
+						<a class="weui-cell weui-cell_access" href="/network/manage/display_registrations.do">
 							<div class="weui-cell__bd">
 								<p>我要查看历史点名情况</p>
 							</div>
