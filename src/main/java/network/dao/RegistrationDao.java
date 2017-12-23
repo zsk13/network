@@ -1,6 +1,8 @@
 package network.dao;
 
 import java.util.List;
+
+import network.model.Course;
 import network.model.Registration;
 import network.model.RegistrationExample;
 import org.apache.ibatis.annotations.Param;
@@ -20,7 +22,9 @@ public interface RegistrationDao {
 
     
     List<Registration> getAll();
-    List<Registration> getByCourseId(Long cId);
+    List<Registration> getByCourseId(long cId);
+    
+    
     Registration selectByPrimaryKey(Long rId);
 
     int updateByExampleSelective(@Param("record") Registration record, @Param("example") RegistrationExample example);

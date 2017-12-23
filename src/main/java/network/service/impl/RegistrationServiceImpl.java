@@ -1,9 +1,11 @@
 package network.service.impl;
 
+import network.dao.CourseMapper;
 import network.dao.LocationDao;
 import network.dao.RegistrationDao;
 import network.dao.RollcallDao;
 import network.dao.UsersDao;
+import network.model.Course;
 import network.model.Location;
 import network.model.Registration;
 import network.model.Rollcall;
@@ -26,6 +28,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     private LocationDao locationDao;
     @Autowired
     private RollcallDao rollcallDao;
+    @Autowired
+    private CourseMapper courseDao;
 
     public int registration(Long rId, double location_x, double location_y, String openId, Date time) {
         int code = 0;
@@ -84,6 +88,16 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	public List<Registration> getByCourseId(Long cId) {
 		return registrationDao.getByCourseId(cId);
+	}
+
+	@Override
+	public List<Course> getAllCourses() {
+		return courseDao.getAll();
+	}
+
+	@Override
+	public List<Course> getValidCoursesByTeacherId(long tId) {
+		return courseDao.getValidCoursesByTeacherId(tId);
 	}
 
 }
