@@ -1,5 +1,6 @@
 package network.controller;
 
+import network.model.Teacher;
 import network.service.LoginService;
 import network.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,14 @@ public class LoginCtr {
             attr.addFlashAttribute("msg", "用户名或密码不正确！");
             return "redirect:./login.do";
         } else {
+
             attr.addFlashAttribute("name", name);
             request.getSession().setAttribute("username", name);
             request.getSession().setAttribute("type", "teacher");
+            Teacher teacher = new Teacher();
+            teacher = teacherService.findTeacherBytName(name);
+            teacher.settPassword(null);
+            request.getSession().setAttribute("teacher",teacher);
             return "redirect:./welcome.do";
         }
 
