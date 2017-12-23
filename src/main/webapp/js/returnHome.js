@@ -4,7 +4,11 @@ $(document).ready(function () {
         var url=location.href;
         var i=url.indexOf('=');
         var id=url.substr(i+1);
-        Update(id);
+        var msg = "确认提交？";
+        if (confirm(msg)==true){
+            Update(id);
+        }
+
     })
 
     $('#btnReturn').click(function () {
@@ -59,7 +63,7 @@ function Update(id) {
             console.log("success")
             console.log(data)
             if (data.message == "success") {
-                alert("编辑成功");
+                //alert("编辑成功");
                 location.href ="./teacherlist.do";
             } else {
                 //alert(info.msg)

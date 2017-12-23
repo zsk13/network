@@ -1,3 +1,6 @@
+-- ----------------------------
+-- Table structure for course_student
+-- ----------------------------
 DROP TABLE IF EXISTS `course_student`;
 CREATE TABLE `course_student` (
   `cs_id` bigint(20) NOT NULL AUTO_INCREMENT,

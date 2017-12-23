@@ -12,7 +12,9 @@ public interface TeacherService {
 
     void updateTeacherBytNumber(Teacher teacher, String tNumber);
 
-    Teacher findTeacher(String tNameORNumber);
+    Teacher findTeacherBytNumber(String tNumber);
+
+    Teacher findTeacherBytName(String tName);
 
 
     boolean login(String TeacherName, String password);

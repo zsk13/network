@@ -29,15 +29,8 @@ public class AccessTokenUtil {
      */
     public static void initAndSetAccessToken() {
         log.info("execute initAndSetAccessToken Start : {}", System.currentTimeMillis());
-        Properties prop = new Properties();
-        try {
-            InputStream in = AccessTokenUtil.class.getClassLoader().getResourceAsStream("web.properties");
-            prop.load(in);
-        } catch (IOException e) {
-            log.info("execute initAndSetAccessToken {}", e.getMessage());
-        }
-        String appid = prop.getProperty("APPID");
-        String appsecret = prop.getProperty("APPSECRET");
+        String appid = AppUtil.getAppId();
+        String appsecret = AppUtil.getAppsecret();
         if(appid != null && appsecret !=null) {
             AccessToken accessToken = getAccessToken(appid,appsecret);
             if(null != accessToken) {

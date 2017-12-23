@@ -1,10 +1,6 @@
 package network.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import network.model.Question;
 import network.model.Teacher;
-import network.service.AnswerService;
-import network.service.QuestionService;
 import network.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,15 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 @Controller
@@ -50,6 +41,13 @@ public class TeacherCtr {
     public ModelAndView TeacherEditView(HttpServletResponse res, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("editTeacher");
+        return mv;
+    }
+
+    @RequestMapping(value = "/detailteacher.do")
+    public ModelAndView TeacherDetailView(HttpServletResponse res, HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("detailTeacher");
         return mv;
     }
 
@@ -94,7 +92,25 @@ public class TeacherCtr {
     @ResponseBody Map<String, Object> edit(HttpServletRequest request, HttpServletResponse response) {
         String tNumber = request.getParameter("tNumber").toString();
 
-        Teacher teacher = teacherservice.findTeacher(tNumber);
+        Teacher teacher = teacherservice.findTeacherBytNumber(tNumber);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("message", "success");
+        map.put("name",teacher.gettName());
+        map.put("password",teacher.gettPassword());
+        map.put("number",teacher.gettNumber());
+        map.put("mail",teacher.gettMail());
+        map.put("phone",teacher.gettPhone());
+        return map;
+
+    }
+
+    @RequestMapping(value = "/detail.do")
+    public
+    @ResponseBody Map<String, Object> detail(HttpServletRequest request, HttpServletResponse response) {
+        String tName = request.getParameter("tName").toString();
+
+        Teacher teacher = teacherservice.findTeacherBytName(tName);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("message", "success");

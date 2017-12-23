@@ -14,11 +14,8 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
-import java.lang.StringBuilder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -93,8 +90,7 @@ public class UpdateRegistrationCtr {
         Long locationId = Long.parseLong(req.getParameter("location_id"));
         Date startTime = sdf.parse(req.getParameter("sTime").replaceAll("T", " "));
         Date endTime = sdf.parse(req.getParameter("eTime").replaceAll("T", " "));
-        reg2.setClassName(className);
-        reg2.setName(name);
+
         reg2.setsTime(startTime);
         reg2.seteTime(endTime);
         reg2.setlId(locationId);

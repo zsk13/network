@@ -1,6 +1,5 @@
 package network.dao;
 
-import java.util.Date;
 import java.util.List;
 import network.model.Registration;
 import network.model.RegistrationExample;
@@ -18,13 +17,11 @@ public interface RegistrationDao {
     int insertSelective(Registration record);
 
     List<Registration> selectByExample(RegistrationExample example);
+
     
     List<Registration> getAll();
     List<Registration> getByCourseId(Long cId);
-
     Registration selectByPrimaryKey(Long rId);
-
-    Registration selectByClass(@Param("className")String className,@Param("time")Date time);
 
     int updateByExampleSelective(@Param("record") Registration record, @Param("example") RegistrationExample example);
 
@@ -33,4 +30,9 @@ public interface RegistrationDao {
     int updateByPrimaryKeySelective(Registration record);
 
     int updateByPrimaryKey(Registration record);
+
+    List<Registration> selectByUid(Long uId);
+
+    Registration checkIsSelected(@Param("rId") Long rId,@Param("uId") Long uId);
+
 }

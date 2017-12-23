@@ -1,16 +1,15 @@
 package network.controller;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import network.model.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import network.model.Registration;
 import network.model.Rollcall;
 import network.model.RollcallDisplay;
 import network.service.RegistrationService;

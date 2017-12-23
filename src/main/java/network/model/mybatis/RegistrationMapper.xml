@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    r_id,  l_id, s_time, e_time, c_id, c_name
+    r_id, l_id, s_time, e_time, c_id, c_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="network.model.RegistrationExample" >
     select
@@ -96,19 +96,31 @@
 		WHERE c_id = #{cId, jdbcType=BIGINT}
 	</select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from registration
     where r_id = #{rId,jdbcType=BIGINT}
   </select>
-  <select id="selectByClass" resultMap="BaseResultMap">
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from registration
-    where class_name = #{className,jdbcType=VARCHAR}
-    and s_time &lt; #{time}
-    and e_time &gt; #{time}
+    WHERE c_id In(
+    SELECT c.c_id FROM course c,course_student cs WHERE cs.s_id=#{uId,jdbcType=BIGINT} AND c.c_state=1 AND c.c_id = cs.c_id) AND now() BETWEEN s_time and e_time
   </select>
+  <select id="checkIsSelected" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    FROM registration r WHERE r_id=#{rId,jdbcType=BIGINT} AND EXISTS(
+    SELECT 1 FROM course_student cs WHERE cs.s_id=#{uId,jdbcType=BIGINT} AND cs.c_id=r.c_id)
+
+  </select>
+  <select id="getAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from registration
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from registration
     where r_id = #{rId,jdbcType=BIGINT}
@@ -120,21 +132,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="network.model.Registration" >
-    insert into registration (r_id, name, l_id, 
-      s_time, e_time, class_name
-      )
-    values (#{rId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{lId,jdbcType=BIGINT}, 
-      #{sTime,jdbcType=TIMESTAMP}, #{eTime,jdbcType=TIMESTAMP}, #{className,jdbcType=VARCHAR}
-      )
+    insert into registration (r_id, l_id, s_time, 
+      e_time, c_id, c_name)
+    values (#{rId,jdbcType=BIGINT}, #{lId,jdbcType=BIGINT}, #{sTime,jdbcType=TIMESTAMP}, 
+      #{eTime,jdbcType=TIMESTAMP}, #{cId,jdbcType=BIGINT}, #{cName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="network.model.Registration" >
     insert into registration
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="rId != null" >
         r_id,
-      </if>
-      <if test="name != null" >
-        name,
       </if>
       <if test="lId != null" >
         l_id,
@@ -145,16 +152,16 @@
       <if test="eTime != null" >
         e_time,
       </if>
-      <if test="className != null" >
-        class_name,
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cName != null" >
+        c_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="rId != null" >
         #{rId,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
       </if>
       <if test="lId != null" >
         #{lId,jdbcType=BIGINT},
@@ -165,8 +172,11 @@
       <if test="eTime != null" >
         #{eTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="className != null" >
-        #{className,jdbcType=VARCHAR},
+      <if test="cId != null" >
+        #{cId,jdbcType=BIGINT},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -182,9 +192,6 @@
       <if test="record.rId != null" >
         r_id = #{record.rId,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
       <if test="record.lId != null" >
         l_id = #{record.lId,jdbcType=BIGINT},
       </if>
@@ -194,8 +201,11 @@
       <if test="record.eTime != null" >
         e_time = #{record.eTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.className != null" >
-        class_name = #{record.className,jdbcType=VARCHAR},
+      <if test="record.cId != null" >
+        c_id = #{record.cId,jdbcType=BIGINT},
+      </if>
+      <if test="record.cName != null" >
+        c_name = #{record.cName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -205,11 +215,11 @@
   <update id="updateByExample" parameterType="map" >
     update registration
     set r_id = #{record.rId,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      l_id = #{record.lId,jdbcType=BIGINT},
-      s_time = #{record.sTime,jdbcType=TIMESTAMP},
-      e_time = #{record.eTime,jdbcType=TIMESTAMP},
-      class_name = #{record.className,jdbcType=VARCHAR}
+    l_id = #{record.lId,jdbcType=BIGINT},
+    s_time = #{record.sTime,jdbcType=TIMESTAMP},
+    e_time = #{record.eTime,jdbcType=TIMESTAMP},
+    c_id = #{record.cId,jdbcType=BIGINT},
+    c_name = #{record.cName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -217,9 +227,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="network.model.Registration" >
     update registration
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
       <if test="lId != null" >
         l_id = #{lId,jdbcType=BIGINT},
       </if>
@@ -229,19 +236,22 @@
       <if test="eTime != null" >
         e_time = #{eTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="className != null" >
-        class_name = #{className,jdbcType=VARCHAR},
+      <if test="cId != null" >
+        c_id = #{cId,jdbcType=BIGINT},
+      </if>
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
       </if>
     </set>
     where r_id = #{rId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="network.model.Registration" >
     update registration
-    set name = #{name,jdbcType=VARCHAR},
-      l_id = #{lId,jdbcType=BIGINT},
+    set l_id = #{lId,jdbcType=BIGINT},
       s_time = #{sTime,jdbcType=TIMESTAMP},
       e_time = #{eTime,jdbcType=TIMESTAMP},
-      class_name = #{className,jdbcType=VARCHAR}
+      c_id = #{cId,jdbcType=BIGINT},
+      c_name = #{cName,jdbcType=VARCHAR}
     where r_id = #{rId,jdbcType=BIGINT}
   </update>
 </mapper>
