@@ -162,7 +162,12 @@
                                         alert("签到失败，您不在上课地点，请检查定位！")
                                         break;
                                     case 3:
-                                        successToast()
+                                        var $toast = $('#toast');
+                                        if ($toast.css('display') != 'none') return;
+                                        $toast.fadeIn(100);
+                                        setTimeout(function () {
+                                            $toast.fadeOut(100);
+                                        }, 2000);
                                         break;
                                     case 4:
                                         alert("您已签到，请勿重复签到！")
@@ -178,17 +183,6 @@
                 });
             });
         });
-</script>
-<script type="text/javascript">
-    function successToast() {
-        var $toast = $('#toast');
-        if ($toast.css('display') != 'none') return;
-        $toast.fadeIn(100);
-        setTimeout(function () {
-            $toast.fadeOut(100);
-        }, 2000);
-    }
-
 </script>
 
 <script src="../js/zepto.min.js"></script>
