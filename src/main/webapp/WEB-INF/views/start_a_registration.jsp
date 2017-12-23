@@ -117,7 +117,7 @@ embed, object {
 							<label for="" class="weui-label">开始时间：</label>
 						</div>
 						<div class="weui-cell__bd">
-							<input class="weui-input" type="datetime-local" value=""
+							<input id="registration_start_time" class="weui-input" type="datetime-local" value=""
 								placeholder="" name="sTime">
 						</div>
 					</div>
@@ -126,7 +126,7 @@ embed, object {
 							<label for="" class="weui-label">结束时间：</label>
 						</div>
 						<div class="weui-cell__bd">
-							<input class="weui-input" type="datetime-local" value=""
+							<input id="registration_end_time" class="weui-input" type="datetime-local" value=""
 								placeholder="" name="eTime" onblur="makeStringOutOfGradeEducationalBackgroundStudyClassAndRollCallCount()">
 						</div>
 					</div>
@@ -143,9 +143,45 @@ embed, object {
 	
 	<script type="text/javascript">
     $(function(){
-
         $('#showTooltips').on('click', function(){
-        	 $('#form1').submit();
+        	var s_time_dom = document.getElementById("registration_start_time");
+			var s_time = s_time_dom.value;
+			//alert("asdf"+s_time.replace(/T/," "));
+			var s_date = s_time.substring(0,10);
+			var s_hour_min = s_time.substring(11,16);
+			if(s_time.length<5){
+				alert("请将开始时间填完整");
+				return;
+			}
+			
+			var s_datetime_string = s_date+" "+s_hour_min+":00";
+			var start_date = new Date(s_datetime_string.replace(/-/,"/"));
+			var start_timestamp = Date.parse(start_date);
+			
+			var e_time_dom = document.getElementById("registration_end_time");
+			var e_time = e_time_dom.value;
+			var e_date = e_time.substring(0,10);
+			var e_hour_min = e_time.substring(11,16);
+			if(e_time.length<5){
+				alert("请将结束时间填完整");
+				return;
+			}
+			var e_datetime_string = e_date+" "+e_hour_min+":00"
+			var end_date = new Date(e_datetime_string.replace(/-/,"/"));
+			var end_timestamp = Date.parse(end_date);
+			
+			var now = new Date();
+			var now_timestamp = Date.parse(now);
+			
+			if(start_timestamp>=end_timestamp){
+				alert("结束时间需要在开始时间之后！");
+				return;
+			}
+			if (now_timestamp>end_timestamp){
+				alert("结束时间需要在当前时间之后！");
+				return;
+			}
+        	$('#form1').submit();
         });
     });
 </script>
