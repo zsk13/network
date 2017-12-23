@@ -29,4 +29,6 @@ public interface LocationDao {
     int updateByPrimaryKeySelective(Location record);
 
     int updateByPrimaryKey(Location record);
+
+	List<Location> getAll();
 }

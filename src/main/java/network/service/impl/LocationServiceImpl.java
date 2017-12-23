@@ -3,6 +3,9 @@ package network.service.impl;
 import network.dao.LocationDao;
 import network.model.Location;
 import network.service.LocationService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,4 +17,8 @@ public class LocationServiceImpl implements LocationService{
         locationDao.insertSelective(location);
 
     }
+	@Override
+	public List<Location> getAll() {
+		return locationDao.getAll();
+	}
 }

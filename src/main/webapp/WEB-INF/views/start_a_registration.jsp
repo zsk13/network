@@ -91,61 +91,11 @@ embed, object {
 							<label class="weui-label">课程名称：</label>
 						</div>
 						<div class="weui-cell__bd">
-							<input class="weui-input" placeholder="课程名称" type="text"
-								name="className">
 							<select class="weui-select" id="class_name1">
 								<c:forEach items="${clist }" var="course">
-									<option value="${ course.cId}">Here is cName.<c:out value="${course.cName}"/></option>
+									<option value="${ course.cId}">${course.cName}</option>
 								</c:forEach>
 							</select>
-						</div>
-					</div>
-					<div class="weui-cell weui-cell_select weui-cell_select-after">
-						<div class="weui-cell__hd">
-							<label for="" class="weui-label">年級：</label>
-						</div>
-						<div class="weui-cell__bd">
-							<select class="weui-select" id="grade">
-								<option value="2014">2014</option>
-								<option value="2015">2015</option>
-								<option value="2016">2016</option>
-								<option value="2017">2017</option>
-								<option value="2018">2018</option>
-							</select>
-						</div>
-					</div>
-					<div class="weui-cell weui-cell_select weui-cell_select-after">
-						<div class="weui-cell__hd">
-							<label for="" class="weui-label">本科/研究生</label>
-						</div>
-						<div class="weui-cell__bd">
-							<select class="weui-select" id="educational_background">
-								<option value="bachelor">本科</option>
-								<option value="master">研究</option>
-							</select>
-						</div>
-					</div>
-					<div class="weui-cell weui-cell_select weui-cell_select-after">
-						<div class="weui-cell__hd">
-							<label for="" class="weui-label">班级：</label>
-						</div>
-						<div class="weui-cell__bd">
-							<select class="weui-select" id="study_class">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-							</select>
-						</div>
-					</div>
-					<div class="weui-cell">
-						<div class="weui-cell__hd">
-							<label class="weui-label">第几次点名：</label>
-						</div>
-						<div class="weui-cell__bd">
-							<input class="weui-input" placeholder="第几次" type="text"
-								id="count"
-								onblur="makeStringOutOfGradeEducationalBackgroundStudyClassAndRollCallCount();">
 						</div>
 					</div>
 					<div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -154,9 +104,9 @@ embed, object {
 						</div>
 						<div class="weui-cell__bd">
 							<select class="weui-select" name="location_id">
-								<option value="1">馆3</option>
-								<option value="2">费彝民楼</option>
-								<option value="3">教学楼</option>
+								<c:forEach items="locationList" var="location1">
+									<option value="${ location1.lId}">${location1.locationName}</option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>
