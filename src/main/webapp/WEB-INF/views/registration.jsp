@@ -82,15 +82,15 @@
 <div class="container" id="container">
     <div class="page home js_show">
         <div class="page list js_show">
-            <div class="page__bd">
+            <div class="page__bd" >
                 <div class="weui-cells">
                     <div class="weui-cell weui-cell_select weui-cell_select-after">
                         <div class="weui-cell__hd">
-                            <label class="weui-label">选择课程：</label>
+                            <label class="weui-label" style="font-size: xx-large">课程：</label>
                         </div>
                         <div class="weui-cell__bd">
                             <input type="hidden" name="openId" id="openId" value="${openId}">
-                            <select class="weui-select" name="registrationSelect" id="registrationSelect">
+                            <select class="weui-select" name="registrationSelect" id="registrationSelect" style="font-size: xx-large">
                                 <c:choose>
                                     <c:when test="${registrationList!=null && fn:length(registrationList) > 0}">    <!--如果数组为空 -->
                                         <c:forEach var="registration" items="${registrationList}">
@@ -105,7 +105,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="javascript:;" id="registration" class="weui-btn weui-btn_plain-primary">签到</a>
+                <div style="text-align: center;">
+                <a href="javascript:;" id="registration" class="weui-btn weui-btn_plain-primary" style="font-size: 100px;height: 200px;width: 300px;text-align: center;border-radius: 100px;line-height: 200px;">签到</a>
+                </div>
             </div>
         </div>
     </div>
