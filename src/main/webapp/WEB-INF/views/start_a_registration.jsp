@@ -9,11 +9,13 @@
 
 <script>
 	function makeStringOutOfGradeEducationalBackgroundStudyClassAndRollCallCount(){
-		var grade = document.getElementById("grade").value;
-		var educational_background = document.getElementById("educational_background").value;
-		var study_class = document.getElementById("study_class").value;
-		var count = document.getElementById("count").value;
-		document.getElementById("makeString1").value=grade+"级"+educational_background+"生"+study_class+"班第"+count+"次点名";
+
+		var obj = document.getElementById("class_name1");
+		var cId = obj.value;
+
+		var obj2 = document.getElementById("aCourseWhoseId="+cId);
+		var cName2 = obj2.innerHTML;
+		document.getElementById("makeString1").value=cName2;
 	}
 	function formReset(){
 		document.getElementById("form1").reset();
@@ -91,20 +93,20 @@ embed, object {
 							<label class="weui-label">课程名称：</label>
 						</div>
 						<div class="weui-cell__bd">
-							<select class="weui-select" id="class_name1">
+							<select class="weui-select" id="class_name1" name = "class_id">
 								<c:forEach items="${clist }" var="course">
-									<option value="${ course.cId}">${course.cName}</option>
+									<option id = "aCourseWhoseId=${course.cId }" value="${ course.cId}">${course.cName}</option>
 								</c:forEach>
 							</select>
 						</div>
 					</div>
 					<div class="weui-cell weui-cell_select weui-cell_select-after">
 						<div class="weui-cell__hd">
-							<label for="" class="weui-label">位置:</label>
+							<label for="" class="weui-label">上课地点:</label>
 						</div>
 						<div class="weui-cell__bd">
 							<select class="weui-select" name="location_id">
-								<c:forEach items="locationList" var="location1">
+								<c:forEach items="${locationList}" var="location1">
 									<option value="${ location1.lId}">${location1.locationName}</option>
 								</c:forEach>
 							</select>
@@ -125,7 +127,7 @@ embed, object {
 						</div>
 						<div class="weui-cell__bd">
 							<input class="weui-input" type="datetime-local" value=""
-								placeholder="" name="eTime">
+								placeholder="" name="eTime" onblur="makeStringOutOfGradeEducationalBackgroundStudyClassAndRollCallCount()">
 						</div>
 					</div>
 					<div class="weui-btn-area">
@@ -134,8 +136,7 @@ embed, object {
 					</div>
 				</div>
 			</div>
-			<input type="text" id="makeString1" name="name" value=""
-			hidden="hidden"></input>
+			<input type="text" id="makeString1" name="class_name" value="" hidden="hidden"/>
 			</form>
 		</div>
 	</div>
