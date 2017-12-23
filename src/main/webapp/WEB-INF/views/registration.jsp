@@ -115,6 +115,15 @@
             </div>
         </div>
     </div>
+    <div class="page toast js_show">
+        <div id="toast" style="opacity: 0; display: none;">
+            <div class="weui-mask_transparent"></div>
+            <div class="weui-toast">
+                <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+                <p class="weui-toast__content">签到成功</p>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script type="text/javascript">
@@ -153,7 +162,7 @@
                                         alert("签到失败，您不在上课地点，请检查定位！")
                                         break;
                                     case 3:
-                                        alert("签到成功！")
+                                        successToast()
                                         break;
                                     case 4:
                                         alert("您已签到，请勿重复签到！")
@@ -169,6 +178,17 @@
                 });
             });
         });
+</script>
+<script type="text/javascript">
+    function successToast() {
+        var $toast = $('#toast');
+        if ($toast.css('display') != 'none') return;
+        $toast.fadeIn(100);
+        setTimeout(function () {
+            $toast.fadeOut(100);
+        }, 2000);
+    }
+
 </script>
 
 <script src="../js/zepto.min.js"></script>
