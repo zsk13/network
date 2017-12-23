@@ -84,7 +84,10 @@
         <div class="page list js_show">
             <div class="page__bd">
                 <div class="weui-cells">
-                    <div class="weui-cell weui-cell_select">
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">选择课程：</label>
+                        </div>
                         <div class="weui-cell__bd">
                             <input type="hidden" name="openId" id="openId" value="${openId}">
                             <select class="weui-select" name="registrationSelect" id="registrationSelect">
