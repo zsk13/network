@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -92,6 +93,11 @@ embed, object {
 						<div class="weui-cell__bd">
 							<input class="weui-input" placeholder="课程名称" type="text"
 								name="className">
+							<select class="weui-select" id="class_name1">
+								<c:forEach items="${clist }" var="course">
+									<option value="${ course.cId}">Here is cName.<c:out value="${course.cName}"/></option>
+								</c:forEach>
+							</select>
 						</div>
 					</div>
 					<div class="weui-cell weui-cell_select weui-cell_select-after">
