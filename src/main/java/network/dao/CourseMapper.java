@@ -20,7 +20,7 @@ public interface CourseMapper {
     
     List<Course> getAll();
     
-    List<Course> getByTeacherId(long tId);
+    List<Course> getValidCoursesByTeacherId(long tId);
 
     Course selectByPrimaryKey(Long cId);
 
