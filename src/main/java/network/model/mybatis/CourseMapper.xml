@@ -88,7 +88,7 @@
   	<include refid="Base_Column_List"/>
   	FROM course 
   </select>
-  <select id="getValidCoursesByTeacherId" resultMap="BaseResultMap" parameterType="Java.lang.Long">
+  <select id="getValidCoursesByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.Long">
   	SELECT 
   	<include refid="Base_Column_List"/>
   	FROM course 
