@@ -82,7 +82,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
 
-	@Override
 	public List<Registration> getByCourseId(Long cId) {
 		return registrationDao.getByCourseId(cId);
 	}
