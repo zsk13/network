@@ -1,11 +1,13 @@
 package network.controller;
 
+import com.github.pagehelper.PageInfo;
 import network.model.Course;
 import network.model.Location;
 import network.model.Registration;
 import network.model.Rollcall;
 import network.model.Teacher;
 import network.service.LocationService;
+import network.service.RegistrationPageService;
 import network.service.RegistrationService;
 import network.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +40,21 @@ public class UpdateRegistrationCtr {
     private RollcallService rollCallService;
     @Autowired
     private LocationService locationService;
-    
-    
-    
+    @Autowired
+    private RegistrationPageService registrationPageService;
+
     @RequestMapping(value = "/display_registrations.do")
-    public ModelAndView displayRegistrations(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println("into displayregistrations");
-    	List<Registration> list1 = registrationService.getAll();
-    	ModelAndView mav = new ModelAndView("display_registrations");
-    	mav.addObject("registrationList",list1);
-    	return mav;
+    public ModelAndView displayRegistrations(Integer registrationId,Integer pageNo,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PageInfo<Registration> page = registrationPageService.queryByPage(pageNo,10);
+        //List<Registration> list1 = registrationService.getAll();
+        ModelAndView mv = new ModelAndView("display_registrations");
+        System.out.println("size:"+page.getList().size());
+        mv.addObject("registrationList",page.getList());
+        mv.addObject("totalPage",page.getPages());
+        mv.addObject("currentPage",page.getPageNum());
+        mv.addObject("registrationId",registrationId);
+        return mv;
     }
-    
     @RequestMapping(value = "/display_registration_records.do")
     public ModelAndView displayRegistrationInDetail(HttpServletRequest request, HttpServletResponse response) {
     	System.out.println("Here is DRID");
