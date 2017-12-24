@@ -94,7 +94,7 @@ public class WeChatCtr {
                 }
                 questionService.dealCommitQuestion(map,out);
                 return;
-            }else if (msgType.equals(WechatMessageUtil.MESSAGE_EVENT)) {  
+            }else if (msgType.equals(WechatMessageUtil.MESSAGE_EVENT_CLICK)) {
                 // 事件KEY值，与创建自定义菜单时指定的KEY值对应  
                 
                 String eventKey = map.get("EventKey");  
