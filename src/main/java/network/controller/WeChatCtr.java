@@ -99,10 +99,10 @@ public class WeChatCtr {
                 
                 String eventKey = map.get("EventKey");  
                 String respContent = "默认";
-                if (eventKey.equals("11")) {
-                 usersService.deleteByOpenId(fromUserName);
+                if (eventKey.equals("12")) {
+                    usersService.deleteByOpenId(fromUserName);
                     respContent = "解除绑定成功！";
-                } else if (eventKey.equals("12")) {  
+                } else if (eventKey.equals("11")) {
                     questionService.dealGetQuestion(map,out);
                     return;
                 } 
