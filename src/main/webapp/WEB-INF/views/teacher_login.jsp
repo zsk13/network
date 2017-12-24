@@ -26,20 +26,24 @@
 								<p>我要发布一次点名</p>
 							</div>
 							<div class="weui-cell__ft"></div>
-						</a>
+						</a><a class="weui-cell weui-cell_access" href="../location/locationList.do">
+						<div class="weui-cell__bd">
+							<p>查看/新增 签到地点</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</a>
+						<a class="weui-cell weui-cell_access" href="../question/addquestion.do">
+						<div class="weui-cell__bd">
+							<p>发布问题</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</a><a class="weui-cell weui-cell_access" href="../question/questionlist.do">
+						<div class="weui-cell__bd">
+							<p>查看已发布问题</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</a>
 					</div>
-					<a class="weui-cell weui-cell_access" href="../question/addquestion.do">
-							<div class="weui-cell__bd">
-								<p>发布问题</p>
-							</div>
-							<div class="weui-cell__ft"></div>
-						</a>
-						<a class="weui-cell weui-cell_access" href="../question/questionlist.do">
-							<div class="weui-cell__bd">
-								<p>查看已发布问题</p>
-							</div>
-							<div class="weui-cell__ft"></div>
-						</a>
 					</div>
 				</div>
 			</div>

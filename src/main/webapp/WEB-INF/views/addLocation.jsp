@@ -130,9 +130,7 @@
     $(function(){
 
         $('#submitForm').on('click', function(){
-            if(Submit()) {
-                $('#formData').submit();
-            }
+           Submit();
         });
     });
 </script>
@@ -165,7 +163,39 @@
             return false;
         }
 
-        return true;
+        var locationName=$("#locationName").val();
+        var minLcationX=$("#minLcationX").val();
+        var maxLcationX=$("#maxLcationX").val();
+        var minLcationY=$("#minLcationY").val();
+        var maxLcationY=$("#maxLcationY").val();
+
+
+        $.ajax({
+            // url: _ctx + '/question/add.do',   http://47.100.116.100/network/question/add.do
+            url:'./add.do',
+            type: 'POST',
+            dataType: "JSON",
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            data: {locationName: locationName,minLcationX: minLcationX,maxLcationX: maxLcationX,minLcationY: minLcationY,maxLcationY: maxLcationY},
+            success: function (data) {
+                console.log("success")
+                console.log(data)
+                if (data.message == "success") {
+                    alert("添加成功");
+                    location.href ="./locationList.do";
+                } else {
+                    //alert(info.msg)
+                }
+
+
+            },
+            error: function (data) {
+                console.log("why")
+                console.log(data)
+                console.error()
+                alert('fail: 添加失败');
+            }
+        });
 
     }
 

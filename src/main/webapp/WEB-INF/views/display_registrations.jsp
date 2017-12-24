@@ -76,7 +76,7 @@ embed, object {
 					<div class="weui-cells">
 						<c:forEach var="registration" items="${registrationList}">
 							<a class="weui-cell weui-cell_access"
-								href="./display_registration_records.do?registrationId=${registration.rId }">
+								href="../manage/display_registration_records.do?registrationId=${registration.rId }">
 								<div class="weui-cell__bd">
 									<p>
 										<fmt:formatDate value="${registration.sTime}" type="date" />日   <c:out value="${registration.cName}" />点名
