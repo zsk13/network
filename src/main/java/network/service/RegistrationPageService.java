@@ -4,5 +4,5 @@ import com.github.pagehelper.PageInfo;
 import network.model.Registration;
 
 public interface RegistrationPageService {
-    PageInfo<Registration> queryByPage(Integer pageNo, Integer pageSize);
+    PageInfo<Registration> queryByPage(Long tId,Integer pageNo, Integer pageSize);
 }

@@ -115,8 +115,11 @@
     SELECT 1 FROM course_student cs WHERE cs.s_id=#{uId,jdbcType=BIGINT} AND cs.c_id=r.c_id)
 
   </select>
-
-
+  <select id="selectByTeacher" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM registration r WHERE r.c_id IN (SELECT c_id FROM course WHERE t_id = #{tId,jdbcType=BIGINT})
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from registration
     where r_id = #{rId,jdbcType=BIGINT}

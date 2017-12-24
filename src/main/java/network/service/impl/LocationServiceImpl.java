@@ -21,4 +21,7 @@ public class LocationServiceImpl implements LocationService{
 	public List<Location> getAll() {
 		return locationDao.getAll();
 	}
+    public void delete(Long lId){
+        locationDao.deleteByPrimaryKey(lId);
+    }
 }

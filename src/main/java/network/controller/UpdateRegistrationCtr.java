@@ -45,7 +45,8 @@ public class UpdateRegistrationCtr {
 
     @RequestMapping(value = "/display_registrations.do")
     public ModelAndView displayRegistrations(Integer registrationId,Integer pageNo,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PageInfo<Registration> page = registrationPageService.queryByPage(pageNo,10);
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        PageInfo<Registration> page = registrationPageService.queryByPage(teacher.gettId(),pageNo,10);
         //List<Registration> list1 = registrationService.getAll();
         ModelAndView mv = new ModelAndView("display_registrations");
         System.out.println("size:"+page.getList().size());
