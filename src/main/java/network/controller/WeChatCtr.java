@@ -39,7 +39,8 @@ public class WeChatCtr {
     
     @Autowired
     private FollowService followService;
-    
+    @Autowired
+    private UsersService usersService;
     @RequestMapping(value = "validate", method = {RequestMethod.GET})
     public void validate(HttpServletRequest request,HttpServletResponse response) throws IOException {
         try {  
@@ -93,16 +94,15 @@ public class WeChatCtr {
                 }
                 questionService.dealCommitQuestion(map,out);
                 return;
-            }else if (msgType.equals(WechatMessageUtil.MESSAGE_EVENT)) {  
+            }else if (msgType.equals(WechatMessageUtil.MESSAGE_EVENT)) {
                 // 事件KEY值，与创建自定义菜单时指定的KEY值对应  
                 
                 String eventKey = map.get("EventKey");  
                 String respContent = "默认";
-                if (eventKey.equals("11")) {
-
-                    respContent = "签到菜单项被点击！";
-
-                } else if (eventKey.equals("12")) {  
+                if (eventKey.equals("12")) {
+                    usersService.deleteByOpenId(fromUserName);
+                    respContent = "解除绑定成功！";
+                } else if (eventKey.equals("11")) {
                     questionService.dealGetQuestion(map,out);
                     return;
                 } 

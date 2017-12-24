@@ -1,11 +1,9 @@
 package network.controller;
 
-import network.model.Course;
-import network.model.Location;
-import network.model.Registration;
-import network.model.Rollcall;
-import network.model.Teacher;
+import com.github.pagehelper.PageInfo;
+import network.model.*;
 import network.service.LocationService;
+import network.service.RegistrationPageService;
 import network.service.RegistrationService;
 import network.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,28 +36,31 @@ public class UpdateRegistrationCtr {
     private RollcallService rollCallService;
     @Autowired
     private LocationService locationService;
-    
-    
-    
+    @Autowired
+    private RegistrationPageService registrationPageService;
+
+
     @RequestMapping(value = "/display_registrations.do")
-    public ModelAndView displayRegistrations(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println("into displayregistrations");
-    	List<Registration> list1 = registrationService.getAll();
-    	ModelAndView mav = new ModelAndView("display_registrations");
-    	mav.addObject("registrationList",list1);
-    	return mav;
+    public ModelAndView displayRegistrations(Integer registrationId,Integer pageNo,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        PageInfo<Registration> page = registrationPageService.queryByPage(teacher.gettId(),pageNo,10);
+        //List<Registration> list1 = registrationService.getAll();
+        ModelAndView mv = new ModelAndView("display_registrations");
+        System.out.println("size:"+page.getList().size());
+        mv.addObject("registrationList",page.getList());
+        mv.addObject("totalPage",page.getPages());
+        mv.addObject("currentPage",page.getPageNum());
+        mv.addObject("registrationId",registrationId);
+        return mv;
     }
-    
     @RequestMapping(value = "/display_registration_records.do")
     public ModelAndView displayRegistrationInDetail(HttpServletRequest request, HttpServletResponse response) {
-    	System.out.println("Here is DRID");
+        ModelAndView mv = new ModelAndView("display_registration_records");
     	Long rid = Long.parseLong(request.getParameter("registrationId"));
-    	System.out.println(rid);
-    	List<Rollcall> list = rollCallService.getAll();
-    	for(int i = 0;i<list.size();i++) {
-    		System.out.println(list.get(i).getuId());
-    	}
-    	return null;
+    	List<RollcallExport> list = rollCallService.getRegistration(rid);
+    	mv.addObject("rollcallDisplayList",list);
+    	mv.addObject("rId",rid);
+    	return mv;
     }
     
     @RequestMapping(value = "/start_add.do")
@@ -105,7 +106,7 @@ public class UpdateRegistrationCtr {
         Registration registration = new Registration();
         String classId = req.getParameter("class_id");
         String className = req.getParameter("class_name");
-        className = new String(className.getBytes(),"UTF-8");
+        className = new String(className.getBytes("ISO-8859-1"),"UTF-8");
         String locationId = req.getParameter("location_id");
         String sTime = req.getParameter("sTime");
         String eTime = req.getParameter("eTime");

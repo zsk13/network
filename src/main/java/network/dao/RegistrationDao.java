@@ -39,4 +39,6 @@ public interface RegistrationDao {
 
     Registration checkIsSelected(@Param("rId") Long rId,@Param("uId") Long uId);
 
+    List<Registration> selectByTeacher(@Param("tId") Long tId);
+
 }

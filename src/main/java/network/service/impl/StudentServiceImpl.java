@@ -12,7 +12,11 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private UsersDao usersDao;
 
-    public void addStudent(Users users) {
+    public int addStudent(Users users) {
+        Users u = usersDao.selectByOpenId(users.getuOpenId());
+        if (u != null)
+            return 2;
         usersDao.insert(users);
+        return 1;
     }
 }

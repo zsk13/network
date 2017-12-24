@@ -11,4 +11,6 @@ public interface UsersService {
 
     Users findUserById(Long userId);
 
+    void deleteByOpenId(String openId);
+
 }

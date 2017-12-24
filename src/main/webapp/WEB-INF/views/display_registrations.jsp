@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ page import="java.util.List"%>
 <%@ page import="network.model.Registration"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -74,48 +76,29 @@ embed, object {
 					<div class="weui-cells">
 						<c:forEach var="registration" items="${registrationList}">
 							<a class="weui-cell weui-cell_access"
-								href="./display_registration_records.do?registrationId=${registration.rId }">
+								href="../manage/display_registration_records.do?registrationId=${registration.rId }">
 								<div class="weui-cell__bd">
 									<p>
-										<c:out value="${registration.name}" />
+										<fmt:formatDate value="${registration.sTime}" type="date" />日   <c:out value="${registration.cName}" />点名
+
 									</p>
-								</div>
-								<div class="weui-cell__ft">
-									点名开始时间：
-									<c:out value="${registration.sTime}" />
 								</div>
 							</a>
 
 						</c:forEach>
 					</div>
 
+					<div class="button-sp-area">
 
+						<a href="./display_registrations.do?pageNo=${currentPage-1}" class="weui-btn weui-btn_mini weui-btn_primary">上一页</a>
+						<a href="./display_registrations.do?pageNo=${currentPage+1}" class="weui-btn weui-btn_mini weui-btn_primary">下一页</a>
+						<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">共${totalPage}页，当前第${currentPage}页</a>
+
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
-
-
-	<table border="1">
-		<tr>
-			<th colspan=2>点名列表</th>
-		</tr>
-
-		<tr>
-			<td>点名名称</td>
-			<td>点名开始时间</td>
-		</tr>
-
-		<c:forEach var="registration" items="${registrationList}">
-			<tr>
-				<td><a
-					href="./display_registration_records.do?registrationId=${registration.rId }">
-						<c:out value="${registration.name}" />
-				</a></td>
-				<td><c:out value="${registration.sTime}" /></td>
-			</tr>
-
-		</c:forEach>
-	</table>
 </body>
 </html>
