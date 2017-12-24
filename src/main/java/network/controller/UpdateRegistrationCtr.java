@@ -1,8 +1,10 @@
 package network.controller;
 
 import com.github.pagehelper.PageInfo;
+import network.model.Course;
 import network.model.Registration;
 import network.model.Rollcall;
+import network.model.Teacher;
 import network.service.RegistrationPageService;
 import network.service.RegistrationService;
 import network.service.RollcallService;
@@ -21,6 +23,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "manage")
@@ -59,9 +62,20 @@ public class UpdateRegistrationCtr {
     }
     
     @RequestMapping(value = "/start_add.do")
-    public String add(Registration registration) {
-        return "start_a_registration";
-
+    public ModelAndView add(HttpServletRequest request) {
+    	ModelAndView mav = new ModelAndView("start_a_registration");
+    	HttpSession session = request.getSession();
+    	Teacher teacher = (Teacher) session.getAttribute("teacher");
+    	
+    	List<Course> courseList1 = null;
+    	if(teacher !=null && teacher.gettId()!=0) {
+    		courseList1 = registrationService.getValidCoursesByTeacherId(teacher.gettId());
+    	}else{
+    		courseList1 = registrationService.getAllCourses();
+    	}
+    	mav.addObject("clist",courseList1);
+    	
+        return mav;
     }
     
     @RequestMapping(value = "/welcome.do")
