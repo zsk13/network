@@ -110,7 +110,7 @@ public class UpdateRegistrationCtr {
         Registration registration = new Registration();
         String classId = req.getParameter("class_id");
         String className = req.getParameter("class_name");
-        className = new String(className.getBytes(),"UTF-8");
+        className = new String(className.getBytes("ISO-8859-1"),"UTF-8");
         String locationId = req.getParameter("location_id");
         String sTime = req.getParameter("sTime");
         String eTime = req.getParameter("eTime");
