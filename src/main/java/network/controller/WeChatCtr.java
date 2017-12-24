@@ -41,7 +41,6 @@ public class WeChatCtr {
     private FollowService followService;
     @Autowired
     private UsersService usersService;
-    
     @RequestMapping(value = "validate", method = {RequestMethod.GET})
     public void validate(HttpServletRequest request,HttpServletResponse response) throws IOException {
         try {  
