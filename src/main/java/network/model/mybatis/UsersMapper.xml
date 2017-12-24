@@ -96,6 +96,21 @@
     from users
     where u_open_id = #{uOpenId,jdbcType=VARCHAR}
   </select>
+  <select id="selectAllStudent" resultMap="BaseResultMap">
+     select
+    <include refid="Base_Column_List" />
+    from users
+    where u_id in(
+ select cs.s_id from registration r,course_student cs where r.r_id=#{rId,jdbcType=BIGINT} and cs.c_id = r.c_id
+ )
+  </select>
+  <select id="selectAllRegistration" resultMap="BaseResultMap">
+     select
+    <include refid="Base_Column_List" />
+    from users where u_id in(
+ select u_id from rollcall where r_id = #{rId,jdbcType=BIGINT})
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from users
     where u_id = #{uId,jdbcType=BIGINT}

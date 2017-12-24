@@ -29,4 +29,8 @@ public interface UsersDao {
     int updateByPrimaryKeySelective(Users record);
 
     int updateByPrimaryKey(Users record);
+
+    List<Users> selectAllStudent(@Param("rId") Long rId);
+
+    List<Users> selectAllRegistration(@Param("rId") Long rId);
 }
