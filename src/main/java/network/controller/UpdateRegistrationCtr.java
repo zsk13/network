@@ -1,11 +1,11 @@
 package network.controller;
 
-import com.github.pagehelper.PageInfo;
 import network.model.Course;
+import network.model.Location;
 import network.model.Registration;
 import network.model.Rollcall;
 import network.model.Teacher;
-import network.service.RegistrationPageService;
+import network.service.LocationService;
 import network.service.RegistrationService;
 import network.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,22 +37,22 @@ public class UpdateRegistrationCtr {
     @Autowired
     private RollcallService rollCallService;
     @Autowired
-    private RegistrationPageService registrationPageService;
+    private LocationService locationService;
+    
+    
+    
     @RequestMapping(value = "/display_registrations.do")
-    public ModelAndView displayRegistrations(Integer registrationId,Integer pageNo,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PageInfo<Registration> page = registrationPageService.queryByPage(pageNo,10);
-        //List<Registration> list1 = registrationService.getAll();
-    	ModelAndView mv = new ModelAndView("display_registrations");
-    	System.out.println("size:"+page.getList().size());
-    	mv.addObject("registrationList",page.getList());
-    	mv.addObject("totalPage",page.getPages());
-    	mv.addObject("currentPage",page.getPageNum());
-    	mv.addObject("registrationId",registrationId);
-    	return mv;
+    public ModelAndView displayRegistrations(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	System.out.println("into displayregistrations");
+    	List<Registration> list1 = registrationService.getAll();
+    	ModelAndView mav = new ModelAndView("display_registrations");
+    	mav.addObject("registrationList",list1);
+    	return mav;
     }
     
     @RequestMapping(value = "/display_registration_records.do")
     public ModelAndView displayRegistrationInDetail(HttpServletRequest request, HttpServletResponse response) {
+    	System.out.println("Here is DRID");
     	Long rid = Long.parseLong(request.getParameter("registrationId"));
     	System.out.println(rid);
     	List<Rollcall> list = rollCallService.getAll();
@@ -73,8 +74,11 @@ public class UpdateRegistrationCtr {
     	}else{
     		courseList1 = registrationService.getAllCourses();
     	}
-    	mav.addObject("clist",courseList1);
+    	List<Location> locationList1 = locationService.getAll();
     	
+    	
+    	mav.addObject("clist",courseList1);
+    	mav.addObject("locationList",locationList1);
         return mav;
     }
     
@@ -87,9 +91,6 @@ public class UpdateRegistrationCtr {
     @RequestMapping(value = "/add.do")
     public String asdf(HttpServletRequest req) throws ParseException, UnsupportedEncodingException {
     	
-    	//req.setCharacterEncoding("utf8");
-    	//req.set
-    	/**
     	Enumeration<String> em = req.getParameterNames();
         while(em.hasMoreElements()) {
         	String name1 = em.nextElement();
@@ -98,8 +99,33 @@ public class UpdateRegistrationCtr {
         	String value2 = new String(b, "UTF-8");
         	System.out.println(name1+"\t"+value1+"\t"+value2);
         }
-		*/
-    	if(req != null && req.getParameter("name") !=null &&  req.getParameter("name").length() >0) {
+		
+        
+        
+        Registration registration = new Registration();
+        String classId = req.getParameter("class_id");
+        String className = req.getParameter("class_name");
+        className = new String(className.getBytes(),"UTF-8");
+        String locationId = req.getParameter("location_id");
+        String sTime = req.getParameter("sTime");
+        String eTime = req.getParameter("eTime");
+        
+        sTime = sTime.replaceAll("T", " ");
+        eTime = eTime.replaceAll("T", " ");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date startTime = sdf.parse(sTime);
+        Date endTime = sdf.parse(eTime);
+        
+        
+        registration.setcId(Long.parseLong(classId));
+        registration.setcName(className);
+        registration.setlId(Long.parseLong(locationId));
+        registration.setsTime(startTime);
+        registration.seteTime(endTime);
+        
+        registrationService.add(registration);
+        
+    	/**
         Registration reg2 = new Registration();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
     	String name = req.getParameter("name");
@@ -117,7 +143,7 @@ public class UpdateRegistrationCtr {
         reg2.seteTime(endTime);
         reg2.setlId(locationId);
         registrationService.add(reg2);
-    	}
+    	*/
         return "teacher_login";
     }
 

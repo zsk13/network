@@ -9,11 +9,13 @@
 
 <script>
 	function makeStringOutOfGradeEducationalBackgroundStudyClassAndRollCallCount(){
-		var grade = document.getElementById("grade").value;
-		var educational_background = document.getElementById("educational_background").value;
-		var study_class = document.getElementById("study_class").value;
-		var count = document.getElementById("count").value;
-		document.getElementById("makeString1").value=grade+"级"+educational_background+"生"+study_class+"班第"+count+"次点名";
+
+		var obj = document.getElementById("class_name1");
+		var cId = obj.value;
+
+		var obj2 = document.getElementById("aCourseWhoseId="+cId);
+		var cName2 = obj2.innerHTML;
+		document.getElementById("makeString1").value=cName2;
 	}
 	function formReset(){
 		document.getElementById("form1").reset();
@@ -91,20 +93,20 @@ embed, object {
 							<label class="weui-label">课程名称：</label>
 						</div>
 						<div class="weui-cell__bd">
-							<select class="weui-select" id="class_name1">
+							<select class="weui-select" id="class_name1" name = "class_id">
 								<c:forEach items="${clist }" var="course">
-									<option value="${ course.cId}">${course.cName}</option>
+									<option id = "aCourseWhoseId=${course.cId }" value="${ course.cId}">${course.cName}</option>
 								</c:forEach>
 							</select>
 						</div>
 					</div>
 					<div class="weui-cell weui-cell_select weui-cell_select-after">
 						<div class="weui-cell__hd">
-							<label for="" class="weui-label">位置:</label>
+							<label for="" class="weui-label">上课地点:</label>
 						</div>
 						<div class="weui-cell__bd">
 							<select class="weui-select" name="location_id">
-								<c:forEach items="locationList" var="location1">
+								<c:forEach items="${locationList}" var="location1">
 									<option value="${ location1.lId}">${location1.locationName}</option>
 								</c:forEach>
 							</select>
@@ -115,7 +117,7 @@ embed, object {
 							<label for="" class="weui-label">开始时间：</label>
 						</div>
 						<div class="weui-cell__bd">
-							<input class="weui-input" type="datetime-local" value=""
+							<input id="registration_start_time" class="weui-input" type="datetime-local" value=""
 								placeholder="" name="sTime">
 						</div>
 					</div>
@@ -124,8 +126,8 @@ embed, object {
 							<label for="" class="weui-label">结束时间：</label>
 						</div>
 						<div class="weui-cell__bd">
-							<input class="weui-input" type="datetime-local" value=""
-								placeholder="" name="eTime">
+							<input id="registration_end_time" class="weui-input" type="datetime-local" value=""
+								placeholder="" name="eTime" onblur="makeStringOutOfGradeEducationalBackgroundStudyClassAndRollCallCount()">
 						</div>
 					</div>
 					<div class="weui-btn-area">
@@ -134,17 +136,51 @@ embed, object {
 					</div>
 				</div>
 			</div>
-			<input type="text" id="makeString1" name="name" value=""
-			hidden="hidden"></input>
+			<input type="text" id="makeString1" name="class_name" value="" hidden="hidden"/>
 			</form>
 		</div>
 	</div>
 	
 	<script type="text/javascript">
     $(function(){
-
         $('#showTooltips').on('click', function(){
-        	 $('#form1').submit();
+        	var s_time_dom = document.getElementById("registration_start_time");
+			var s_time = s_time_dom.value;
+			//alert("asdf"+s_time.replace(/T/," "));
+			if(s_time.length<5){
+				alert("请将开始时间填完整");
+				return;
+			}
+			var s_date = s_time.substring(0,10);
+			var s_hour_min = s_time.substring(11,16);
+			var s_datetime_string = s_date+" "+s_hour_min+":00";
+			var start_date = new Date(s_datetime_string.replace(/-/,"/"));
+			var start_timestamp = Date.parse(start_date);
+			
+			var e_time_dom = document.getElementById("registration_end_time");
+			var e_time = e_time_dom.value;
+			if(e_time.length<5){
+				alert("请将结束时间填完整");
+				return;
+			}
+			var e_date = e_time.substring(0,10);
+			var e_hour_min = e_time.substring(11,16);
+			var e_datetime_string = e_date+" "+e_hour_min+":00"
+			var end_date = new Date(e_datetime_string.replace(/-/,"/"));
+			var end_timestamp = Date.parse(end_date);
+			
+			var now = new Date();
+			var now_timestamp = Date.parse(now);
+			
+			if(start_timestamp>=end_timestamp){
+				alert("结束时间需要在开始时间之后！");
+				return;
+			}
+			if (now_timestamp>end_timestamp){
+				alert("结束时间需要在当前时间之后！");
+				return;
+			}
+        	$('#form1').submit();
         });
     });
 </script>
