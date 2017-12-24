@@ -147,25 +147,24 @@ embed, object {
         	var s_time_dom = document.getElementById("registration_start_time");
 			var s_time = s_time_dom.value;
 			//alert("asdf"+s_time.replace(/T/," "));
-			var s_date = s_time.substring(0,10);
-			var s_hour_min = s_time.substring(11,16);
 			if(s_time.length<5){
 				alert("请将开始时间填完整");
 				return;
 			}
-			
+			var s_date = s_time.substring(0,10);
+			var s_hour_min = s_time.substring(11,16);
 			var s_datetime_string = s_date+" "+s_hour_min+":00";
 			var start_date = new Date(s_datetime_string.replace(/-/,"/"));
 			var start_timestamp = Date.parse(start_date);
 			
 			var e_time_dom = document.getElementById("registration_end_time");
 			var e_time = e_time_dom.value;
-			var e_date = e_time.substring(0,10);
-			var e_hour_min = e_time.substring(11,16);
 			if(e_time.length<5){
 				alert("请将结束时间填完整");
 				return;
 			}
+			var e_date = e_time.substring(0,10);
+			var e_hour_min = e_time.substring(11,16);
 			var e_datetime_string = e_date+" "+e_hour_min+":00"
 			var end_date = new Date(e_datetime_string.replace(/-/,"/"));
 			var end_timestamp = Date.parse(end_date);
