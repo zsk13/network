@@ -55,6 +55,7 @@
             <mvc:exclude-mapping path="/manage/check.do" />
             <mvc:exclude-mapping path="/adminLogin/check.do"/>
             <mvc:exclude-mapping path="/adminLogin/adminLogin.do"/>
+            <mvc:exclude-mapping path="/student/**"/>
 
 
             <bean class="network.interceptor.LoginHandleInterceptor"></bean>
