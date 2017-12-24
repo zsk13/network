@@ -36,31 +36,40 @@ public class StudentCtr {
         String CODE = request.getParameter("code");
         String openid = null;
         try {
-            if(CODE != null)
+            if (CODE != null)
                 openid = OpenIdUtil.getOpenId(URLEncoder.encode(CODE, "UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
         ModelAndView mv = new ModelAndView();
         mv.setViewName("addStudent");
-        mv.addObject("openId",openid);
+        mv.addObject("openId", openid);
         return mv;
     }
 
     @RequestMapping(value = "/add.do")
-    public @ResponseBody Map<String, Object> add(HttpServletRequest request, HttpServletResponse response) {
+    public @ResponseBody
+    Map<String, Object> add(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
         String sno = request.getParameter("sno");
         String name = request.getParameter("sName");
         String openId = request.getParameter("openId");
-
+        String className = request.getParameter("className");
+        int code;
+        if (openId == null || openId.trim().length() == 0) {
+            code = 3;
+            map.put("code", code);
+            return map;
+        }
         Users users = new Users();
         users.setSno(sno);
         users.setName(name);
         users.setuOpenId(openId);
-        studentService.addStudent(users);
+        users.setClassname(className);
+        code = studentService.addStudent(users);
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("message", "success");
+        map.put("code", code);
         return map;
     }
 }
