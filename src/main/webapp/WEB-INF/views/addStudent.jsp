@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<meta http-equiv=Content-Type content="text/html;charset=utf-8">
 <html>
 <head>
     <title>学生注册</title>
@@ -47,4 +49,6 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/addStudent.js"></script>
 </html>
