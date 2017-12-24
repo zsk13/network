@@ -39,6 +39,8 @@ public class WeChatCtr {
     
     @Autowired
     private FollowService followService;
+    @Autowired
+    private UsersService usersService;
     
     @RequestMapping(value = "validate", method = {RequestMethod.GET})
     public void validate(HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -99,9 +101,8 @@ public class WeChatCtr {
                 String eventKey = map.get("EventKey");  
                 String respContent = "默认";
                 if (eventKey.equals("11")) {
-
-                    respContent = "签到菜单项被点击！";
-
+                 usersService.deleteByOpenId(fromUserName);
+                    respContent = "解除绑定成功！";
                 } else if (eventKey.equals("12")) {  
                     questionService.dealGetQuestion(map,out);
                     return;

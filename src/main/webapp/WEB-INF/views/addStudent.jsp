@@ -42,6 +42,7 @@
         </form>
 
         <div class="weui-btn-area">
+            <input type="hidden" name="openId" value="${openId}"/>
             <a href="javascript:;" class="weui-btn weui-btn_primary" id="btnSubmit">注册</a>
         </div>
     </div>

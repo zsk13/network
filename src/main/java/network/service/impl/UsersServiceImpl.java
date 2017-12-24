@@ -2,6 +2,7 @@ package network.service.impl;
 
 import network.dao.UsersDao;
 import network.model.Users;
+import network.model.UsersExample;
 import network.service.UsersService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,4 +31,12 @@ public class UsersServiceImpl implements UsersService {
         Users user = usersDao.selectByPrimaryKey(userId);
         return user;
     }
+    public void deleteByOpenId(String openId){
+        UsersExample usersExample = new UsersExample();
+        UsersExample.Criteria criteria = usersExample.createCriteria();
+        criteria.andUOpenIdEqualTo(openId);
+        usersDao.deleteByExample(usersExample);
+    }
+
+
 }
