@@ -72,6 +72,7 @@
 <script type="text/javascript">
     $(function () {
         var $androidDialog2 = $('#androidDialog2');
+        var cId;
 
         $('.weui-cell_access').on('click', function () {
             var openId = $("#openId").val();
@@ -81,7 +82,7 @@
             }
             $androidDialog2.fadeIn(200);
 
-            var cId = $(this).attr('id');
+            cId = $(this).attr('id');
 
         });
         $('#btnSubmit').on("click", function () {

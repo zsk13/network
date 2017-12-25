@@ -64,8 +64,6 @@ public class CourseStudentCtr {
         Map<String, Object> map = new HashMap<String, Object>();
 
         Date first = new Date();
-//        DateFormat formatfirst = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String createtime = formatfirst.format(first);
 
         String cId = request.getParameter("cId");
         String cPassword = request.getParameter("cPassword");
