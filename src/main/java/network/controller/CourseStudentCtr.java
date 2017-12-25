@@ -75,7 +75,6 @@ public class CourseStudentCtr {
 
         Users users = usersService.findByOpneId(openId);
 
-
         if (!courseStudentService.checkPassword(Long.valueOf(cId), cPassword)) {
             code = 2;
             map.put("code", code);
