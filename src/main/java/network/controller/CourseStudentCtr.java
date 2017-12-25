@@ -1,8 +1,11 @@
 package network.controller;
 
+import network.common.OpenIdUtil;
 import network.model.Course;
 import network.model.CourseStudent;
+import network.model.Users;
 import network.service.CourseStudentService;
+import network.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +28,8 @@ public class CourseStudentCtr {
 
     @Autowired
     private CourseStudentService courseStudentService;
+    @Autowired
+    private UsersService usersService;
 
     @RequestMapping(value = "/redirect.do")
     public String wechatRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
@@ -35,10 +41,20 @@ public class CourseStudentCtr {
 
     @RequestMapping(value = "/addCourseStudent.do")
     public ModelAndView CourseStudentAddView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //用code换取openid
+        String CODE = request.getParameter("code");
+        String openid = null;
+        try {
+            if (CODE != null)
+                openid = OpenIdUtil.getOpenId(URLEncoder.encode(CODE, "UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ModelAndView mv = new ModelAndView();
         mv.setViewName("selectCourse");
         List<Course> cList = courseStudentService.getAllSelectiveCourses();
         mv.addObject("cList", cList);
+        mv.addObject("openId", openid);
         return mv;
     }
 
@@ -53,8 +69,18 @@ public class CourseStudentCtr {
 
         String cId = request.getParameter("cId");
         String cPassword = request.getParameter("cPassword");
+        String openId = request.getParameter("openId");
 
         int code;
+
+        if(openId == null || openId.trim().length()<=0){
+            code = 3;
+            map.put("code", code);
+            return map;
+
+        }
+        Users users = usersService.findByOpneId(openId);
+
 
         if (!courseStudentService.checkPassword(Long.valueOf(cId), cPassword)) {
             code = 2;
@@ -65,7 +91,7 @@ public class CourseStudentCtr {
         CourseStudent courseStudent = new CourseStudent();
         courseStudent.setcId(Long.valueOf(cId));
         courseStudent.setsTime(first);
-//        courseStudent.setsId();
+        courseStudent.setsId(users.getuId());
         courseStudentService.addCourseStudent(courseStudent);
         code = 1;
         map.put("code", code);

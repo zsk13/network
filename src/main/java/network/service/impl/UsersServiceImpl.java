@@ -32,6 +32,9 @@ public class UsersServiceImpl implements UsersService {
         Users user = usersDao.selectByPrimaryKey(userId);
         return user;
     }
+    public  Users findByOpneId(String openId){
+        return usersDao.selectByOpenId(openId);
+    }
     public void deleteByOpenId(String openId){
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();

@@ -31,8 +31,7 @@
 							<p>查看/新增 签到地点</p>
 						</div>
 						<div class="weui-cell__ft"></div>
-					</a>
-						<a class="weui-cell weui-cell_access" href="../question/addquestion.do">
+					</a><a class="weui-cell weui-cell_access" href="../question/addquestion.do">
 						<div class="weui-cell__bd">
 							<p>发布问题</p>
 						</div>

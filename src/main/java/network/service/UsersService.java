@@ -13,4 +13,7 @@ public interface UsersService {
 
     void deleteByOpenId(String openId);
 
-}
+    Users findByOpneId(String openId);
+
+
+    }

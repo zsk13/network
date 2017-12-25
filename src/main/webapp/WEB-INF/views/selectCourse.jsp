@@ -61,6 +61,7 @@
                     <p style="color: red;">密码错误！</p>
                 </div>
                 <div class="weui-dialog__ft">
+                    <input type="hidden" name="openId" id="openId" value="${openId}"/>
                     <a href="./add.do" class="weui-dialog__btn weui-dialog__btn_primary" id="btnSubmit">确定</a>
                 </div>
 
@@ -80,13 +81,14 @@
 
             $('#btnSubmit').on("click", function () {
                 var cPassword = $('cPassword').val();
+                var openId=$("#openId").val();
 
                 $.ajax({
                     url:'./add.do',
                     type: 'POST',
                     dataType: "JSON",
                     contentType: "application/x-www-form-urlencoded;charset=utf-8",
-                    data: {cId: cId, cPassword: cPassword},
+                    data: {cId: cId, cPassword: cPassword,openId:openId},
                     success: function (data) {
                         console.log("success")
                         console.log(data)
@@ -97,6 +99,9 @@
                         if (data.code == 2){
                             var error = document.getElementById("errorPassword");
                             error.style.display = "";
+                        }
+                        if (data.code == 2){
+                            alert("好像出了点问题，请稍后重试！")
                         }
                     },
                     error: function (data) {
