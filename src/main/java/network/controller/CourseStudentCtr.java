@@ -73,12 +73,6 @@ public class CourseStudentCtr {
 
         int code;
 
-        if(openId == null || openId.trim().length()<=0){
-            code = 3;
-            map.put("code", code);
-            return map;
-
-        }
         Users users = usersService.findByOpneId(openId);
 
 
