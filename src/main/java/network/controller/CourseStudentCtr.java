@@ -45,7 +45,6 @@ public class CourseStudentCtr {
     public ModelAndView CourseStudentAddView(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Integer type = Integer.valueOf(request.getParameter("type"));
         String openid = (String) request.getSession().getAttribute("openId");
-        openid = request.getParameter("openid");
         if (openid == null || openid.trim().length() <= 0) {
 
             //用code换取openid

@@ -34,10 +34,10 @@
             <input type="hidden" name="openId" id="openId" value="${openId}"/>
             <c:forEach items="${cList}" var="c">
                 <a class="weui-cell weui-cell_access" href="javascript:;" id="${c.cId}" name="${c.cId}">
-                <div class="weui-cell__bd">
-                    <p>${c.cName}</p>
-                </div>
-                <div class="weui-cell__ft">点击选课</div>
+                    <div class="weui-cell__bd">
+                        <p>${c.cName}</p>
+                    </div>
+                    <div class="weui-cell__ft">点击选课</div>
                 </a>
 
             </c:forEach>
@@ -72,7 +72,7 @@
 </body>
 <script type="text/javascript">
     $(function () {
-        $('#dialogs').on('click', '.weui-dialog__btn_default', function(){
+        $('#dialogs').on('click', '.weui-dialog__btn_default', function () {
             $(this).parents('.js_dialog').fadeOut(200);
         });
 
@@ -81,10 +81,10 @@
 
         $('.weui-cell_access').on('click', function () {
             var openId = $("#openId").val();
-           　　// if(openId ==null || openId.trim().length <=0){
-              //  alert("好像出了点问题，请稍后重试！");
-              //  return false;
-            //}
+            if (openId == null || openId.trim().length <= 0) {
+                alert("好像出了点问题，请稍后重试！");
+                return false;
+            }
             $androidDialog2.fadeIn(200);
 
             cId = $(this).attr('id');
@@ -106,7 +106,7 @@
                     if (data.code == 1) {
                         alert("选课成功！");
                         $androidDialog2.fadeOut(200);
-                        location.href ="./addCourseStudent.do?type=1";
+                        location.href = "./addCourseStudent.do?type=1";
                     }
                     if (data.code == 2) {
                         var error = document.getElementById("errorPassword");

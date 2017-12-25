@@ -66,7 +66,7 @@
 </body>
 <script type="text/javascript">
     $(function () {
-        $('#dialogs').on('click', '.weui-dialog__btn_default', function(){
+        $('#dialogs').on('click', '.weui-dialog__btn_default', function () {
             $(this).parents('.js_dialog').fadeOut(200);
         });
 
@@ -75,10 +75,10 @@
 
         $('.weui-cell_access').on('click', function () {
             var openId = $("#openId").val();
-            // if(openId ==null || openId.trim().length <=0){
-            //  alert("好像出了点问题，请稍后重试！");
-            //  return false;
-            //}
+            if (openId == null || openId.trim().length <= 0) {
+                alert("好像出了点问题，请稍后重试！");
+                return false;
+            }
             $androidDialog2.fadeIn(200);
 
             cId = $(this).attr('id');
@@ -99,7 +99,7 @@
                     if (data.code == 1) {
                         alert("退课成功！");
                         $androidDialog2.fadeOut(200);
-                        location.href ="./addCourseStudent.do?type=2";
+                        location.href = "./addCourseStudent.do?type=2";
                     }
                 },
                 error: function (data) {
