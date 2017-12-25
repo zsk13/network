@@ -11,4 +11,10 @@ public interface CourseStudentService {
     public boolean checkPassword(Long cId, String password);
 
     public int addCourseStudent(CourseStudent courseStudent);
+
+    public List<Course> getAllSelected(Long uId);
+
+    public List<Course> getAllNoSelected(Long uId);
+
+    public void delete(Long uId,Long cId);
 }

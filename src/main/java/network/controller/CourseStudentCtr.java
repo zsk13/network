@@ -15,12 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "course_student")
@@ -35,25 +30,51 @@ public class CourseStudentCtr {
     public String wechatRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=wx39b5d81dba20a59e&" +
-                "redirect_uri=http://47.100.116.100/network/course_student/addCourseStudent.do" +
+                "redirect_uri=http://47.100.116.100/network/course_student/addCourseStudent.do?type=1" +
+                "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+    }
+    @RequestMapping(value = "/quitRedirect.do")
+    public String quitRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=wx39b5d81dba20a59e&" +
+                "redirect_uri=http://47.100.116.100/network/course_student/addCourseStudent.do?type=2" +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
     }
 
     @RequestMapping(value = "/addCourseStudent.do")
     public ModelAndView CourseStudentAddView(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //用code换取openid
-        String CODE = request.getParameter("code");
-        String openid = null;
-        try {
-            if (CODE != null)
-                openid = OpenIdUtil.getOpenId(URLEncoder.encode(CODE, "UTF-8"));
-        } catch (Exception e) {
-            e.printStackTrace();
+        Integer type = Integer.valueOf(request.getParameter("type"));
+        String openid = (String) request.getSession().getAttribute("openId");
+        openid = request.getParameter("openid");
+        if (openid == null || openid.trim().length() <= 0) {
+
+            //用code换取openid
+            String CODE = request.getParameter("code");
+            try {
+                if (CODE != null)
+                    openid = OpenIdUtil.getOpenId(URLEncoder.encode(CODE, "UTF-8"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            request.getSession().setAttribute("openId", openid);
         }
+        Users users = usersService.findByOpneId(openid);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("selectCourse");
-        List<Course> cList = courseStudentService.getAllSelectiveCourses();
-        mv.addObject("cList", cList);
+        List<Course> list = new ArrayList<Course>();
+        if (type == 1) {
+            mv.setViewName("selectCourse");
+
+            if (users != null) {
+                list = courseStudentService.getAllNoSelected(users.getuId());
+            }
+            mv.addObject("cList", list);
+        } else {
+            mv.setViewName("quitCourse");
+            if (users != null)
+                list = courseStudentService.getAllSelected(users.getuId());
+            mv.addObject("cList", list);
+        }
+
         mv.addObject("openId", openid);
         return mv;
     }
@@ -61,6 +82,7 @@ public class CourseStudentCtr {
     @RequestMapping(value = "/add.do")
     public @ResponseBody
     Map<String, Object> add(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("into add！");
         Map<String, Object> map = new HashMap<String, Object>();
 
         Date first = new Date();
@@ -84,6 +106,23 @@ public class CourseStudentCtr {
         courseStudent.setsTime(first);
         courseStudent.setsId(users.getuId());
         courseStudentService.addCourseStudent(courseStudent);
+        code = 1;
+        map.put("code", code);
+        return map;
+    }
+
+    @RequestMapping(value = "/delete.do")
+    public @ResponseBody
+    Map<String, Object> delete(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        String cId = request.getParameter("cId");
+        String openId = request.getParameter("openId");
+
+        int code;
+        Users users = usersService.findByOpneId(openId);
+
+        courseStudentService.delete(users.getuId(), Long.valueOf(cId));
         code = 1;
         map.put("code", code);
         return map;

@@ -31,4 +31,9 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    List<Course> getAllSelected(@Param("uId") Long uId);
+
+    List<Course> getAllNoSelected(@Param("uId")Long uId);
+
 }

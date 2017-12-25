@@ -88,6 +88,17 @@
   	<include refid="Base_Column_List"/>
   	FROM course 
   </select>
+  <select id="getAllSelected" resultMap="BaseResultMap" >
+  SELECT
+  <include refid="Base_Column_List"/>
+  FROM course c where exists(select 1 from course_student cs where cs.s_id=#{uId, jdbcType=BIGINT} and cs.c_id = c.c_id) and c.c_state=1
+</select>
+  <select id="getAllNoSelected" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM course c where not exists(select 1 from course_student cs where cs.s_id=#{uId, jdbcType=BIGINT} and cs.c_id=c.c_id) and c_state=1
+  </select>
+
   <select id="getValidCoursesByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.Long">
   	SELECT 
   	<include refid="Base_Column_List"/>

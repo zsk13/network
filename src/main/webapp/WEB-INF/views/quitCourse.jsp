@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: 张康
-  Date: 2017/12/24
-  Time: 13:40
+  User: zhuhuihui
+  Date: 2017/12/25
+  Time: 下午10:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -34,10 +34,10 @@
             <input type="hidden" name="openId" id="openId" value="${openId}"/>
             <c:forEach items="${cList}" var="c">
                 <a class="weui-cell weui-cell_access" href="javascript:;" id="${c.cId}" name="${c.cId}">
-                <div class="weui-cell__bd">
-                    <p>${c.cName}</p>
-                </div>
-                <div class="weui-cell__ft">点击选课</div>
+                    <div class="weui-cell__bd">
+                        <p>${c.cName}</p>
+                    </div>
+                    <div class="weui-cell__ft">点击选课</div>
                 </a>
 
             </c:forEach>
@@ -50,14 +50,8 @@
             <div class="js_dialog" id="androidDialog2" style="display: none;">
                 <div class="weui-mask"></div>
                 <div class="weui-dialog weui-skin_android">
-                    <div class="weui-dialog__hd">
-                        <label class="weui-label">选课密码</label>
-                    </div>
                     <div class="weui-dialog__bd">
-                        <input class="weui-input" type="password" placeholder="请输入选课密码" id="cPassword"/>
-                    </div>
-                    <div class="weui-dialog__bd" style="display: none;" id="errorPassword">
-                        <p style="color: red;">密码错误！</p>
+                        <label class="weui-label">确认退课？</label>
                     </div>
                     <div class="weui-dialog__ft">
                         <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
@@ -81,9 +75,9 @@
 
         $('.weui-cell_access').on('click', function () {
             var openId = $("#openId").val();
-           　　// if(openId ==null || openId.trim().length <=0){
-              //  alert("好像出了点问题，请稍后重试！");
-              //  return false;
+            // if(openId ==null || openId.trim().length <=0){
+            //  alert("好像出了点问题，请稍后重试！");
+            //  return false;
             //}
             $androidDialog2.fadeIn(200);
 
@@ -91,33 +85,28 @@
 
         });
         $('#btnSubmit').on("click", function () {
-            var cPassword = $('#cPassword').val();
             var openId = $("#openId").val();
 
             $.ajax({
-                url: './add.do',
+                url: './delete.do',
                 type: 'POST',
                 dataType: "JSON",
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
-                data: {cId: cId, cPassword: cPassword, openId: openId},
+                data: {cId: cId, openId: openId},
                 success: function (data) {
                     console.log("success")
                     console.log(data)
                     if (data.code == 1) {
-                        alert("选课成功！");
+                        alert("退课成功！");
                         $androidDialog2.fadeOut(200);
-                        location.href ="./addCourseStudent.do?type=1";
-                    }
-                    if (data.code == 2) {
-                        var error = document.getElementById("errorPassword");
-                        error.style.display = "";
+                        location.href ="./addCourseStudent.do?type=2";
                     }
                 },
                 error: function (data) {
                     console.log("why")
                     console.log(data)
                     console.error()
-                    alert('fail: 选课失败，请稍后重试！');
+                    alert('fail: 退课失败，请稍后重试！');
                 }
             });
         });
