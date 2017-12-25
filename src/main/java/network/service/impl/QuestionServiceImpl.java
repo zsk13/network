@@ -4,17 +4,19 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import network.dao.QuestionMapper;
-import network.model.Question;
-import network.model.QuestionExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import network.common.wechatUtil.TextMessage;
 import network.common.wechatUtil.WechatMessageUtil;
 import network.dao.AnswerMapper;
+import network.dao.CourseMapper;
+import network.dao.QuestionMapper;
 import network.dao.UsersDao;
 import network.model.Answer;
+import network.model.Course;
+import network.model.Question;
+import network.model.QuestionExample;
 import network.model.Users;
 import network.service.QuestionService;
 
@@ -32,6 +34,9 @@ public class QuestionServiceImpl implements QuestionService{
     
     @Autowired
     UsersDao usersDao;
+    
+    @Autowired
+    CourseMapper courseMapper;
 
     public List<Question> getQuestion(){
         QuestionExample questionExample = new QuestionExample();
@@ -127,6 +132,23 @@ public class QuestionServiceImpl implements QuestionService{
         }
         questionMapper.updateByPrimaryKey(q);
         
+    }
+
+    @Override
+    public List<Course> getCourses(Long tId) {
+        // TODO Auto-generated method stub
+        return courseMapper.getValidCoursesByTeacherId(tId);
+    }
+
+    @Override
+    public Question getQuestion(Long qid) {
+        // TODO Auto-generated method stub
+        return questionMapper.selectByPrimaryKey(qid);
+    }
+
+    @Override
+    public void update(Question que) {
+        questionMapper.updateByPrimaryKey(que);
     }
 
 }

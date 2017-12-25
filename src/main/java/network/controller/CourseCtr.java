@@ -1,7 +1,11 @@
 package network.controller;
 
-import network.model.Course;
-import network.service.CourseService;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import network.model.Course;
+import network.model.Teacher;
+import network.service.CourseService;
+import network.service.QuestionService;
 
 @Controller
 @RequestMapping(value="course")
@@ -23,8 +26,11 @@ public class CourseCtr {
 
     @Autowired
     CourseService courseService ;
+    
+    @Autowired
+    QuestionService questionService ;
 
-    @RequestMapping(value = "/addcourse.do")
+    @RequestMapping(value = "/addCourse.do")
     public ModelAndView CourseAddView(HttpServletResponse res, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("addCourse");
@@ -33,24 +39,29 @@ public class CourseCtr {
 
     @RequestMapping(value = "/publishCourse.do")
     @ResponseBody
-    public String publishCourse(String  c_name,String  c_password,int c_state, Long t_id,HttpServletResponse res){
-
-
-
+    public String publishCourse(String  c_name,String  c_password,HttpServletResponse res, HttpServletRequest request){
         Date first = new Date();
-        DateFormat formatfirst = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String createtime = formatfirst.format(first);
-
         Course c=new Course();
-
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        
         c.setcId(first.getTime());
         c.setcName(c_name);
         c.setcPassword(c_password);
-        c.setcState(c_state);
-        c.settId(t_id);
+        c.setcState(1);
+        c.settId(teacher.gettId());
 
         courseService.insert(c);
         return "success";
 
+    }
+    
+    @RequestMapping(value = "/courseList.do")
+    public ModelAndView courseListView(HttpServletResponse res, HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("courseList");
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        List<Course> courseList = questionService.getCourses(teacher.gettId());
+        mv.addObject("courseList", courseList);
+        return mv;
     }
 }

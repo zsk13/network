@@ -41,6 +41,11 @@
 							<p>查看已发布问题</p>
 						</div>
 						<div class="weui-cell__ft"></div>
+					</a><a class="weui-cell weui-cell_access" href="../course/addCourse.do">
+						<div class="weui-cell__bd">
+							<p>创建课程</p>
+						</div>
+						<div class="weui-cell__ft"></div>
 					</a>
 					</div>
 					</div>

@@ -15,8 +15,14 @@ function Submit() {
         return false;
     }
 
+    if ($("#answer").val().trim() == "") {
+        alert("请输入答案")
+        return false;
+    }
+    
    var question=$("#question").val();
    var answer=$("#answer").val();
+   var cId=$("#cId").val();
    var teacher_id = 1 ;
    var status = "0";
 
@@ -26,7 +32,7 @@ function Submit() {
         type: 'POST',
         dataType: "JSON",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
-        data: {teacher_id:teacher_id,question:question,answer:answer,status:status},
+        data: {cId:cId,question:question,answer:answer,status:status},
         success: function (data) {
             console.log(data)
         },

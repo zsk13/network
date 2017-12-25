@@ -1,5 +1,7 @@
 package network.service;
 
+import java.util.List;
+
 import network.model.Course;
 
 public interface CourseService {

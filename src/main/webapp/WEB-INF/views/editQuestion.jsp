@@ -7,7 +7,7 @@
 <html lang="zh-CN">
 <head>
 
-    <title> 发布问题 </title>
+    <title> 修改问题 </title>
 
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css"/>
 
@@ -17,7 +17,7 @@
         }
 
     </style>
-
+<script src="/network/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -42,15 +42,20 @@
 			<div class="weui-cell weui-cell_select">
                 <div class="weui-cell__bd">
                     <select class="weui-select" name="cId" id = "cId">
-                    	<c:forEach items="${courseList }" var="q">
-							<option value="${q.cId }">${q.cName }</option>
+                    	<c:forEach items="${courseList }" var="c">
+							<c:if test="${c.cId eq q.courseId}">
+								<option  selected value="${c.cId }">${c.cName }</option>
+							</c:if>
+							<c:if test="${not (c.cId eq q.courseId)}">
+								<option  value="${c.cId }">${c.cName }</option>
+							</c:if>
 						</c:forEach>
   
                     </select>
                 </div>
             </div>
 
-
+			<input type="hidden" id="qid" value="${q.qid }"></input>
 
 
             <div class="weui-cells__title" style="padding-top: 60px;">问题内容</div>
@@ -58,7 +63,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
                         <textarea class="weui-textarea" placeholder="问题内容（必填）" id="question" name="content"
-                                  rows="3" required maxlength="100" required> </textarea>
+                                  rows="3" required maxlength="100" required> ${q.question }</textarea>
 
                     </div>
                 </div>
@@ -69,7 +74,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
                         <textarea class="weui-textarea" placeholder="问题答案（必填）" id="answer" name="ans"
-                                  rows="3" required maxlength="100" required> </textarea>
+                                  rows="3" required maxlength="100" required> ${q.answer }</textarea>
 
                     </div>
                 </div>
@@ -87,6 +92,50 @@
 </div>
 
 </div>
+<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('#btnSubmit').click(function() {
+				Submit();
+			})
+
+		});
+
+		function Submit() {
+
+			if ($("#question").val().trim() == "") {
+		        alert("请输入问题")
+		        return false;
+		    }
+
+		    if ($("#answer").val().trim() == "") {
+		        alert("请输入答案")
+		        return false;
+		    }
+			var qid = $("#qid").val();
+		    var question=$("#question").val();
+		    var answer=$("#answer").val();
+		    var cId=$("#cId").val();
+		    var teacher_id = 1 ;
+		    var status = "0";
+
+		     $.ajax({
+		         url:'./edit.do',
+		         type: 'POST',
+		         dataType: "JSON",
+		         contentType: "application/x-www-form-urlencoded;charset=utf-8",
+		         data: {qid:qid,cId:cId,question:question,answer:answer,status:status},
+		         success: function (data) {
+		             console.log(data)
+		         },
+		         error: function (request) {
+		             console.error()
+		             alert('提交成功');
+		         }
+		     });
+
+		}
+	</script>
 
 </body>
 <script type="text/javascript" src="http://g.alicdn.com/msui/sm/0.6.2/js/sm.js" charset="utf-8"></script>
@@ -96,8 +145,7 @@
 <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>--%>
 <%--<script type="text/javascript" src="${ctx}/js/question.js"></script>--%>
 
-<script src="/network/js/jquery.min.js"></script>
-<script type="text/javascript" src="/network/js/question.js"></script>
+
 </html>
 
 
