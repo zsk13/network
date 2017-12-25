@@ -83,35 +83,35 @@
 
             var cId = $(this).attr('id');
 
-            $('#btnSubmit').on("click", function () {
-                var cPassword = $('cPassword').val();
-                var openId = $("#openId").val();
+        });
+        $('#btnSubmit').on("click", function () {
+            var cPassword = $('cPassword').val();
+            var openId = $("#openId").val();
 
-                $.ajax({
-                    url: './add.do',
-                    type: 'POST',
-                    dataType: "JSON",
-                    contentType: "application/x-www-form-urlencoded;charset=utf-8",
-                    data: {cId: cId, cPassword: cPassword, openId: openId},
-                    success: function (data) {
-                        console.log("success")
-                        console.log(data)
-                        if (data.code == 1) {
-                            alert("选课成功！");
-                            $androidDialog2.fadeOut(200);
-                        }
-                        if (data.code == 2) {
-                            var error = document.getElementById("errorPassword");
-                            error.style.display = "";
-                        }
-                    },
-                    error: function (data) {
-                        console.log("why")
-                        console.log(data)
-                        console.error()
-                        alert('fail: 选课失败，请稍后重试！');
+            $.ajax({
+                url: './add.do',
+                type: 'POST',
+                dataType: "JSON",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                data: {cId: cId, cPassword: cPassword, openId: openId},
+                success: function (data) {
+                    console.log("success")
+                    console.log(data)
+                    if (data.code == 1) {
+                        alert("选课成功！");
+                        $androidDialog2.fadeOut(200);
                     }
-                });
+                    if (data.code == 2) {
+                        var error = document.getElementById("errorPassword");
+                        error.style.display = "";
+                    }
+                },
+                error: function (data) {
+                    console.log("why")
+                    console.log(data)
+                    console.error()
+                    alert('fail: 选课失败，请稍后重试！');
+                }
             });
         });
 
