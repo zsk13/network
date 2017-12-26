@@ -30,7 +30,7 @@
         <h1 class="page__title">退课</h1>
     </div>
     <div class="page__bd">
-        <div class="weui-cells" style="font-size: xx-large;">
+        <div class="weui-cells" style="font-size: 300%">
             <input type="hidden" name="openId" id="openId" value="${openId}"/>
             <c:forEach items="${cList}" var="c">
                 <a class="weui-cell weui-cell_access" href="javascript:;" id="${c.cId}" name="${c.cId}">

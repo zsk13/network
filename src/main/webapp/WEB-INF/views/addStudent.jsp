@@ -23,7 +23,7 @@
 <div class="page">
     <div class="page__bd">
         <form id="formData" action="" >
-            <div class="weui-cells" style="font-size: xx-large;">
+            <div class="weui-cells" style="font-size: 300%;">
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">学号</label></div>
                     <div class="weui-cell__bd">
