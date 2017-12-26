@@ -47,6 +47,12 @@
 						</div>
 						<div class="weui-cell__ft"></div>
 					</a>
+					<a class="weui-cell weui-cell_access" href="../course/courseList.do">
+						<div class="weui-cell__bd">
+							<p>课程列表</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</a>
 					</div>
 					</div>
 				</div>

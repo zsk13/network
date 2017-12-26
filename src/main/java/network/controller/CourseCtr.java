@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import network.model.Course;
+import network.model.Question;
 import network.model.Teacher;
 import network.service.CourseService;
 import network.service.QuestionService;
@@ -60,8 +61,39 @@ public class CourseCtr {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("courseList");
         Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
-        List<Course> courseList = questionService.getCourses(teacher.gettId());
+        List<Course> courseList = questionService.getAllCourses(teacher.gettId());
         mv.addObject("courseList", courseList);
         return mv;
     }
+    
+    @RequestMapping(value = "/editCourse.do")
+    public ModelAndView updateCourse(Long cid,HttpServletResponse res, HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("editCourse");
+        Course c = courseService.getCourse(cid);
+        mv.addObject("c", c);
+        return mv;
+    }
+    
+    @RequestMapping(value = "/update.do")
+    @ResponseBody
+    public String update(Long cid, String  c_name,String  c_password,Integer c_state,HttpServletResponse res, HttpServletRequest request){
+        Course c=new Course();
+        c.setcId(cid);
+        c.setcName(c_name);
+        c.setcPassword(c_password);
+        c.setcState(c_state);
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        c.settId(teacher.gettId());
+
+        courseService.updateByPrimaryKey(c);
+        return "success";
+    }
+    
+    @RequestMapping(value = "/deleteCourse.do")
+    public String deleteCourse(Long cid,HttpServletResponse res, HttpServletRequest request) throws Exception{
+        courseService.deleteByPrimaryKey(cid);
+        return "redirect:./courseList.do";
+    }
+
 }

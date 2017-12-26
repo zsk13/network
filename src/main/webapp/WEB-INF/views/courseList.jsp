@@ -36,16 +36,19 @@
 					<div class="weui-cell weui-cell_access">
 						
 							<div class="weui-cell__bd">
+								<c:if test="${q.cState eq 1}">
 								<a href="./editCourse.do?cid=${q.cId }"
 									style="height: 50px; font-size: medium;">${q.cName }</a>
+							     </c:if>
+							     <c:if test="${not (q.cState eq 1)}">
+								<a 
+									style="height: 50px; font-size: medium;">${q.cName }</a>
+							     </c:if>
 							</div>
 							<div class="weui-cell__ft" style="font-size: 0">
 								<span style="vertical-align: middle; font-size: 17px;"> <c:choose>
-										<c:when test="${q.cState eq 0}">
-											<a onclick="publishQuestion(${q.qid })">发布问题</a>
-										</c:when>
-										<c:when test="${q.cState eq 1}"> 结束课程 </c:when>
-										<c:when test="${q.cState eq 2}"> 已完结  </c:when>
+										<c:when test="${q.cState eq 1}"> <a href="./deleteCourse.do?cid=${q.cId }">删除课程</a> </c:when>
+										<c:otherwise> 已完结  </c:otherwise>
 									</c:choose>
 								</span> 
 							</div>

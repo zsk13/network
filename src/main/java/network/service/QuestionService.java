@@ -14,6 +14,7 @@ public interface QuestionService {
     public List<Question> getQuestions();
     public void publishQuestion(Long qid);
     public List<Course> getCourses(Long tId);
+    public List<Course> getAllCourses(Long tId);
     public Question getQuestion(Long qid);
     public void update(Question que);
 }

@@ -17,6 +17,7 @@ import network.dao.QuestionMapper;
 import network.dao.UsersDao;
 import network.model.Answer;
 import network.model.Course;
+import network.model.CourseExample;
 import network.model.CourseStudent;
 import network.model.CourseStudentExample;
 import network.model.Question;
@@ -199,6 +200,15 @@ public class QuestionServiceImpl implements QuestionService {
 
     private Question getQuestionByOpenId(String sopenid) {
         return getQuestionByCids(getCIds(sopenid));
+    }
+
+    @Override
+    public List<Course> getAllCourses(Long tId) {
+        CourseExample CourseExample = new CourseExample();
+        CourseExample.Criteria criteria = CourseExample.createCriteria();
+        criteria.andTIdEqualTo(tId);
+        
+        return courseMapper.selectByExample(CourseExample);
     }
 
 }

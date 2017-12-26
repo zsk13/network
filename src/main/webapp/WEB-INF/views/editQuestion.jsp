@@ -84,7 +84,7 @@
 
         <div class="weui-btn-area">
             <%--<a href="javascript:;" class="button button-fill" style="margin: auto;" id="btnSubmit">提交</a>--%>
-            <a href="javascript:;" class="weui-btn weui-btn_primary" id="btnSubmit">提交</a>
+            <a href="javascript:;" class="weui-btn weui-btn_primary" id="btnSubmit">修改</a>
 
         </div>
             </div>

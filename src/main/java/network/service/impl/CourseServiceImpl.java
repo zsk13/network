@@ -26,4 +26,9 @@ public class CourseServiceImpl implements CourseService{
     public int updateByPrimaryKey(Course record) {
         return courseMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public Course getCourse(Long cid) {
+        return courseMapper.selectByPrimaryKey(cid);
+    }
 }
