@@ -16,6 +16,7 @@ import network.dao.CourseStudentMapper;
 import network.dao.QuestionMapper;
 import network.dao.UsersDao;
 import network.model.Answer;
+import network.model.AnswerExample;
 import network.model.Course;
 import network.model.CourseExample;
 import network.model.CourseStudent;
@@ -105,6 +106,13 @@ public class QuestionServiceImpl implements QuestionService {
             answer1.setContent(answer);
             answer1.setUid(user.getuId());
 
+            AnswerExample answerExample = new AnswerExample();
+            AnswerExample.Criteria criteria = answerExample.createCriteria();
+            criteria.andQidEqualTo(question.getQid());
+            criteria.andUidEqualTo(user.getuId());
+            List<Answer> list = answerMapper.selectByExample(answerExample);
+            
+            
             if (correctAnswer == null || correctAnswer.equals("") || answer.equals(correctAnswer)) {
                 answer1.setCorrect(true);
                 respContent = "回答正确";
@@ -112,7 +120,13 @@ public class QuestionServiceImpl implements QuestionService {
                 answer1.setCorrect(false);
                 respContent = "回答错误";
             }
-            answerMapper.insert(answer1);
+            if(list==null || list.size()==0){
+                answer1.setAid(list.get(0).getAid());
+                answerMapper.updateByPrimaryKey(answer1);
+            }else{           
+                answerMapper.insert(answer1);
+            }
+
         }
         
 
