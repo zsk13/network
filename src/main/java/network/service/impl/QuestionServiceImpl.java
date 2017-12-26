@@ -47,10 +47,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     CourseStudentMapper courseStudentMapper;
 
-    public List<Question> getQuestion() {
+    public List<Question> getQuestions(Long cid) {
         QuestionExample questionExample = new QuestionExample();
         QuestionExample.Criteria criteria = questionExample.createCriteria();
         criteria.andStatusEqualTo("1");
+        criteria.andCourseIdEqualTo(cid);
         questionExample.setOrderByClause("qid DESC");
         return questionMapper.selectByExample(questionExample);
     }
@@ -155,7 +156,7 @@ public class QuestionServiceImpl implements QuestionService {
     public void publishQuestion(Long qid) {
         Question q = questionMapper.selectByPrimaryKey(qid);
         q.setStatus("1");
-        List<Question> questions = getQuestion();
+        List<Question> questions = getQuestions(q.getCourseId());
         for (Question q1 : questions) {
             q1.setStatus("2");
             questionMapper.updateByPrimaryKey(q1);
@@ -223,6 +224,14 @@ public class QuestionServiceImpl implements QuestionService {
         criteria.andTIdEqualTo(tId);
         
         return courseMapper.selectByExample(CourseExample);
+    }
+
+    @Override
+    public void finishQuestion(Long qid) {
+        // TODO Auto-generated method stub
+        Question q = questionMapper.selectByPrimaryKey(qid);
+        q.setStatus("2");
+        questionMapper.updateByPrimaryKey(q);
     }
 
 }
