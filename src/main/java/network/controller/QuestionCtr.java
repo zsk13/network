@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import network.model.Question;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import network.model.Course;
+import network.model.Question;
+import network.model.Teacher;
 import network.service.AnswerService;
 import network.service.QuestionService;
 
@@ -35,6 +37,9 @@ public class QuestionCtr {
     @RequestMapping(value = "/addquestion.do")
     public ModelAndView QuestionAddView(HttpServletResponse res, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        List<Course> courseList = questionservice.getCourses(teacher.gettId());
+        mv.addObject("courseList", courseList);
         mv.setViewName("question");
         return mv;
     }
@@ -58,16 +63,43 @@ public class QuestionCtr {
         mv.addObject("wrong", qs.get(2));
         return mv;
     }
+    
+    @RequestMapping(value = "/editquestion.do")
+    public ModelAndView editQuestion(Long qid,HttpServletResponse res, HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("editQuestion");
+        Question q = questionservice.getQuestion(qid);
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        List<Course> courseList = questionservice.getCourses(teacher.gettId());
+        mv.addObject("courseList", courseList);
+        mv.addObject("q", q);
+        return mv;
+    }
+    
+    
+    @RequestMapping(value = "/edit.do")
+    @ResponseBody
+    public String edit(Long qid,Long cId,String question,String answer,String status,HttpServletResponse res, HttpServletRequest request){
+        Date first = new Date();
+        DateFormat formatfirst = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createtime = formatfirst.format(first);
+
+        Question que=new Question();
+        que.setQid(qid);
+        que.setAnswer(answer);
+        que.setQuestion(question);
+        que.setStatus(status);
+        que.setCourseId(cId);
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        que.setTeacherId(teacher.gettId());
+
+        questionservice.update(que);
+        return "success";
+    }
 
     @RequestMapping(value = "/add.do")
     @ResponseBody
-    public String add(Long teacher_id,String question,String answer,String status,HttpServletResponse res){
-
-
-        //teacher_id = Long.valueOf(1);
-
-        //status ="0" ;
-
+    public String add(Long cId,String question,String answer,String status,HttpServletResponse res, HttpServletRequest request){
         Date first = new Date();
         DateFormat formatfirst = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createtime = formatfirst.format(first);
@@ -77,15 +109,12 @@ public class QuestionCtr {
         que.setAnswer(answer);
         que.setQuestion(question);
         que.setStatus(status);
-        que.setTeacherId(teacher_id);
+        que.setCourseId(cId);
+        Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
+        que.setTeacherId(teacher.gettId());
 
         questionservice.insert(que);
         return "success";
-
-        //String responseMessage = WechatMessageUtil.textMessageToXml(que);
-
-
-        //System.out.println("a");
 
     }
     

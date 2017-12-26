@@ -1,22 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yangyicheng
-  Date: 17/12/9
-  Time: 下午4:49
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
-
-<%--<script type="text/javascript" src="${ctx}/js/questionList.js"></script>--%>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 
-<title>问题列表</title>
+<title>课程列表</title>
 
 <link rel="stylesheet"
 	href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" />
@@ -35,41 +25,32 @@
 			<div class="weui-tab">
 				<div class="weui-navbar">
 					<div class="weui-navbar__item weui-bar__item_on" id="tab1">
-						<a href="./addquestion.do">提问</a>
+						<a href="./addCourse.do">创建课程</a>
 					</div>
 					<div class="weui-navbar__item" id="tab2">
-						<a href="./questionlist.do">问题列表</a>
+						<a href="./courseList.do">课程列表</a>
 					</div>
 				</div>
 				<div class="weui-cells" style="padding-top: 60px;">
-				<c:forEach items="${qs }" var="q">
+					<c:forEach items="${courseList }" var="q">
 					<div class="weui-cell weui-cell_access">
-							<c:if test="${q.status eq 0}">
-								<div class="weui-cell__bd">
-									<a href="./editquestion.do?qid=${q.qid }"
-										style="height: 50px; font-size: medium;">${q.question }</a>
-								</div>
-							</c:if>
-							<c:if test="${q.status eq 1 or q.status eq 2}">
-								<div class="weui-cell__bd">
-									<a href="./answer.do?qid=${q.qid }"
-										style="height: 50px; font-size: medium;">${q.question }</a>
-								</div>
-							</c:if>
-							
+						
+							<div class="weui-cell__bd">
+								<c:if test="${q.cState eq 1}">
+								<a href="./editCourse.do?cid=${q.cId }"
+									style="height: 50px; font-size: medium;">${q.cName }</a>
+							     </c:if>
+							     <c:if test="${not (q.cState eq 1)}">
+								<a 
+									style="height: 50px; font-size: medium;">${q.cName }</a>
+							     </c:if>
+							</div>
 							<div class="weui-cell__ft" style="font-size: 0">
 								<span style="vertical-align: middle; font-size: 17px;"> <c:choose>
-										<c:when test="${q.status eq 0}">
-											<a onclick="publishQuestion(${q.qid })">发布问题</a>
-										</c:when>
-										<c:when test="${q.status eq 1}"> 回答中  </c:when>
-										<c:when test="${q.status eq 2}"> 已完结  </c:when>
+										<c:when test="${q.cState eq 1}"> <a href="./deleteCourse.do?cid=${q.cId }">删除课程</a> </c:when>
+										<c:otherwise> 已完结  </c:otherwise>
 									</c:choose>
 								</span> 
-								<!--  
-								<span class="weui-badge weui-badge_dot"
-									style="margin-left: 5px; margin-right: 5px;"></span>
-								-->
 							</div>
 						
 					</div>
@@ -79,7 +60,6 @@
 		</div>
 	</div>
 
-	</div>
 
 </body>
 <script src="/network/js/jquery.min.js"></script>
