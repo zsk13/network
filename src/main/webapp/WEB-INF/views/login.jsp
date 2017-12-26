@@ -35,9 +35,9 @@
 		<img src="../images/avtar.png" />
 	</div>
 			<form id = "form1" action="./check.do" method="post">
-					<input name="name" type="text" class="text" value="" >
+					<input name="name" type="text" class="text" value="" placeholder="请输入工号">
 						<div class="key">
-					<input name="password" type="password" value="">
+					<input name="password" type="password" value="" placeholder="请输入密码">
 						</div>
 			<div style="color:#F00">
 			${msg}

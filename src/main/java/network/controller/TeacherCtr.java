@@ -53,14 +53,15 @@ public class TeacherCtr {
 
     @RequestMapping(value = "/add.do")
     public
-    @ResponseBody Map<String, Object> add(HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    Map<String, Object> add(HttpServletRequest request, HttpServletResponse response) {
         String tName = request.getParameter("tName");
         String tPassword = request.getParameter("tPassword");
         String tNumber = request.getParameter("tNumber");
-        String tMail= request.getParameter("tMail");
+        String tMail = request.getParameter("tMail");
         String tPhone = request.getParameter("tPhone");
 
-        Teacher teacher=new Teacher();
+        Teacher teacher = new Teacher();
         teacher.settName(tName);
         teacher.settPassword(tPassword);
         teacher.settNumber(tNumber);
@@ -74,9 +75,26 @@ public class TeacherCtr {
         return map;
 
     }
+
+    @RequestMapping(value = "/check.do")
+    public
+    @ResponseBody
+    Map<String, Object> check(HttpServletRequest request, HttpServletResponse response) {
+        String tNumber = request.getParameter("tNumber");
+        int code = 0;
+        Teacher teacher = teacherservice.findTeacherBytNumber(tNumber);
+        if (teacher == null)
+            code = 1;
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", code);
+        return map;
+
+    }
+
     @RequestMapping(value = "/del.do")
     public
-    @ResponseBody Map<String, Object> delete(HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    Map<String, Object> delete(HttpServletRequest request, HttpServletResponse response) {
         String tNumber = request.getParameter("tNumber").toString();
 
         teacherservice.deleteTeacherBytNumber(tNumber);
@@ -89,59 +107,62 @@ public class TeacherCtr {
 
     @RequestMapping(value = "/edit.do")
     public
-    @ResponseBody Map<String, Object> edit(HttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    Map<String, Object> edit(HttpServletRequest request, HttpServletResponse response) {
         String tNumber = request.getParameter("tNumber").toString();
 
         Teacher teacher = teacherservice.findTeacherBytNumber(tNumber);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("message", "success");
-        map.put("name",teacher.gettName());
-        map.put("password",teacher.gettPassword());
-        map.put("number",teacher.gettNumber());
-        map.put("mail",teacher.gettMail());
-        map.put("phone",teacher.gettPhone());
+        map.put("name", teacher.gettName());
+        map.put("password", teacher.gettPassword());
+        map.put("number", teacher.gettNumber());
+        map.put("mail", teacher.gettMail());
+        map.put("phone", teacher.gettPhone());
         return map;
 
     }
 
     @RequestMapping(value = "/detail.do")
     public
-    @ResponseBody Map<String, Object> detail(HttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    Map<String, Object> detail(HttpServletRequest request, HttpServletResponse response) {
         String tName = request.getParameter("tName").toString();
 
         Teacher teacher = teacherservice.findTeacherBytName(tName);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("message", "success");
-        map.put("name",teacher.gettName());
-        map.put("password",teacher.gettPassword());
-        map.put("number",teacher.gettNumber());
-        map.put("mail",teacher.gettMail());
-        map.put("phone",teacher.gettPhone());
+        map.put("name", teacher.gettName());
+        map.put("password", teacher.gettPassword());
+        map.put("number", teacher.gettNumber());
+        map.put("mail", teacher.gettMail());
+        map.put("phone", teacher.gettPhone());
         return map;
 
     }
 
     @RequestMapping(value = "/update.do")
     public
-    @ResponseBody Map<String, Object> update(HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    Map<String, Object> update(HttpServletRequest request, HttpServletResponse response) {
         String tName = request.getParameter("tName");
         String tPassword = request.getParameter("tPassword");
         String tNumber = request.getParameter("tNumber");
-        String tMail= request.getParameter("tMail");
+        String tMail = request.getParameter("tMail");
         String tPhone = request.getParameter("tPhone");
         String tid = request.getParameter("tid");
         System.out.println("success read");
 
-        Teacher teacher=new Teacher();
+        Teacher teacher = new Teacher();
         teacher.settName(tName);
         teacher.settPassword(tPassword);
         teacher.settNumber(tNumber);
         teacher.settMail(tMail);
         teacher.settPhone(tPhone);
 
-        teacherservice.updateTeacherBytNumber(teacher,tid);
+        teacherservice.updateTeacherBytNumber(teacher, tid);
 
         System.out.println("success update");
 

@@ -33,13 +33,13 @@ public class LoginCtr {
             return "redirect:./login.do";
         } else {
 
-            attr.addFlashAttribute("name", name);
             request.getSession().setAttribute("username", name);
             request.getSession().setAttribute("type", "teacher");
             Teacher teacher = new Teacher();
-            teacher = teacherService.findTeacherBytName(name);
+            teacher = teacherService.findTeacherBytNumber(name);
             teacher.settPassword(null);
             request.getSession().setAttribute("teacher",teacher);
+            attr.addFlashAttribute("name", teacher.gettName());
             return "redirect:./welcome.do";
         }
 

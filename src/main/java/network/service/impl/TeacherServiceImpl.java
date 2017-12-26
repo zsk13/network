@@ -40,7 +40,7 @@ public class TeacherServiceImpl implements TeacherService {
     public boolean login(String teacherName, String password) {
         TeacherExample teacherExample = new TeacherExample();
         TeacherExample.Criteria criteria = teacherExample.createCriteria();
-        criteria.andTNameEqualTo(teacherName);
+        criteria.andTNumberEqualTo(teacherName);
         List<Teacher> teacherList = teacherMapper.selectByExample(teacherExample);
         if (teacherList.size() <= 0)
             return false;
