@@ -27,7 +27,7 @@
 <body>
 <div class="container">
     <div class="page__hd">
-        <h1 class="page__title">选课</h1>
+        <h1 class="page__title">退课</h1>
     </div>
     <div class="page__bd">
         <div class="weui-cells" style="font-size: xx-large;">
@@ -37,7 +37,7 @@
                     <div class="weui-cell__bd">
                         <p>${c.cName}</p>
                     </div>
-                    <div class="weui-cell__ft">点击选课</div>
+                    <div class="weui-cell__ft">点击退课</div>
                 </a>
 
             </c:forEach>
