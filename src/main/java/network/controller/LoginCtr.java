@@ -32,7 +32,6 @@ public class LoginCtr {
             attr.addFlashAttribute("msg", "用户名或密码不正确！");
             return "redirect:./login.do";
         } else {
-
             request.getSession().setAttribute("username", name);
             request.getSession().setAttribute("type", "teacher");
             Teacher teacher = new Teacher();
