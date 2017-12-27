@@ -17,4 +17,5 @@ public interface QuestionService {
     public List<Course> getAllCourses(Long tId);
     public Question getQuestion(Long qid);
     public void update(Question que);
+    public void finishQuestion(Long qid);
 }
