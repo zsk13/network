@@ -100,4 +100,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return courseDao.getValidCoursesByTeacherId(tId);
 	}
 
+	@Override
+	public void deleteById(long rId) {
+		// TODO Auto-generated method stub
+		registrationDao.deleteById(rId);
+	}
+
 }

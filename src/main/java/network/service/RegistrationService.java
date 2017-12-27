@@ -14,4 +14,5 @@ public interface RegistrationService {
     public List<Registration> getByOpenid(String openid);
     public List<Course> getAllCourses();
     public List<Course> getValidCoursesByTeacherId(long tId);
+    public void deleteById(long rId);
 }

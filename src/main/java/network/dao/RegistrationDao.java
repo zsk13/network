@@ -23,7 +23,7 @@ public interface RegistrationDao {
     
     List<Registration> getAll();
     List<Registration> getByCourseId(long cId);
-    
+    void deleteById(long rId);
     
     Registration selectByPrimaryKey(Long rId);
 
