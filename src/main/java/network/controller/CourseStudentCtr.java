@@ -1,5 +1,6 @@
 package network.controller;
 
+import network.common.AppUtil;
 import network.common.OpenIdUtil;
 import network.model.Course;
 import network.model.CourseStudent;
@@ -28,16 +29,20 @@ public class CourseStudentCtr {
 
     @RequestMapping(value = "/redirect.do")
     public String wechatRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String appid = AppUtil.getAppId();
+        String URL = AppUtil.getURL();
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=wx39b5d81dba20a59e&" +
-                "redirect_uri=http://47.100.116.100/network/course_student/addCourseStudent.do?type=1" +
+                "appid="+appid+"&" +
+                "redirect_uri="+URL+"course_student/addCourseStudent.do?type=1" +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
     }
     @RequestMapping(value = "/quitRedirect.do")
     public String quitRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String appid = AppUtil.getAppId();
+        String URL = AppUtil.getURL();
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=wx39b5d81dba20a59e&" +
-                "redirect_uri=http://47.100.116.100/network/course_student/addCourseStudent.do?type=2" +
+                "appid="+appid+"&" +
+                "redirect_uri="+URL+"course_student/addCourseStudent.do?type=2" +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
     }
 
@@ -81,7 +86,6 @@ public class CourseStudentCtr {
     @RequestMapping(value = "/add.do")
     public @ResponseBody
     Map<String, Object> add(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("into add！");
         Map<String, Object> map = new HashMap<String, Object>();
 
         Date first = new Date();

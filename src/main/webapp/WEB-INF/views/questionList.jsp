@@ -62,7 +62,7 @@
 										<c:when test="${q.status eq 0}">
 											<a onclick="publishQuestion(${q.qid })">发布问题</a>
 										</c:when>
-										<c:when test="${q.status eq 1}"> 回答中  </c:when>
+										<c:when test="${q.status eq 1}"> <a href="./finishQuestion.do?qid=${q.qid }">结束提问</a>  </c:when>
 										<c:when test="${q.status eq 2}"> 已完结  </c:when>
 									</c:choose>
 								</span> 

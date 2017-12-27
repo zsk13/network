@@ -49,7 +49,6 @@ public class UpdateRegistrationCtr {
         PageInfo<Registration> page = registrationPageService.queryByPage(teacher.gettId(),pageNo,10);
         //List<Registration> list1 = registrationService.getAll();
         ModelAndView mv = new ModelAndView("display_registrations");
-        System.out.println("size:"+page.getList().size());
         mv.addObject("registrationList",page.getList());
         mv.addObject("totalPage",page.getPages());
         mv.addObject("currentPage",page.getPageNum());
@@ -101,7 +100,6 @@ public class UpdateRegistrationCtr {
         	String value1 = req.getParameter(name1);
         	byte[] b = value1.getBytes("ISO-8859-1");
         	String value2 = new String(b, "UTF-8");
-        	System.out.println(name1+"\t"+value1+"\t"+value2);
         }
 		
         

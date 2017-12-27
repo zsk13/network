@@ -123,6 +123,10 @@ public class QuestionCtr {
         questionservice.publishQuestion(qid);
     }
 
-
+    @RequestMapping(value = "/finishQuestion.do")
+    public String finishQuestion(Long qid,HttpServletResponse res, HttpServletRequest request) throws Exception{
+        questionservice.finishQuestion(qid);
+        return "redirect:./questionlist.do";
+    }
 
 }

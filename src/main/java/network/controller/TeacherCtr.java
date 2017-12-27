@@ -153,7 +153,6 @@ public class TeacherCtr {
         String tMail = request.getParameter("tMail");
         String tPhone = request.getParameter("tPhone");
         String tid = request.getParameter("tid");
-        System.out.println("success read");
 
         Teacher teacher = new Teacher();
         teacher.settName(tName);
@@ -163,8 +162,6 @@ public class TeacherCtr {
         teacher.settPhone(tPhone);
 
         teacherservice.updateTeacherBytNumber(teacher, tid);
-
-        System.out.println("success update");
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("message", "success");

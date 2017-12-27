@@ -72,7 +72,6 @@ public class LocationCtr {
         Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
         PageInfo<Location> page = locationPageService.queryByPage(pageNo, 10);
         ModelAndView mv = new ModelAndView("locationList");
-        System.out.println("size:" + page.getList().size());
         mv.addObject("locationList", page.getList());
         mv.addObject("totalPage", page.getPages());
         mv.addObject("currentPage", page.getPageNum());

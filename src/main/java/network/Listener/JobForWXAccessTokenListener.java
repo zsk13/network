@@ -1,9 +1,10 @@
-package network.common;
+package network.Listener;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import network.common.AccessTokenUtil;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,6 @@ public class JobForWXAccessTokenListener implements ApplicationListener<ContextR
 
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (event.getApplicationContext().getParent() == null) {
-
             Runnable runnable = new Runnable() {
                 public void run() {
                     /**
