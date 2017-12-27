@@ -94,7 +94,7 @@
 
 										 <a class="del-btn weui-btn weui-btn_mini weui-btn_warn"
                                             id="${registration.rId}"
-                                            href="./finishQuestion.do?qid=1514118913291">删除点名</a>
+                                            href="javascript:;">删除点名</a>
 								</span>
                             </div>
 

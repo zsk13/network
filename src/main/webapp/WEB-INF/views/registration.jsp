@@ -86,7 +86,7 @@
                 <div class="weui-cells">
                     <div class="weui-cell weui-cell_select weui-cell_select-after">
                         <div class="weui-cell__hd">
-                            <label class="weui-label" style="font-size: xx-large">课程：</label>
+                            <label class="weui-label" style="font-size: xx-large">课程:</label>
                         </div>
                         <div class="weui-cell__bd">
                             <input type="hidden" name="openId" id="openId" value="${openId}">
