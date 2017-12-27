@@ -122,10 +122,10 @@ public class QuestionServiceImpl implements QuestionService {
                 respContent = "回答错误";
             }
             if(list==null || list.size()==0){
+                answerMapper.insert(answer1);
+            }else{                           
                 answer1.setAid(list.get(0).getAid());
                 answerMapper.updateByPrimaryKey(answer1);
-            }else{           
-                answerMapper.insert(answer1);
             }
 
         }
