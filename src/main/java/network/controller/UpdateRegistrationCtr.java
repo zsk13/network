@@ -9,6 +9,7 @@ import network.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -17,7 +18,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -146,4 +149,21 @@ public class UpdateRegistrationCtr {
         return "teacher_login";
     }
 
+    @RequestMapping(value="/delete.do")
+    @ResponseBody
+    public Map<String, String> delete(HttpServletRequest request){
+    	System.out.println("Here is manage/delete.do");
+    	String rId = request.getParameter("rId");
+    	Map<String, String> result = new HashMap<String,String>();
+    	if(rId!=null&&(!rId.equals(""))) {
+    		long registrationId = Long.parseLong(rId);
+    		registrationService.deleteById(registrationId);
+    		result.put("message","success");
+    	}else {
+    		result.put("message", "fail");
+    	}
+    	
+    	System.out.println("deletion result = "+result.get("message"));
+    	return result;
+    }
 }
