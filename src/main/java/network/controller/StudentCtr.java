@@ -1,5 +1,6 @@
 package network.controller;
 
+import network.common.AppUtil;
 import network.common.OpenIdUtil;
 import network.model.Users;
 import network.service.StudentService;
@@ -24,9 +25,11 @@ public class StudentCtr {
 
     @RequestMapping(value = "/redirect.do")
     public String wechatRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String appid = AppUtil.getAppId();
+        String URL = AppUtil.getURL();
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=wx39b5d81dba20a59e&" +
-                "redirect_uri=http://47.100.116.100/network/student/addStudent.do" +
+                "appid="+appid+"&" +
+                "redirect_uri="+URL+"student/addStudent.do" +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
     }
 

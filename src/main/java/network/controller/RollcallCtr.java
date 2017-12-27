@@ -25,7 +25,6 @@ public class RollcallCtr {
 	
 	@RequestMapping(value = "/display_registrations.do")
 	public ModelAndView showRegistrations(HttpServletRequest request) {
-		System.out.println("This is RollcallCtr.showRegistrations. rollcall/display_registrations.do expected.");
 		ModelAndView mav = new ModelAndView("display_registrations");
 		List<Registration> list1 = registrationService.getAll();
 		mav.addObject("registrationList", list1);

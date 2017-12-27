@@ -19,6 +19,10 @@ public class AppUtil {
         return appsecret;
     }
 
+    public static String getURL(){
+        String URL = getProperties().getProperty("URL");
+        return  URL;
+    }
     public static Properties getProperties() {
         Properties prop = new Properties();
         try {
