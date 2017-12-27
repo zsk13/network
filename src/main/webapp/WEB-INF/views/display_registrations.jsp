@@ -80,9 +80,12 @@ embed, object {
 								<div class="weui-cell__bd">
 									<p>
 										<fmt:formatDate value="${registration.sTime}" type="date" />日   <c:out value="${registration.cName}" />点名
-
+										<div class="weui-cell__ft">
+                        					<a href="javascript:;" class="del-btn weui-btn weui-btn_mini weui-btn_warn" id="${registration.rId}" >删除</a>
+                    					</div>
 									</p>
 								</div>
+								
 							</a>
 
 						</c:forEach>
@@ -101,4 +104,50 @@ embed, object {
 
 	</div>
 </body>
+<script src="../js/jquery.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function () {
+
+    $('.del-btn').click(function () {
+        var id = $(this).attr('id');
+        var msg = "确定要删除吗？";
+        if (confirm(msg)==true){
+            Delete(id);
+        }
+    })
+
+
+});
+
+function Delete(id) {
+    $.ajax({
+        url:'./delete.do',
+        type: 'POST',
+        dataType: "JSON",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        data: {rId: id},
+        //console.log(data);
+        success: function (data) {
+        	//alert("Here is success");
+            //console.log("success")
+            //console.log(data)
+            if (data.message == "success") {
+                alert("删除成功");
+                location.href ="./display_registrations.do";
+            } else {
+                //alert(info.msg)
+            }
+
+
+        },
+        error: function (data) {
+            console.log("deletion failed oh my fuck why?");
+            console.log(data);
+            //console.error()
+            alert('fail: 删除失败');
+        }
+    });
+
+}
+</script>
 </html>

@@ -23,7 +23,7 @@ public class JobForWXAccessTokenListener implements ApplicationListener<ContextR
             };
 
             ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-            service.scheduleAtFixedRate(runnable, 1, 20, TimeUnit.SECONDS);
+            service.scheduleAtFixedRate(runnable, 1, 7000, TimeUnit.SECONDS);
         }
     }
 }

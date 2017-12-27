@@ -130,6 +130,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <delete id="deleteById" parameterType="java.lang.Long">
+	DELETE FROM registration
+	WHERE r_id = #{rId,jdbcType=BIGINT}	
+  </delete>
+  
   <insert id="insert" parameterType="network.model.Registration" >
     insert into registration (r_id, l_id, s_time, 
       e_time, c_id, c_name)
