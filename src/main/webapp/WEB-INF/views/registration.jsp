@@ -117,50 +117,71 @@
     $(function(){
         $('#registration').on('click', function(){
             var date = new Date();
-            wx.getLocation({
-                type: 'gcj02',
-                success: function (res) {
-                    //   alert("获取地理位置成功，经纬度为：（" + res.latitude + "，" + res.longitude + "）");
-                    $.ajax({
-                        type: "POST",
-                        url: "./addRegistration.do",
-                        data: {
-                            openId: $("#openId").val(),
-                            location_x: res.latitude,
-                            location_y: res.longitude,
-                            date: date.getTime(),
-                            rId: $('#registrationSelect option:selected').val(),
-                        },
-                        dataType: "json",
-                        error: function (data) {
-                            alert("签到失败，请稍后重试！");
-                        },
-                        success: function (data) {
-                            // alert(data.state);
-                            switch (data.state) {
-                                case 0:
-                                    alert("您还没有注册，无法签到！")
-                                    break;
-                                case 1:
-                                    alert("签到失败，当前时间内没有课程！")
-                                    break;
-                                case 2:
-                                    alert("签到失败，您不在上课地点，请检查定位！")
-                                    break;
-                                case 3:
-                                    alert("签到成功！")
-                                    break;
-                                case 4:
-                                    alert("您已签到，请勿重复签到！")
-                                    break;
-                            }
-                        }
-                    });
-                },
-                fail: function (error) {
-                    alert("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
+            function getLocation()
+            {
+                if (navigator.geolocation)
+                {
+                    navigator.geolocation.getCurrentPosition(showPosition,showError);
                 }
-            });
+                else{x.innerHTML="Geolocation is not supported by this browser.";}
+            }
+            function showPosition(position)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "./addRegistration.do",
+                    data: {
+                        openId: $("#openId").val(),
+                        location_x: position.coords.latitude,
+                        location_y: position.coords.longitude,
+                        date: date.getTime(),
+                        rId: $('#registrationSelect option:selected').val(),
+                    },
+                    dataType: "json",
+                    error: function (data) {
+                        alert("签到失败，请稍后重试！");
+                    },
+                    success: function (data) {
+                        // alert(data.state);
+                        switch (data.state) {
+                            case 0:
+                                alert("您还没有注册，无法签到！")
+                                break;
+                            case 1:
+                                alert("签到失败，当前时间内没有课程！")
+                                break;
+                            case 2:
+                                alert("签到失败，您不在上课地点，请检查定位！")
+                                break;
+                            case 3:
+                                alert("签到成功！")
+                                break;
+                            case 4:
+                                alert("您已签到，请勿重复签到！")
+                                break;
+                        }
+                    }
+                });
+            }
+            function showError(error)
+            {
+                switch(error.code)
+                {
+                    case error.PERMISSION_DENIED:
+                        alert("User denied the request for Geolocation.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("An unknown error occurred.");
+                        break;
+                }
+            }
+
         });
     });
 </script>
