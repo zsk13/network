@@ -6,42 +6,58 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <style>
         @
         -moz-keyframes nodeInserted {
-        from {opacity: 0.99;
+
+        from {
+            opacity: 0.99;
         }
+
         to {
             opacity: 1;
         }
+
         }
         @
         -webkit-keyframes nodeInserted {
-        from {opacity: 0.99;
+
+        from {
+            opacity: 0.99;
         }
+
         to {
             opacity: 1;
         }
+
         }
         @
         -o-keyframes nodeInserted {
-        from {opacity: 0.99;
+
+        from {
+            opacity: 0.99;
         }
+
         to {
             opacity: 1;
         }
+
         }
         @
         keyframes nodeInserted {
-        from {opacity: 0.99;
+
+        from {
+            opacity: 0.99;
         }
+
         to {
             opacity: 1;
         }
+
         }
         embed, object {
             animation-duration: .001s;
@@ -82,7 +98,7 @@
 <div class="container" id="container">
     <div class="page home js_show">
         <div class="page list js_show">
-            <div class="page__bd" >
+            <div class="page__bd">
                 <div class="weui-cells">
                     <div class="weui-cell weui-cell_select weui-cell_select-after">
                         <div class="weui-cell__hd">
@@ -90,14 +106,15 @@
                         </div>
                         <div class="weui-cell__bd">
                             <input type="hidden" name="openId" id="openId" value="${openId}">
-                            <select class="weui-select" name="registrationSelect" id="registrationSelect" style="font-size: xx-large">
+                            <select class="weui-select" name="registrationSelect" id="registrationSelect"
+                                    style="font-size: xx-large">
                                 <c:choose>
-                                    <c:when test="${registrationList!=null && fn:length(registrationList) > 0}">    <!--如果数组为空 -->
+                                    <c:when test="${registrationList!=null && fn:length(registrationList) > 0}"> <!--如果数组为空 -->
                                         <c:forEach var="registration" items="${registrationList}">
                                             <option value="${registration.rId}">${registration.cName}</option>
                                         </c:forEach>
                                     </c:when>
-                                    <c:otherwise>  <!--否则 -->
+                                    <c:otherwise> <!--否则 -->
                                         <option value="">目前暂时没有可签到课程</option>
                                     </c:otherwise>
                                 </c:choose>
@@ -106,7 +123,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                <a href="javascript:;" id="registration" class="weui-btn weui-btn_plain-primary" style="font-size: 100px;height: 200px;width: 300px;text-align: center;border-radius: 100px;line-height: 200px;">签到</a>
+                    <a href="javascript:;" id="registration" class="weui-btn weui-btn_plain-primary"
+                       style="font-size: 100px;height: 200px;width: 300px;text-align: center;border-radius: 100px;line-height: 200px;">签到</a>
                 </div>
             </div>
         </div>
@@ -114,19 +132,18 @@
 </div>
 </body>
 <script type="text/javascript">
-    $(function(){
-        $('#registration').on('click', function(){
+    $(function () {
+        $('#registration').on('click', function () {
             var date = new Date();
-            function getLocation()
-            {
-                if (navigator.geolocation)
-                {
-                    navigator.geolocation.getCurrentPosition(showPosition,showError);
-                }
-                else{x.innerHTML="Geolocation is not supported by this browser.";}
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
             }
-            function showPosition(position)
-            {
+            else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+
+            function showPosition(position) {
                 $.ajax({
                     type: "POST",
                     url: "./addRegistration.do",
@@ -163,10 +180,9 @@
                     }
                 });
             }
-            function showError(error)
-            {
-                switch(error.code)
-                {
+
+            function showError(error) {
+                switch (error.code) {
                     case error.PERMISSION_DENIED:
                         alert("User denied the request for Geolocation.");
                         break;
