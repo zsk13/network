@@ -70,6 +70,17 @@ public class WeChatCtr {
     
     @RequestMapping(value = "validate", method = {RequestMethod.POST})
     public void process(PrintWriter out,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        processWithoutAuth(out,request,response);
+    }
+    
+    /**
+     * 有菜单权限时
+     * @param out
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    public void processWithAuth(PrintWriter out,HttpServletRequest request,HttpServletResponse response) throws IOException {
         try {  
             // 开发者提交信息后，微信服务器将发送GET请求到填写的服务器地址URL上，GET请求携带参数  
             Map<String, String> map = XmlToMap.xmlToMap(request);
@@ -117,6 +128,71 @@ public class WeChatCtr {
             logger.info(responseMessage);
             out.print(responseMessage);
             out.flush();
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+    }
+    /**
+     * 没有菜单权限时
+     * @param out
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    public void processWithoutAuth(PrintWriter out,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        try {  
+            // 开发者提交信息后，微信服务器将发送GET请求到填写的服务器地址URL上，GET请求携带参数  
+            Map<String, String> map = XmlToMap.xmlToMap(request);
+            logger.info(map);
+            // 发送方帐号（一个OpenID）
+            String fromUserName = map.get("FromUserName");
+            // 开发者微信号
+            String toUserName = map.get("ToUserName");
+            // 消息类型
+            String msgType = map.get("MsgType");
+            // 默认回复一个"success"
+            String responseMessage = "success";
+            //消息内容
+            String content = map.get("Content");
+            logger.error("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm:" + msgType);
+            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm:" + msgType + " " +content);
+            // 对消息进行处理
+            if (WechatMessageUtil.MESSAGE_TEXT.equals(msgType)) {// 文本消息
+                if(content.startsWith("答题")){
+                    questionService.dealGetQuestion(map,out);
+                    return;
+                }
+                String msg = "";
+                if(content.startsWith("退课")){
+                    msg = "http://ww.ufengtech.xyz/network/course_student/quitRedirect.do";
+                }
+                if(content.startsWith("选课")){
+                    msg = "http://ww.ufengtech.xyz/network/course_student/redirect.do";
+                }
+                if(content.startsWith("签到")){
+                    msg = "http://ww.ufengtech.xyz/network/registration/redirect.do";
+                }
+                if(content.startsWith("注册")){
+                    msg = "http://ww.ufengtech.xyz/network/student/redirect.do";
+                }
+                if(msg.equals("")){
+                    questionService.dealCommitQuestion(map,out);
+                    return;
+                }
+                
+                
+                TextMessage textMessage = new TextMessage();
+                textMessage.setMsgType(WechatMessageUtil.MESSAGE_TEXT);
+                textMessage.setToUserName(fromUserName);
+                textMessage.setFromUserName(toUserName);
+                textMessage.setCreateTime(System.currentTimeMillis());
+                textMessage.setContent(msg);
+                responseMessage = WechatMessageUtil.textMessageToXml(textMessage);
+                logger.info(responseMessage);
+                out.print(responseMessage);
+                out.flush();
+                return;
+            }
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
