@@ -14,7 +14,7 @@
 		<div class="page home js_show">
 			<div class="page list js_show">
 				<div class="page__bd">
-					<div class="weui-cells__title">欢迎${sessionScope.teacher.tName} 老师</div>
+					<jsp:include page="head.jsp" />
 					<div class="weui-cells">
 						<a class="weui-cell weui-cell_access" href="/network/manage/display_registrations.do">
 							<div class="weui-cell__bd">

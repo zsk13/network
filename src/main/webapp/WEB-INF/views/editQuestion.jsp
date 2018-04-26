@@ -23,7 +23,7 @@
 <body>
 <div class="page">
     <div class="page__bd">
-
+			<jsp:include page="head.jsp" />
             <div class="weui-tab">
                 <div class="weui-navbar">
                     <div class="weui-navbar__item weui-bar__item_on" id = "tab1">
@@ -108,10 +108,6 @@
 		        return false;
 		    }
 
-		    if ($("#answer").val().trim() == "") {
-		        alert("请输入答案")
-		        return false;
-		    }
 			var qid = $("#qid").val();
 		    var question=$("#question").val();
 		    var answer=$("#answer").val();

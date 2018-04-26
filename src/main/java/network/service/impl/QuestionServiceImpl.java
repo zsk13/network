@@ -136,6 +136,41 @@ public class QuestionServiceImpl implements QuestionService {
         out.print(responseMessage);
         out.flush();
     }
+    
+    public boolean dealCommitQuestionWithoutAuth(String openid,String answer){
+        Question question = getQuestionByOpenId(openid);
+        if(question==null){
+            return false;
+        }
+        String correctAnswer = question.getAnswer();
+        Users user = usersDao.selectByOpenId(openid);
+        Answer answer1 = new Answer();
+        answer1.setQid(question.getQid());
+        answer1.setContent(answer);
+        answer1.setUid(user.getuId());
+
+        AnswerExample answerExample = new AnswerExample();
+        AnswerExample.Criteria criteria = answerExample.createCriteria();
+        criteria.andQidEqualTo(question.getQid());
+        criteria.andUidEqualTo(user.getuId());
+        List<Answer> list = answerMapper.selectByExample(answerExample);
+        
+        boolean cor = false;
+        if (correctAnswer == null || correctAnswer.equals("") || answer.equals(correctAnswer)) {
+            answer1.setCorrect(true);
+            cor=true;
+        } else {
+            answer1.setCorrect(false);
+            cor = false;
+        }
+        if(list==null || list.size()==0){
+            answerMapper.insert(answer1);
+        }else{                           
+            answer1.setAid(list.get(0).getAid());
+            answerMapper.updateByPrimaryKey(answer1);
+        }
+        return cor;
+    }
 
     @Override
     public int insert(Question record) {
@@ -213,7 +248,7 @@ public class QuestionServiceImpl implements QuestionService {
         }
     }
 
-    private Question getQuestionByOpenId(String sopenid) {
+    public Question getQuestionByOpenId(String sopenid) {
         return getQuestionByCids(getCIds(sopenid));
     }
 

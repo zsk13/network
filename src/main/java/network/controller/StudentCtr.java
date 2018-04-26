@@ -49,6 +49,15 @@ public class StudentCtr {
         mv.addObject("openId", openid);
         return mv;
     }
+    
+    @RequestMapping(value = "/addStudentWithNoAuth.do")
+    public ModelAndView StudentAddWithNoAuthView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String openid = (String)request.getParameter("openId");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("addStudent");
+        mv.addObject("openId", openid);
+        return mv;
+    }
 
     @RequestMapping(value = "/add.do")
     public @ResponseBody

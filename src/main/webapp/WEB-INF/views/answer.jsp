@@ -2,6 +2,7 @@
 <meta http-equiv=Content-Type content="text/html;charset=utf-8">
 
 <%--<script type="text/javascript" src="${ctx}/WEB-INF/js/answer.js"></script>--%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -16,6 +17,29 @@
 .weui-input {
 	text-align: right;
 }
+
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
 </style>
 
 </head>
@@ -23,7 +47,7 @@
 <body>
 	<div class="page">
 		<div class="page__bd">
-
+					<jsp:include page="head.jsp" />
 				<div class="weui-cells" >
 					<div class="weui-cell">
 						<div class="weui-cell__hd">
@@ -42,6 +66,28 @@
 						<div class="weui-cell__bd">
 							<input class="weui-input" type="text" id="wrongnum"
 								name="wrongpeople" required readonly value="${wrong}  人" />
+						</div>
+					</div>
+					
+					<div class="weui-cells__title">回答情况<a style="float: right"  href="./export.do?qid=${qid }">导出</a></div>
+					<div class="weui-cells weui-cells_form" style ="text-align:center">
+						<div class="weui-cell">
+							<div class="weui-cell__bd" >
+								<table class="gridtable">
+									<tr>
+										<th>学生</th>
+										<th style="width:600px">答案</th>
+										<th>是否正确</th>
+									</tr>
+									<c:forEach items="${as}" var="answer">
+									<tr>
+										<td>${answer.username}</td>
+										<td>${answer.content }</td>
+										<td>${answer.correct }</td>
+									</tr>
+									</c:forEach>
+								</table>
+							</div>
 						</div>
 					</div>
 

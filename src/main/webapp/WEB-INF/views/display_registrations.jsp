@@ -78,6 +78,7 @@
     <div class="page home js_show">
         <div class="page list js_show">
             <div class="page__bd">
+            	<jsp:include page="head.jsp" />
                 <div class="weui-cells__title">点名列表</div>
                 <div class="weui-cells">
                     <c:forEach var="registration" items="${registrationList}">

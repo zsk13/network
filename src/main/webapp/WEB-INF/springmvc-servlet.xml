@@ -57,6 +57,7 @@
             <mvc:exclude-mapping path="/adminLogin/adminLogin.do"/>
             <mvc:exclude-mapping path="/student/**"/>
             <mvc:exclude-mapping path="/wechat/**" />
+            <mvc:exclude-mapping path="/courseques/**" />
             <mvc:exclude-mapping path="/course_student/**" />
 
 

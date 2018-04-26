@@ -82,6 +82,56 @@ public class CourseStudentCtr {
         mv.addObject("openId", openid);
         return mv;
     }
+    
+    @RequestMapping(value = "/addCourseStudentWithNoAuth.do")
+    public ModelAndView CourseStudentAddWithNoAuthView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Integer type = 1;
+        String openid = (String)request.getParameter("openId");
+        Users users = usersService.findByOpneId(openid);
+        ModelAndView mv = new ModelAndView();
+        List<Course> list = new ArrayList<Course>();
+        if (type == 1) {
+            mv.setViewName("selectCourse");
+
+            if (users != null) {
+                list = courseStudentService.getAllNoSelected(users.getuId());
+            }
+            mv.addObject("cList", list);
+        } else {
+            mv.setViewName("quitCourse");
+            if (users != null)
+                list = courseStudentService.getAllSelected(users.getuId());
+            mv.addObject("cList", list);
+        }
+
+        mv.addObject("openId", openid);
+        return mv;
+    }
+    
+    @RequestMapping(value = "/deleteCourseStudentWithNoAuth.do")
+    public ModelAndView CourseStudentDeleteWithNoAuthView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Integer type = 2;
+        String openid = (String)request.getParameter("openId");
+        Users users = usersService.findByOpneId(openid);
+        ModelAndView mv = new ModelAndView();
+        List<Course> list = new ArrayList<Course>();
+        if (type == 1) {
+            mv.setViewName("selectCourse");
+
+            if (users != null) {
+                list = courseStudentService.getAllNoSelected(users.getuId());
+            }
+            mv.addObject("cList", list);
+        } else {
+            mv.setViewName("quitCourse");
+            if (users != null)
+                list = courseStudentService.getAllSelected(users.getuId());
+            mv.addObject("cList", list);
+        }
+
+        mv.addObject("openId", openid);
+        return mv;
+    }
 
     @RequestMapping(value = "/add.do")
     public @ResponseBody

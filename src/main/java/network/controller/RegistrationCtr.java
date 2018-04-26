@@ -104,6 +104,17 @@ public class RegistrationCtr {
         return mav;
 
     }
+    
+    @RequestMapping("/registrationWithNoAuth.do")
+    public ModelAndView registrationWithNoAuth(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("registration");
+        String openid = (String)request.getParameter("openId");
+
+        mav.addObject("openId", openid);
+        mav.addObject("registrationList",registrationService.getByOpenid(openid));
+        return mav;
+
+    }
 
     @RequestMapping(value = "/addRegistration.do")
     public @ResponseBody

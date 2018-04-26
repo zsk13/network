@@ -76,22 +76,8 @@
     <link rel="stylesheet" href="../css/example.css">
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="../js/jquery.min.js"></script>
-    <script>
-        //    alert(location.href.split('#')[0]);
-        wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: '${appId}', // 必填，企业号的唯一标识，此处填写企业号corpid
-            timestamp: parseInt("${timestamp}", 10), // 必填，生成签名的时间戳
-            nonceStr: '${noncestr}', // 必填，生成签名的随机串
-            signature: '${signature}',// 必填，签名，见附录1
-            jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-        wx.ready(function () {
-        });
-        wx.error(function (res) {
-            alert("获取位置失败！请检查定位是否打开！")
-        });
-    </script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=Fhb4MUBVcLURvrRLPEGuBVZuTR2mkjol"></script>    
+    <script type="text/javascript" src="https://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>  
     <script src="../js/jquery.min.js"></script>
 </head>
 <body>
@@ -136,51 +122,50 @@
         $('#registration').on('click', function () {
             var date = new Date();
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            }
-            else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-
-            function showPosition(position) {
-                $.ajax({
-                    type: "POST",
-                    url: "./addRegistration.do",
-                    data: {
-                        openId: $("#openId").val(),
-                        location_x: position.coords.latitude,
-                        location_y: position.coords.longitude,
-                        date: date.getTime(),
-                        rId: $('#registrationSelect option:selected').val(),
-                    },
-                    dataType: "json",
-                    error: function (data) {
-                        alert("签到失败，请稍后重试！");
-                    },
-                    success: function (data) {
-                        // alert(data.state);
-                        switch (data.state) {
-                            case 0:
-                                alert("您还没有注册，无法签到！")
-                                break;
-                            case 1:
-                                alert("签到失败，当前时间内没有课程！")
-                                break;
-                            case 2:
-                                alert("签到失败，您不在上课地点，请检查定位！")
-                                break;
-                            case 3:
-                                alert("签到成功！")
-                                break;
-                            case 4:
-                                alert("您已签到，请勿重复签到！")
-                                break;
+            var geolocation = new BMap.Geolocation();    
+            geolocation.getCurrentPosition(function (r) {    
+                if (this.getStatus() == BMAP_STATUS_SUCCESS) {      
+                    currentLat = r.point.lat;    
+                    currentLon = r.point.lng; 
+                    $.ajax({
+                        type: "POST",
+                        url: "./addRegistration.do",
+                        data: {
+                            openId: $("#openId").val(),
+                            location_x: currentLat,
+                            location_y: currentLon,
+                            date: date.getTime(),
+                            rId: $('#registrationSelect option:selected').val(),
+                        },
+                        dataType: "json",
+                        error: function (data) {
+                            alert("签到失败，请稍后重试！");
+                        },
+                        success: function (data) {
+                            // alert(data.state);
+                            switch (data.state) {
+                                case 0:
+                                    alert("您还没有注册，无法签到！")
+                                    break;
+                                case 1:
+                                    alert("签到失败，当前时间内没有课程！")
+                                    break;
+                                case 2:
+                                    alert("签到失败，您不在上课地点，请检查定位！" + position.coords.latitude +" " +position.coords.longitude)
+                                    break;
+                                case 3:
+                                    alert("签到成功！")
+                                    break;
+                                case 4:
+                                    alert("您已签到，请勿重复签到！")
+                                    break;
+                            }
                         }
-                    }
-                });
-            }
-
+                    });
+                }   
+            });  
+            
+        
             function showError(error) {
                 switch (error.code) {
                     case error.PERMISSION_DENIED:

@@ -18,4 +18,6 @@ public interface QuestionService {
     public Question getQuestion(Long qid);
     public void update(Question que);
     public void finishQuestion(Long qid);
+    public Question getQuestionByOpenId(String sopenid);
+    public boolean dealCommitQuestionWithoutAuth(String openid,String answer);
 }

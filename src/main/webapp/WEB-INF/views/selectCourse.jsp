@@ -21,6 +21,20 @@
         .weui-swiped-btn_primary {
             background-color: #1AAD19;
         }
+        
+        .weui-cell__bd {
+			font-size:4em !important;
+		}
+		.weui-cell__ft{
+			font-size:4em !important;
+		}
+		.weui-label{
+			font-size:4em !important;
+		}
+		.weui-input{
+			font-size:4em !important;
+		}
+		
     </style>
     <script type="text/javascript" src="../js/jquery.min.js"></script>
 </head>

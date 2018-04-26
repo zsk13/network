@@ -85,6 +85,7 @@ embed, object {
            <form id = "form1" action="./add.do" method="post">
             
 			<div class="page__bd">
+			<jsp:include page="head.jsp" />
 				<div class="weui-cells__title">发起点名</div>
 				<div class="weui-cells weui-cells_form">
 

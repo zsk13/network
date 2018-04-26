@@ -22,6 +22,7 @@
 <body>
 	<div class="page">
 		<div class="page__bd">
+							<jsp:include page="head.jsp" />
 			<div class="weui-tab">
 				<div class="weui-navbar">
 					<div class="weui-navbar__item weui-bar__item_on" id="tab1">

@@ -15,6 +15,7 @@
 <div class="container" id="container">
     <div class="page home js_show">
         <div class="page__hd">
+        	<jsp:include page="head.jsp" />
             <div class="weui-cell__ft">
                 <a href="../export/rollcallExport.do?rId=${rId}"
                    class="weui-btn weui-btn_mini weui-btn_primary">下载签到表</a>

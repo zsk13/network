@@ -72,6 +72,7 @@
     <div class="page home js_show">
         <div class="page list js_show">
             <div class="page__bd">
+            	<jsp:include page="head.jsp" />
                 <form id="formData" action="./add.do" >
                     <div class="weui-cells">
                         <div class="weui-cell">

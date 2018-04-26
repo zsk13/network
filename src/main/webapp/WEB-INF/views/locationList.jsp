@@ -23,6 +23,7 @@
 <body>
 
 <div class="page__bd">
+	<jsp:include page="head.jsp" />
     <div class="weui-tab">
         <div class="page__hd">
             <h1 class="page__title">地点管理</h1>
