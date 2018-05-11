@@ -59,7 +59,7 @@
             <mvc:exclude-mapping path="/wechat/**" />
             <mvc:exclude-mapping path="/courseques/**" />
             <mvc:exclude-mapping path="/course_student/**" />
-
+			<mvc:exclude-mapping path="/miniProgram/**" />
 
             <bean class="network.interceptor.LoginHandleInterceptor"></bean>
         </mvc:interceptor>
