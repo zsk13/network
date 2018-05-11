@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/question/question",
-    "pages/infoBinding/infoBinding"
+    "pages/infoBinding/infoBinding",
+    "pages/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,7 +27,11 @@
       {
         "pagePath": "pages/question/question",
         "text": "问答"
-      }
+      },
+            {
+              "pagePath": "pages/register/register",
+              "text": "qiandao"
+            }
     ]
   }
 }
