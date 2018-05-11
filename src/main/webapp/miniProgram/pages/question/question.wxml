@@ -2,7 +2,7 @@
   <view class="usermotto">
     <text class="ques">{{question}}</text>
     <form>
-      <input name="answer" class='ans' bindinput='bindAnswer' focus='true' type='text' placeholder='答案'></input>
+      <input name="answer" class='ans' bindinput='bindAnswer' type='text' placeholder='答案'></input>
       <button class='submit' bindtap='submitAnswer' type='primary' form-type='submit'>submit</button>
     </form>
   </view>

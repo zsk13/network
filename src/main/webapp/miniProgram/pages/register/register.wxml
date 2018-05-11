@@ -1,5 +1,5 @@
 <!--pages/register/register.wxml-->
 <view class='container'>
   <text class='courseName'>{{courseName}}</text>
-  <button  class='button' type='primary'>签到</button>
+  <button bindtap='register' class='button' type='primary'>签到</button>
 </view>

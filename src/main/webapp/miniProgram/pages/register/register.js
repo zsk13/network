@@ -8,7 +8,31 @@ Page({
   data: {
     courseName: ""
   },
-  
+  /**
+   * 提交答案
+   */
+  register(event) {
+    let that = this;
+    let x;
+    let y;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        console.log(res)
+        x = res.latitude
+        y = res.longitude
+        
+      }
+    }) 
+    service.rollcall(x,y).then(function (res) {
+      wx.showToast({
+        icon: 'none',
+        title: res,
+        duration: 2000,
+        mask: true
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
