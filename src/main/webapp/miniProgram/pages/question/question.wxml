@@ -3,7 +3,7 @@
     <text class="ques">{{question}}</text>
     <form>
       <input name="answer" class='ans' bindinput='bindAnswer' focus='true' type='text' placeholder='答案'></input>
-      <button class='submit' type='primary' form-type='提交'>submit</button>
+      <button class='submit' type='primary' form-type='submit'>submit</button>
     </form>
   </view>
 </view>
