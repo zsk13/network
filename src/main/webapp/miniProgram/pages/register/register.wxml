@@ -1,0 +1,5 @@
+<!--pages/register/register.wxml-->
+<view class='container'>
+  <text class='courseName'>{{course}}</text>
+  <button class='submit'  type='primary'>签到</button>
+</view>

@@ -1,0 +1,8 @@
+/* pages/register/register.wxss */
+.courseName{
+  font-size: 50rpx;
+}
+.submit{
+  margin-top: 100rpx;
+  width: 360rpx;
+}
