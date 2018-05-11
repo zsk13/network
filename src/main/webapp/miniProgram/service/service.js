@@ -1,29 +1,38 @@
+var util = require('../utils/util.js');
 function getOpenId(code) {
   return new Promise(function (resolve, reject) {
-    wx.request({
-      url: '',
+    util.request("http://www.ufeng.top/network/miniProgram/first.do").then(function (res) {
+      resolve(res);
     })
-    util.yqrpc('warehouseIOServiceForStd.getOpenId', [code]).then(function (res) {
-      var temp = JSON.parse(res.data.result);
-      var sessionId = temp.sessionId;
-
-      if (sessionId) {
-        console.log('JSESSIONID=' + sessionId);
-
-        getApp().globalData.header.Cookie = 'JSESSIONID=' + sessionId;
-        console.log(getApp().globalData.header.Cookie);
-      }
-
-
-      wx.setStorageSync('session_key', temp.session_key);
-      wx.setStorageSync('unionid', temp.unionid);
-      wx.setStorageSync('openid', temp.openid);
-      console.log("openid: " + temp.openid)
-      resolve(temp.openid);
-    });
+  });
+}
+function getUserInfo(){
+  return new Promise(function(resolve){
+    var userInfo = {
+      id : 1,
+      sno : "MF1732173",
+      name : "张苏可"
+    }
+    resolve(userInfo)
   })
 }
 
+function getQuestion() {
+  return new Promise(function (resolve, reject) {
+    resolve("1+1=?");
+  })
+}
+
+function getCourseName(){
+  return new Promise(function (resolve, reject) {
+    resolve("计算机网络");
+  })
+}
+
+
 module.exports = {
   getOpenId,
+  getUserInfo,
+  getQuestion,
+  getCourseName
 }

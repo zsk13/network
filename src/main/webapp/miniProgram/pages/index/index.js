@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var service = require('../../service/service.js');
 
 Page({
   data: {
@@ -16,6 +17,10 @@ Page({
     })
   },
   onLoad: function () {
+    service.getOpenId("2").then(function(res){
+      console.log(res.data);
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
