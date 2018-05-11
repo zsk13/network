@@ -22,16 +22,17 @@ Page({
         x = res.latitude
         y = res.longitude
         
+        service.rollcall(x, y).then(function (res) {
+          wx.showToast({
+            icon: 'none',
+            title: res,
+            duration: 2000,
+            mask: true
+          })
+        })
       }
     }) 
-    service.rollcall(x,y).then(function (res) {
-      wx.showToast({
-        icon: 'none',
-        title: res,
-        duration: 2000,
-        mask: true
-      })
-    })
+    
   },
   /**
    * 生命周期函数--监听页面加载
