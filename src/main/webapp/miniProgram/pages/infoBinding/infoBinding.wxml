@@ -1,12 +1,28 @@
 <!--pages/infoBinding/infoBinding.wxml-->
-<view>  
-    <form bindsubmit="sumit">  
-        <input bindinput="schoolNum" maxlength="9" type="text" class="marginview" name="schoolNum" placeholder="学号"/>  
-        <input bindinput="password" type="text" password class="marginview" name="name" placeholder="姓名"/>  
-        <button class="marginview" form-type="submit" style="opacity: {{opacity}};color: white; background-color: #ff8719;" disabled="{{disabled}}"> 
+
+<view class="blank"></view>
+
+<view wx:if="{{hasBinded}}">  
+    <form bindsubmit="sumit">
+        <view class="displayView"><text>{{schoolNum}}</text></view>
+        <view class="displayView"><text>{{name}}</text></view> 
+         <!-- <input bindinput="schoolNum" maxlength="9" type="text" class="inputView" name="schoolNum" value="{{schoolNum}}" placeholder="学号" disabled="false"/>  
+        <input type="text" class="inputView" name="name" value = "{{name}}" placeholder="姓名" disabled="false"/>    -->
+        <button class="marginview" form-type="submit" style="color: white; background-color: #ff8719; margin-top: 10%; margin-left: 15px; margin-right: 15px;"> 
+        <span style="color:#ff0000;"></span>
+        重置个人信息
+        </button>  
+    </form> 
+</view>  
+
+<view wx:if="{{!hasBinded}}">  
+    <form bindsubmit="submit">
+        <input bindinput="schoolNum" maxlength="9" type="text" class="inputView" name="schoolNum" placeholder="学号"/>  
+        <input type="text" class="inputView" name="name" placeholder="姓名"/>  
+        <button class="marginview" form-type="submit" style="opacity: {{opacity}};color: white; background-color: #ff8719; margin-top: 10%; margin-left: 15px; margin-right: 15px;" disabled="{{disabled}}"> 
         <span style="color:#ff0000;"></span>
         确认
         </button>  
     </form> 
-</view>  
+</view> 
 
