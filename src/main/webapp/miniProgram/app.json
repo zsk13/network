@@ -3,8 +3,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/question/question",
-    "pages/infoBinding/infoBinding",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/infoBinding/infoBinding"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,13 +25,17 @@
         "text": "首页"
       },
       {
+        "pagePath": "pages/infoBinding/infoBinding",
+        "text": "个人信息"
+      },
+      {
         "pagePath": "pages/question/question",
         "text": "问答"
       },
-            {
-              "pagePath": "pages/register/register",
-              "text": "qiandao"
-            }
+      {
+        "pagePath": "pages/register/register",
+        "text": "签到"
+      }
     ]
   }
 }

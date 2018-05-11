@@ -1,3 +1,14 @@
+function isSchoolNum(str){  //判断学号输入长度是否符合规则
+  if(str != null) {
+    var len = str.length;
+    if (len == 9) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
 // pages/binding/infoBinding.js
 Page({
 
@@ -5,7 +16,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    disabled: true,
+    opacity: 0.4,
+  },
+
+  schoolNum:function(event){
+    debugger;
+    var isNum = isSchoolNum(event.detail.value.schoolNum)
+    if (isNum) {
+      this.setData({
+        disabled: false,
+        opacity: 1
+      })
+    } else {
+      this.setData({
+        disabled: true,
+        opacity: 0.4
+      })
+    }
   },
 
   /**
