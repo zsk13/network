@@ -8,6 +8,12 @@ Page({
       question : "1+1",
       answer:"2"
   },
+  bindAnswer(event){
+    let answer=event.detail.value;
+    this.setData({
+      answer:answer
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载

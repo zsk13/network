@@ -2,8 +2,8 @@
   <view class="usermotto">
     <text class="ques">{{question}}</text>
     <form>
-      <input class='ans' focus='true' type='text' placeholder='Please input your answer.'></input>
-      <button class='submit' type='primary' form-type='submit'>submit</button>
+      <input name="answer" class='ans' bindinput='bindAnswer' focus='true' type='text' placeholder='答案'></input>
+      <button class='submit' type='primary' form-type='提交'>submit</button>
     </form>
   </view>
 </view>
