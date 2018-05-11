@@ -2,6 +2,7 @@ package network.vo;
 
 public class CommonBean<T> {
     String resultCode;
+    int code;
     private T data;
 
     public String getResultCode() {
@@ -18,6 +19,14 @@ public class CommonBean<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
     
     

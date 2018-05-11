@@ -1,3 +1,5 @@
+
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -36,8 +38,45 @@ function request(url, data = {}, method = "GET") {
   });
 }
 
+/**
+ * 调用微信登录
+ */
+function login() {
+  return new Promise(function (resolve, reject) {
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          //登录远程服务器
+          resolve(res);
+        } else {
+          reject(res);
+        }
+      },
+      fail: function (err) {
+        reject(err);
+      }
+    });
+  });
+}
+
+function getUserInfo() {
+  return new Promise(function (resolve, reject) {
+    wx.getUserInfo({
+      withCredentials: false,
+      success: function (res) {
+        resolve(res);
+      },
+      fail: function (err) {
+        reject(err);
+      }
+    })
+  });
+}
+
 module.exports = {
   request,
-  formatTime: formatTime
+  formatTime: formatTime,
+  login,
+  getUserInfo
 }
 
