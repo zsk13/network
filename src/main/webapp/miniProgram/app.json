@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/question/question",
+    "pages/register/register",
     "pages/infoBinding/infoBinding"
   ],
   "window": {
@@ -26,6 +27,14 @@
       {
         "pagePath": "pages/infoBinding/infoBinding",
         "text": "个人信息"
+      },
+      {
+        "pagePath": "pages/question/question",
+        "text": "问答"
+      },
+      {
+        "pagePath": "pages/register/register",
+        "text": "签到"
       }
     ]
   }
