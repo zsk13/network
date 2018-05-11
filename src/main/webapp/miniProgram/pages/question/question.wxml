@@ -1,0 +1,5 @@
+<view class="container">
+  <view class="usermotto">
+    <text class="ques">{{question}}</text>
+  </view>
+</view>

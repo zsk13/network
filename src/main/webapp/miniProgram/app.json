@@ -1,13 +1,15 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/question/question",
+    "pages/binding/infoBinding"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
@@ -17,19 +19,14 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "static/images/home.png",
         "iconPath-height": "40rpx",
         "iconPath-width": "40rpx",
-        "selectedIconPath": "static/images/home-action.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/catalog/catalog",
-        "iconPath": "static/images/menu.png",
-        "selectedIconPath": "static/images/menu-action.png",
+        "pagePath": "pages/question/question",
         "text": "分类"
       }
     ]
   }
-
 }
