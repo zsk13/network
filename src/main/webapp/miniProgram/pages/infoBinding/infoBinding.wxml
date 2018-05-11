@@ -1,2 +1,12 @@
-<!--pages/binding/infoBinding.wxml-->
-<text>pages/binding/infoBinding.wxml</text>
+<!--pages/infoBinding/infoBinding.wxml-->
+<view>  
+    <form bindsubmit="sumit">  
+        <input bindinput="schoolNum" maxlength="9" type="text" class="marginview" name="schoolNum" placeholder="学号"/>  
+        <input bindinput="password" type="text" password class="marginview" name="name" placeholder="姓名"/>  
+        <button class="marginview" form-type="submit" style="opacity: {{opacity}};color: white; background-color: #ff8719;" disabled="{{disabled}}"> 
+        <span style="color:#ff0000;"></span>
+        确认
+        </button>  
+    </form> 
+</view>  
+

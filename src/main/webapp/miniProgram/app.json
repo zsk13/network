@@ -24,8 +24,8 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/question/question",
-        "text": "问答"
+        "pagePath": "pages/infoBinding/infoBinding",
+        "text": "个人信息"
       }
     ]
   }
