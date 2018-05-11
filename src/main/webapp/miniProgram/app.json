@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/question/question",
-    "pages/binding/infoBinding"
+    "pages/infoBinding/infoBinding"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,7 +25,7 @@
       },
       {
         "pagePath": "pages/question/question",
-        "text": "分类"
+        "text": "问答"
       }
     ]
   }
