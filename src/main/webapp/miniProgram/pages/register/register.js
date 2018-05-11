@@ -1,18 +1,24 @@
 // pages/register/register.js
+var service = require('../../service/service.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    course: "高级计算机网络"
+    courseName: ""
   },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this;
+    service.getCourseName().then(function (res) {
+      that.setData({
+        courseName: res
+      });
+    })
   },
 
   /**
