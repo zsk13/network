@@ -9,11 +9,38 @@ Page({
     question:"",
     answer:"",
   },
+  /**
+   * 绑定用户输入
+   */
   bindAnswer(event) {
     let answer = event.detail.value;
     this.setData({
       answer: answer
     });
+  },
+  /**
+   * 提交答案
+   */
+  submitAnswer(event) {
+    let that = this;
+    service.submitAnswer(this.data.answer).then(function (res) {
+      if (res == 'success'){
+        wx.showToast({
+          icon: 'none',
+          title: '答案正确',
+          duration: 2000,
+          mask: true
+        })
+      }
+      else{
+        wx.showToast({
+          icon: 'none',
+          title: ' 答案错误',
+          duration: 2000,
+          mask: true
+        })
+      }
+    })
   },
 
   /**

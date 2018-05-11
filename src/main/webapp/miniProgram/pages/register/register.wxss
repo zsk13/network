@@ -2,7 +2,7 @@
 .courseName{
   font-size: 50rpx;
 }
-.submit{
+.button{
   margin-top: 100rpx;
   width: 360rpx;
 }
