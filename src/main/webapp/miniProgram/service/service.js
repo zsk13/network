@@ -1,5 +1,6 @@
 var util = require('../utils/util.js');
 var config = require('../config/config.js');
+var syncStore = require('../utils/syncStore.js');
 function getOpenid(code) {
   return new Promise(function (resolve, reject) {
     util.request(config.BaseUrl +"miniProgram/getOpenid.do?code="+code).then(function (res) {
@@ -65,6 +66,16 @@ function rollcall(x,y){
   })
 }
 
+function getCourses(){
+  return new Promise(function (resolve, reject) {
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/getCourses.do?openid=" + openid).then(function (res) {
+      console.log(res);
+      resolve(res.data);
+    })
+  });
+}
+
 
 module.exports = {
   getOpenid,
@@ -73,5 +84,6 @@ module.exports = {
   getCourse,
   submitUserInfo,
   submitAnswer,
-  rollcall
+  rollcall,
+  getCourses
 }

@@ -17,7 +17,7 @@ Page({
     })
   },
   onLoad: function () {
-
+    service.getCourses()
     user.loginByWeixin().then(res => {
       app.globalData.userInfo = res;
       this.setData({
