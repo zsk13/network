@@ -6,10 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courseName: ""
+    courseName: "",
+    hasRegister: ""
   },
   /**
-   * 提交答案
+   * 签到
    */
   register(event) {
     let that = this;
@@ -29,19 +30,25 @@ Page({
             duration: 2000,
             mask: true
           })
+          service.getCourse().then(function (res) {
+            that.setData({
+              hasRegister: res.hasRegister
+            });
+          })
         })
       }
     }) 
-    
+   
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this;
-    service.getCourseName().then(function (res) {
+    service.getCourse().then(function (res) {
       that.setData({
-        courseName: res
+        courseName: res.name,
+        hasRegister: res.hasRegister
       });
     })
   },
