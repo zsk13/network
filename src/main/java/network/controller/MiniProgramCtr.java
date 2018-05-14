@@ -49,7 +49,7 @@ public class MiniProgramCtr {
         return bean;
     }
     
-    @RequestMapping("/first")
+    @RequestMapping("/getUserInfo")
     @ResponseBody
     public CommonBean getUserInfo(){
         CommonBean bean = new CommonBean();

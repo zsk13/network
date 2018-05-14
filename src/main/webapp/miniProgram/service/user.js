@@ -13,7 +13,7 @@ function loginByWeixin() {
       })
     }).then((code) => {
       wx.setStorageSync('code', code);
-      return service.getOpenId(code);
+      return service.getOpenid(code);
     }).then((openId) => {
       wx.setStorageSync('userOpenId', openId);
       return util.getUserInfo();

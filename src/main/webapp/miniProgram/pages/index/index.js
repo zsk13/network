@@ -17,6 +17,7 @@ Page({
     })
   },
   onLoad: function () {
+
     user.loginByWeixin().then(res => {
       app.globalData.userInfo = res;
       this.setData({

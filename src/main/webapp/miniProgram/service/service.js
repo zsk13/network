@@ -1,8 +1,9 @@
 var util = require('../utils/util.js');
-function getOpenId(code) {
+var config = require('../config/config.js');
+function getOpenid(code) {
   return new Promise(function (resolve, reject) {
-    util.request("http://www.ufeng.top/network/miniProgram/first.do").then(function (res) {
-      resolve(res);
+    util.request(config.BaseUrl +"miniProgram/getOpenid.do?code="+code).then(function (res) {
+      resolve(res.data);
     })
   });
 }
@@ -62,7 +63,7 @@ function rollcall(x,y){
 
 
 module.exports = {
-  getOpenId,
+  getOpenid,
   getUserInfo,
   getQuestion,
   getCourseName,

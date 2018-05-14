@@ -62,7 +62,7 @@ function login() {
 function getUserInfo() {
   return new Promise(function (resolve, reject) {
     wx.getUserInfo({
-      withCredentials: false,
+      withCredentials: true,
       success: function (res) {
         resolve(res);
       },
