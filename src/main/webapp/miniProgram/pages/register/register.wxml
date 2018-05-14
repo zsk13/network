@@ -1,5 +1,7 @@
 <!--pages/register/register.wxml-->
 <view class='container'>
   <text class='courseName'>{{courseName}}</text>
-  <button  class='button' type='primary'>签到</button>
+  <button wx:if="{{!hasRegister && !courseName==''}}" bindtap='register' class='button' type='primary'>签到</button>
+  <button wx:if="{{hasRegister && !courseName==''}}" class='button' type='default'>已签到</button>
+  <button wx:if="{{courseName==''}}" class='button' type='default'>暂无需签到课程</button>
 </view>

@@ -24,9 +24,13 @@ function getQuestion() {
   })
 }
 
-function getCourseName(){
+function getCourse(){
   return new Promise(function (resolve, reject) {
-    resolve("计算机网络");
+    var course = {
+      name:"计算机网络",
+      hasRegister: false
+    }
+    resolve(course);
   })
 }
 
@@ -66,7 +70,7 @@ module.exports = {
   getOpenid,
   getUserInfo,
   getQuestion,
-  getCourseName,
+  getCourse,
   submitUserInfo,
   submitAnswer,
   rollcall

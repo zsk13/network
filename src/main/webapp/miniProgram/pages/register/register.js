@@ -6,17 +6,49 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courseName: ""
+    courseName: "",
+    hasRegister: ""
   },
-  
+  /**
+   * 签到
+   */
+  register(event) {
+    let that = this;
+    let x;
+    let y;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        console.log(res)
+        x = res.latitude
+        y = res.longitude
+        
+        service.rollcall(x, y).then(function (res) {
+          wx.showToast({
+            icon: 'none',
+            title: res,
+            duration: 2000,
+            mask: true
+          })
+          service.getCourse().then(function (res) {
+            that.setData({
+              hasRegister: res.hasRegister
+            });
+          })
+        })
+      }
+    }) 
+   
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this;
-    service.getCourseName().then(function (res) {
+    service.getCourse().then(function (res) {
       that.setData({
-        courseName: res
+        courseName: res.name,
+        hasRegister: res.hasRegister
       });
     })
   },
