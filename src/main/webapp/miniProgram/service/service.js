@@ -131,5 +131,6 @@ module.exports = {
   submitUserInfo,
   submitAnswer,
   rollcall,
-  getCourses
+  getCourses,
+  selectCourse
 }
