@@ -1,4 +1,7 @@
 // pages/homePage/homePage.js
+var service = require('../../service/service.js');
+var util = require('../../utils/util.js');
+var user = require('../../service/user.js');
 Page({
 
   /**
@@ -12,7 +15,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    user.loginByWeixin().then(res => {
+      app.globalData.userInfo = res;
+    })
+
   },
 
   /**
