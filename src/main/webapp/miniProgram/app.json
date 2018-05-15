@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/question/question",
     "pages/register/register",
-    "pages/infoBinding/infoBinding"
+    "pages/infoBinding/infoBinding",
+    "pages/homePage/homePage"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,6 +28,10 @@
       {
         "pagePath": "pages/infoBinding/infoBinding",
         "text": "个人信息"
+      },
+      {
+        "pagePath": "pages/homePage/homePage",
+        "text": "首页测试"
       },
       {
         "pagePath": "pages/question/question",
