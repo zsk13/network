@@ -1,7 +1,7 @@
 <!--pages/homePage/homePage.wxml-->
 <view>
   <view class="rowView">
-    <navigator class="item" url="/pages/testPage/test">
+    <navigator class="item" url="/pages/courseList/courseList">
       <view class="naviViewImg">
         <image class="img" src="/static/images/classes.png"></image>
       </view>
@@ -9,7 +9,7 @@
         <text>选课</text>
       </view>   
     </navigator>
-    <navigator class="item" url="/pages/testPage/test">
+    <navigator class="item" url="/pages/register/register">
       <view class="naviViewImg">
         <image class="img" src="/static/images/regist.png"></image>
       </view>
@@ -19,7 +19,8 @@
     </navigator>
   </view>
   <view class="rowView">
-    <navigator class="item" url="/pages/testPage/test">
+  
+    <navigator class="item" url="/pages/question/question">
       <view class="naviViewImg">
         <image class="img" src="/static/images/questions.png"></image>
       </view>
@@ -27,7 +28,7 @@
         <text>答题</text>
       </view>  
     </navigator>
-    <navigator class="item" url="/pages/testPage/test">
+    <navigator class="item" url="/pages/question/question">
       <view class="naviViewImg">
         <image class="img" src="/static/images/leave.png"></image>
       </view>

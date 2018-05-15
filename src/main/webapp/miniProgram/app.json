@@ -1,13 +1,12 @@
 {
   "pages": [
+    "pages/homePage/homePage",
+    "pages/infoBinding/infoBinding",
     "pages/index/index",
     "pages/logs/logs",
     "pages/question/question",
     "pages/register/register",
-    "pages/infoBinding/infoBinding",
-    "pages/homePage/homePage",
-    "pages/courseList/courseList",
-    "pages/testPage/test"
+    "pages/courseList/courseList"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,7 +21,7 @@
     "color": "#000000",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/homePage/homePage",
         "iconPath-height": "40rpx",
         "iconPath-width": "40rpx",
         "text": "首页"
@@ -30,18 +29,6 @@
       {
         "pagePath": "pages/infoBinding/infoBinding",
         "text": "个人信息"
-      },
-      {
-        "pagePath": "pages/homePage/homePage",
-        "text": "首页测试"
-      },
-      {
-        "pagePath": "pages/courseList/courseList",
-        "text": "课程列表"
-      },
-      {
-        "pagePath": "pages/register/register",
-        "text": "签到"
       }
     ]
   }
