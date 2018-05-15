@@ -1,2 +1,10 @@
 <!--pages/courseList/courseList.wxml-->
-<text>pages/courseList/courseList.wxml</text>
+<view class='container'>
+  <view class='course-cell' wx:for="{{courseList}}" wx:for-item="item" wx:for-index="iindex">
+    <button class='select' wx:if="{{item.hasSelected}}" type='default'>已选择</button>
+    <button class='select' wx:if="{{!item.hasSelected}}" data-id='{{item.id}}' bindtap='selectCourse' type='primary'>选择</button>
+    <text >{{item.name}}</text>
+  </view>
+</view>
+
+

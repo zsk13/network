@@ -1,1 +1,19 @@
 /* pages/courseList/courseList.wxss */
+.contianer{
+  margin-top: 10rpx;
+  padding-top: 10rpx;
+}
+.course-cell{
+  margin-top: 20rpx;
+  padding: 20rpx;
+  width: 650rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid gray;
+  border-left: 10rpx solid #6F63CC;
+  box-shadow: 5rpx 5rpx 5rpx #888888;
+}
+.select{
+  border-bottom: 2rpx solid gray;
+  font-size: 24rpx;
+  float: right;
+}

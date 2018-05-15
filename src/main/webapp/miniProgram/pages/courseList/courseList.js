@@ -8,7 +8,13 @@ Page({
   data: {
     courseList:""
   },
-
+  /**
+   * 选课
+   */
+  selectCourse(event){
+    let id = event.currentTarget.dataset.id
+    //console.log(id)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
