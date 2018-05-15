@@ -3,13 +3,13 @@ var config = require('../config/config.js');
 var syncStore = require('../utils/syncStore.js');
 function getOpenid(code) {
   return new Promise(function (resolve, reject) {
-    util.request(config.BaseUrl +"miniProgram/getOpenid.do?code="+code).then(function (res) {
+    util.request(config.BaseUrl + "miniProgram/getOpenid.do?code=" + code).then(function (res) {
       resolve(res.data);
     })
   });
 }
-function getUserInfo(){
-  return new Promise(function(resolve){
+function getUserInfo() {
+  return new Promise(function (resolve) {
     var openid = syncStore.getOpenid();
     util.request(config.BaseUrl + "miniProgram/getUserInfo.do?openid=" + openid).then(function (res) {
       console.log(res);
@@ -25,59 +25,97 @@ function getUserInfo(){
 
 function getQuestion() {
   return new Promise(function (resolve, reject) {
-    resolve("1+1=?");
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/getQuestion.do?openid=" + openid).then(function (res) {
+      console.log(res);
+      resolve(res.data);
+    })
   })
 }
 
-function getCourse(){
-  return new Promise(function (resolve, reject) {
-    var course = {
-      name:"计算机网络",
+/**
+ *     var course = {
+      name: "计算机网络",
       hasRegister: false
     }
-    resolve(course);
+ */
+function getCourse() {
+  return new Promise(function (resolve, reject) {
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/getCourse.do?openid=" + openid).then(function (res) {
+      console.log(res);
+      resolve(res.data);
+    })
   })
 }
 
-function submitUserInfo(name,sno){
+function submitUserInfo(name, sno) {
   return new Promise(function (resolve, reject) {
     var openid = syncStore.getOpenid();
-    util.request(config.BaseUrl + "miniProgram/submitUserInfo.do?openid=" + openid+"&name="+name+"&sno="+sno).then(function (res) {
+    util.request(config.BaseUrl + "miniProgram/submitUserInfo.do?openid=" + openid + "&name=" + name + "&sno=" + sno).then(function (res) {
       console.log(res);
       resolve(config.success);
     })
   })
 }
 
+/**
+ * 正确返回success
+ * 失败返回error
+ */
 function submitAnswer(answer) {
   return new Promise(function (resolve, reject) {
-    if(answer == 2){
-      resolve("success");
-    }else{
-      resolve("error")
-    }
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/rollcall.do?openid=" + openid + "&answer=" + answer).then(function (res) {
+      console.log(res);
+      if(res.data){
+        resolve("success");
+      }else{
+        resolve("error")
+      }
+    })
   })
 }
 
-function rollcall(x,y){
+function rollcall(x, y) {
   return new Promise(function (resolve, reject) {
-    var code = 3;
-    if(code==0){
-      resolve("您还没有注册，无法签到")
-    } else if (code == 1) {
-      resolve("签到失败，当前时间内没有课程！")
-    }else if (code == 2) {
-      resolve("签到失败，您不在上课地点，请检查定位")
-    }else if (code == 3) {
-      resolve("签到成功")
-    }
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/rollcall.do?openid=" + openid + "&x=" + x + "&y=" + y).then(function (res) {
+      console.log(res);
+      var code = res.data
+      if (code == 0) {
+        resolve("您还没有注册，无法签到")
+      } else if (code == 1) {
+        resolve("签到失败，当前时间内没有课程！")
+      } else if (code == 2) {
+        resolve("签到失败，您不在上课地点，请检查定位")
+      } else if (code == 3) {
+        resolve("签到成功")
+      }
+    })
+
+
   })
 }
 
-function getCourses(){
+function getCourses() {
   return new Promise(function (resolve, reject) {
     var openid = syncStore.getOpenid();
     util.request(config.BaseUrl + "miniProgram/getCourses.do?openid=" + openid).then(function (res) {
+      console.log(res);
+      resolve(res.data);
+    })
+  });
+}
+
+/**
+ * 成功返回success
+ * 失败返回密码错误
+ */
+function selectCourse(cId, password) {
+  return new Promise(function (resolve, reject) {
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/selectCourse.do?openid=" + openid + "&cId=" + cId + "&password=" + password).then(function (res) {
       console.log(res);
       resolve(res.data);
     })
