@@ -1,1 +1,19 @@
 /* pages/homePage/homePage.wxss */
+.item{
+  float: left;
+  background: #06F;
+  width: 367.5rpx;
+  padding: 7.5rpx;
+  height: 367.5rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rowView{
+  width: 750rpx;
+  padding: 7.5rpx 7.5rpx;
+  height: auto;
+  overflow: hidden;
+}

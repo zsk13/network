@@ -1,2 +1,19 @@
 <!--pages/homePage/homePage.wxml-->
-<text>pages/homePage/homePage.wxml</text>
+<view>
+  <view class="rowView">
+    <navigator class="item" url="/pages/testPage/test">
+      <text>个人信息</text>
+    </navigator>
+    <navigator class="item" url="/pages/testPage/test">
+      <text>个人信息</text>
+    </navigator>
+  </view>
+  <view class="rowView">
+    <navigator class="item" url="/pages/testPage/test">
+      <text>个人信息</text>
+    </navigator>
+    <navigator class="item" url="/pages/testPage/test">
+      <text>个人信息</text>
+    </navigator>
+  </view>
+</view>

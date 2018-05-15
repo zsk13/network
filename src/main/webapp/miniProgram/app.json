@@ -6,7 +6,8 @@
     "pages/register/register",
     "pages/infoBinding/infoBinding",
     "pages/homePage/homePage",
-    "pages/courseList/courseList"
+    "pages/courseList/courseList",
+    "pages/testPage/test"
   ],
   "window": {
     "backgroundTextStyle": "light",
