@@ -176,7 +176,6 @@ public class MiniProgramCtr {
     @ResponseBody
     public CommonBean getCourses(String openid) {
         Users user = usersService.findByOpneId(openid);
-        ModelAndView mv = new ModelAndView();
         List<Course> all = new ArrayList<Course>();
         List<Course> selected = new ArrayList<Course>();
         JSONArray array = new JSONArray();
