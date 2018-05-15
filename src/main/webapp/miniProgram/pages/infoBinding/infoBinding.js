@@ -81,14 +81,16 @@ Page({
     let that = this;
     wx.showModal({
       title: '确定重新绑定？',
-      showCancel: false,
-      success: function() {
-        that.setData({
-          hasBinded: false,
-          name: "",
-          schoolNum: "",
-          disabled: true
-        })
+      showCancel: true,
+      success: function(res) {
+        if(res.confirm) {
+          that.setData({
+            hasBinded: false,
+            name: "",
+            schoolNum: "",
+            disabled: true
+          })
+        }
       }
     })
   },

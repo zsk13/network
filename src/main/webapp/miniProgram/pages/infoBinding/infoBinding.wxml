@@ -3,7 +3,7 @@
 <view class="blank"></view>
 
 <view wx:if="{{hasBinded}}">  
-    <form bindsubmit="resetInfos">
+    <form bindsubmit="resetInfo">
         <view class="displayView"><text>{{schoolNum}}</text></view>
         <view class="displayView"><text>{{name}}</text></view> 
          <!-- <input bindinput="schoolNum" maxlength="9" type="text" class="inputView" name="schoolNum" value="{{schoolNum}}" placeholder="学号" disabled="false"/>  
