@@ -84,7 +84,7 @@ Page({
       that.setData({
         name: res.name,
         schoolNum: res.sno,
-        hasBinded: true
+        hasBinded: res.name
       })
     })
   },

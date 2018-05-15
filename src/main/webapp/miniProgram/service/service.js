@@ -10,12 +10,16 @@ function getOpenid(code) {
 }
 function getUserInfo(){
   return new Promise(function(resolve){
-    var userInfo = {
-      id : 1,
-      sno : "MF1732173",
-      name : "张苏可"
-    }
-    resolve(userInfo)
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/getUserInfo.do?openid=" + openid).then(function (res) {
+      console.log(res);
+      var userInfo = {
+        id: res.data.uId,
+        sno: res.data.sno,
+        name: res.data.name
+      }
+      resolve(userInfo);
+    })
   })
 }
 
@@ -37,7 +41,11 @@ function getCourse(){
 
 function submitUserInfo(name,sno){
   return new Promise(function (resolve, reject) {
-    resolve("success");
+    var openid = syncStore.getOpenid();
+    util.request(config.BaseUrl + "miniProgram/submitUserInfo.do?openid=" + openid+"&name="+name+"&sno="+sno).then(function (res) {
+      console.log(res);
+      resolve(res.data);
+    })
   })
 }
 
