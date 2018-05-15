@@ -24,17 +24,17 @@
       <view class="naviViewImg">
         <image class="img" src="/static/images/questions.png"></image>
       </view>
-       <view class="naviViewText">
+      <view class="naviViewText">
         <text>答题</text>
-      </view>  
+      </view>
     </navigator>
-    <navigator class="item" url="/pages/question/question">
+    <!-- <navigator class="item" url="/pages/question/question">
       <view class="naviViewImg">
         <image class="img" src="/static/images/leave.png"></image>
       </view>
        <view class="naviViewText">
         <text>请假</text>
-      </view>  
-    </navigator>
+      </view>   
+    </navigator>  -->
   </view>
 </view>
