@@ -1,4 +1,5 @@
 var service = require('../../service/service.js');
+var config = require('../../config/config.js');
 
 // pages/binding/infoBinding.js
 Page({
@@ -44,6 +45,7 @@ Page({
     let that = this;
     var n = event.detail.value.name
     var sno = event.detail.value.schoolNum
+    // debugger;
     if (n.length == 0) {
       wx.showModal({
         title: '',
@@ -60,7 +62,7 @@ Page({
         schoolNum: sno
       })
       service.submitUserInfo(n, sno).then(function(res){
-        if (res == "success") {
+        if (res == config.success) {
           wx.showModal({
             title: '绑定成功',
             showCancel: false,
@@ -81,11 +83,13 @@ Page({
   onLoad: function (options) {
     let that = this;
     service.getUserInfo().then(function(res){
-      that.setData({
-        name: res.name,
-        schoolNum: res.sno,
-        hasBinded: res.name
-      })
+      if (res.id) {
+        that.setData({
+          name: res.name,
+          schoolNum: res.sno,
+          hasBinded: res.name
+        })
+      }
     })
   },
 

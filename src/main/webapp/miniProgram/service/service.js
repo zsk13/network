@@ -44,7 +44,7 @@ function submitUserInfo(name,sno){
     var openid = syncStore.getOpenid();
     util.request(config.BaseUrl + "miniProgram/submitUserInfo.do?openid=" + openid+"&name="+name+"&sno="+sno).then(function (res) {
       console.log(res);
-      resolve(res.data);
+      resolve(config.success);
     })
   })
 }
