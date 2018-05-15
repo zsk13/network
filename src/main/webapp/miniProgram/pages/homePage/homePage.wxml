@@ -2,18 +2,38 @@
 <view>
   <view class="rowView">
     <navigator class="item" url="/pages/testPage/test">
-      <text>个人信息</text>
+      <view class="naviViewImg">
+        <image class="img" src="/static/images/classes.png"></image>
+      </view>
+       <view class="naviViewText">
+        <text>选课</text>
+      </view>   
     </navigator>
     <navigator class="item" url="/pages/testPage/test">
-      <text>个人信息</text>
+      <view class="naviViewImg">
+        <image class="img" src="/static/images/regist.png"></image>
+      </view>
+       <view class="naviViewText">
+        <text>签到</text>
+      </view>  
     </navigator>
   </view>
   <view class="rowView">
     <navigator class="item" url="/pages/testPage/test">
-      <text>个人信息</text>
+      <view class="naviViewImg">
+        <image class="img" src="/static/images/questions.png"></image>
+      </view>
+       <view class="naviViewText">
+        <text>答题</text>
+      </view>  
     </navigator>
     <navigator class="item" url="/pages/testPage/test">
-      <text>个人信息</text>
+      <view class="naviViewImg">
+        <image class="img" src="/static/images/leave.png"></image>
+      </view>
+       <view class="naviViewText">
+        <text>请假</text>
+      </view>  
     </navigator>
   </view>
 </view>
