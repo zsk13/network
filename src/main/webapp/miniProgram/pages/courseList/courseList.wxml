@@ -5,7 +5,14 @@
     <button class='select' wx:if="{{!item.hasSelected}}" data-id='{{item.id}}' bindtap='selectCourse' type='primary'>选择</button>
     <text >{{item.name}}</text>
   </view>
-  <button wx:if='{{courseList==""}}' type='default'>暂无可选课程</button>
+
+  <button wx:if="{{courseList==''|| courseList==null}}" type='default'>暂无可选课程</button>
+
+  <view class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+  <view class="commodity_attr_box" wx:if="{{showModalStatus}}">
+    <input  class='passwd' bindinput='bindAnswer' type='password' placeholder='选课密码'></input>
+    <button bindtap='submit' type='primary'>确定</button>
+  </view>
 </view>
 
 

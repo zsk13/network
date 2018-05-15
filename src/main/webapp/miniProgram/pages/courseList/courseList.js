@@ -6,7 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courseList:""
+    courseList:"",
+    password:"",
+    courseId:"",
+
+    showModalStatus: false,
+    animation:"",
   },
   /**
    * 选课
@@ -14,6 +19,94 @@ Page({
   selectCourse(event){
     let id = event.currentTarget.dataset.id
     //console.log(id)
+    this.setData({
+      courseId: id
+    });
+    this.showModal();
+  },
+  /**
+   * 绑定用户输入
+   */
+  bindAnswer(event) {
+    let answer = event.detail.value;
+    this.setData({
+      password: answer
+    });
+  },
+  /**
+   * 提交选课结果
+   */
+  submit(event) {
+    this.hideModal();
+    let that = this;
+    
+    service.selectCourse(this.data.courseId,this.data.password).then(function (res) {
+      if (res == 'success') {
+        wx.showToast({
+          icon: 'none',
+          title: '选课密码正确',
+          duration: 2000,
+          mask: true
+        })
+      }
+      else {
+        wx.showToast({
+          icon: 'none',
+          title: ' 选课密码错误',
+          duration: 2000,
+          mask: true
+        })
+      }
+      service.getCourses().then(function (res) {
+        that.setData({
+          courseList: res,
+          password:"",
+          courseId:"",
+        });
+      })
+    })
+    
+  },
+  showModal: function () {
+    // 显示遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  hideModal: function () {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: false
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
   },
   /**
    * 生命周期函数--监听页面加载
