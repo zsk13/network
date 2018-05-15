@@ -4,8 +4,8 @@
   background: #FFF;
   padding: 7.5rpx;
   margin: 7.5rpx;
-  width: 350rpx;
-  height: 350rpx;
+  width: 340rpx;
+  height: 340rpx;
   overflow: hidden;
   /* display: flex;
   justify-content: center; */
