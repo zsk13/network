@@ -77,6 +77,22 @@ Page({
     }
   },
 
+  resetInfo: function() {
+    let that = this;
+    wx.showModal({
+      title: '确定重新绑定？',
+      showCancel: false,
+      success: function() {
+        that.setData({
+          hasBinded: false,
+          name: "",
+          schoolNum: "",
+          disabled: true
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
