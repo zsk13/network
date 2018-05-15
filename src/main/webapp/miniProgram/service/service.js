@@ -66,7 +66,7 @@ function submitUserInfo(name, sno) {
 function submitAnswer(answer) {
   return new Promise(function (resolve, reject) {
     var openid = syncStore.getOpenid();
-    util.request(config.BaseUrl + "miniProgram/rollcall.do?openid=" + openid + "&answer=" + answer).then(function (res) {
+    util.request(config.BaseUrl + "miniProgram/submitAnswer.do?openid=" + openid + "&answer=" + answer).then(function (res) {
       console.log(res);
       if(res.data){
         resolve("success");

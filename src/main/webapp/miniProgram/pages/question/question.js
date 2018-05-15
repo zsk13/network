@@ -50,7 +50,7 @@ Page({
     let that = this;
     service.getQuestion().then(function (res) {
       that.setData({
-        question: res
+        question: res.question
       });
     })
   },

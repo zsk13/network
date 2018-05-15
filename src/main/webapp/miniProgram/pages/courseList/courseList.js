@@ -37,14 +37,14 @@ Page({
    * 提交选课结果
    */
   submit(event) {
-    this.hideModal();
     let that = this;
     
-    service.selectCourse(this.data.courseId,this.data.password).then(function (res) {
+    service.selectCourse(this.data.courseId, this.data.password).then(function (res) {
+      that.hideModal();
       if (res == 'success') {
         wx.showToast({
           icon: 'none',
-          title: '选课密码正确',
+          title: '选课成功',
           duration: 2000,
           mask: true
         })
