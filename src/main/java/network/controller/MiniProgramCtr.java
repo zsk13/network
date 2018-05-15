@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import network.model.Course;
+import network.model.CourseStudent;
 import network.model.Question;
 import network.model.Registration;
 import network.model.Users;
@@ -192,7 +193,7 @@ public class MiniProgramCtr {
             }
             all = courseStudentService.getAllSelectiveCourses();
             for(Course course : all){
-                if(ids.contains(course.getcId())){
+                if(!ids.contains(course.getcId())){
                     JSONObject obj = new JSONObject();
                     obj.put("id", course.getcId());
                     obj.put("name", course.getcName());
@@ -210,4 +211,24 @@ public class MiniProgramCtr {
         return bean;
     }
 
+    
+    @RequestMapping("/selectCourse")
+    @ResponseBody
+    public CommonBean selectCourse(String openid, Long cId,String password) {
+        Date date = new Date();
+        CommonBean bean = new CommonBean();
+        bean.setCode(200);
+        Users users = usersService.findByOpneId(openid);
+        if (!courseStudentService.checkPassword(Long.valueOf(cId), password)) {
+            bean.setData("密码错误");
+        }else{
+            CourseStudent courseStudent = new CourseStudent();
+            courseStudent.setcId(Long.valueOf(cId));
+            courseStudent.setsTime(date);
+            courseStudent.setsId(users.getuId());
+            courseStudentService.addCourseStudent(courseStudent);
+            bean.setData("success");
+        }
+        return bean;
+    }
 }
