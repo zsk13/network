@@ -58,7 +58,10 @@ function getCourse() {
         }
 
       }else{
-        resolve("当前没有待签到课程");
+        resolve({
+          name: "",
+          hasRegister: false
+        });
       }
 
     })
