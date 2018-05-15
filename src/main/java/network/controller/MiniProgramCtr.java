@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -25,11 +24,13 @@ import network.model.Course;
 import network.model.CourseStudent;
 import network.model.Question;
 import network.model.Registration;
+import network.model.Rollcall;
 import network.model.Users;
 import network.service.CourseService;
 import network.service.CourseStudentService;
 import network.service.QuestionService;
 import network.service.RegistrationService;
+import network.service.RollcallService;
 import network.service.UsersService;
 import network.vo.CommonBean;
 
@@ -50,6 +51,9 @@ public class MiniProgramCtr {
 
     @Autowired
     private RegistrationService registrationService;
+    
+    @Autowired
+    private RollcallService rollcallService;
 
     @RequestMapping("/first")
     @ResponseBody
@@ -119,12 +123,19 @@ public class MiniProgramCtr {
     public CommonBean getCourse(String openid) {
         Users user = usersService.findByOpneId(openid);
         List<Registration> list = registrationService.getByOpenid(openid);
+
         CommonBean bean = new CommonBean();
         bean.setCode(200);
         if(list==null || list.size()==0){
             bean.setData(null);
         }else{
-            bean.setData(list.get(0));
+            Rollcall rollcall = rollcallService.getRegistrationByRidAndUid(list.get(0).getrId(), user.getuId());
+            if(rollcall==null){
+                bean.setData(list.get(0));
+            }else{
+                bean.setData(list.get(0).getcName());
+            }
+            
         }
         return bean;
     }

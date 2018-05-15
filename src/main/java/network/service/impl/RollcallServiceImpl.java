@@ -65,4 +65,11 @@ public class RollcallServiceImpl implements RollcallService {
         return rollcallExportList;
     }
 
+    @Override
+    public Rollcall getRegistrationByRidAndUid(Long rId, Long uId) {
+        // TODO Auto-generated method stub
+        Rollcall test = rollcallDao.check(uId, rId);
+        return test;
+    }
+
 }

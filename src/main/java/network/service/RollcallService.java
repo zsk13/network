@@ -14,4 +14,6 @@ public interface RollcallService {
 	public List<RollcallDisplay> getAllRollcallDisplaysByRegistrationId(Long rid);
 
 	public List<RollcallExport> getRegistration(Long rId);
+	
+	public Rollcall getRegistrationByRidAndUid(Long rId,Long uId);
 }

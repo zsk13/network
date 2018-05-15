@@ -44,7 +44,23 @@ function getCourse() {
     var openid = syncStore.getOpenid();
     util.request(config.BaseUrl + "miniProgram/getCourse.do?openid=" + openid).then(function (res) {
       console.log(res);
-      resolve(res.data);
+      if(res.data){
+        if(res.data.cName){
+          resolve({
+            name: res.data.cName,
+            hasRegister: false
+          });
+        }else{
+          resolve({
+            name: res.data,
+            hasRegister: true
+          });
+        }
+
+      }else{
+        resolve("当前没有待签到课程");
+      }
+
     })
   })
 }

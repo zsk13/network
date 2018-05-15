@@ -50,10 +50,10 @@ public class RegistrationServiceImpl implements RegistrationService {
             return code;
         }
         Location location = this.locationDao.selectByPrimaryKey(registration.getlId());
-//        if (location_x < location.getMinLcationX() || location_x > location.getMaxLcationX() || location_y < location.getMinLcationY() || location_y > location.getMaxLocationY()) {
-//            code = 2;
-//            return code;
-//        } else {
+        if (location_x < location.getMinLcationX() || location_x > location.getMaxLcationX() || location_y < location.getMinLcationY() || location_y > location.getMaxLocationY()) {
+            code = 2;
+            return code;
+        } else {
             Rollcall rollcall = new Rollcall();
             rollcall.setLocationX(location_x);
             rollcall.setLocationY(location_y);
@@ -63,7 +63,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             rollcall.setrTime(time);
             rollcallDao.insertSelective(rollcall);
             code = 3;
-//        }
+        }
 
         return code;
     }
