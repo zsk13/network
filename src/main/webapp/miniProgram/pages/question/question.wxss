@@ -1,6 +1,11 @@
 /* pages/question/question.wxss */
 .ans,.ques{
-  font-size: 50rpx;
+  font-size: 40rpx;
+}
+.ques{
+  padding-left: 60rpx;
+  padding-right: 60rpx;
+  margin-top: -100rpx;
 }
 .ans{
   margin-top: 50rpx;
@@ -8,8 +13,12 @@
   border: solid 1rpx #E5E5E5;
   border-radius:20rpx;
   outline: 0;
-  width: 500rpx;
-  height:110rpx;
+  width: 610rpx;
+  height:280rpx;
   background: #FFFFFF;
   box-shadow: rgba(0, 0, 0, 0.1) 0rpx 0rpx 8rpx;
+}
+.space{
+  min-width: 200rpx;
+  margin-left: 100rpx;
 }

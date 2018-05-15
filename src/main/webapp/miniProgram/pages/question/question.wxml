@@ -1,9 +1,9 @@
 <view class="container">
-  <view class="usermotto">
-    <text class="ques">{{question}}</text>
+    <view class="ques">
+      <text >{{question}}</text>
+    </view>
     <form>
-      <input name="answer" class='ans' bindinput='bindAnswer' type='text' placeholder='答案'></input>
-      <button class='submit' bindtap='submitAnswer' type='primary' form-type='submit'>submit</button>
+      <textarea name="answer" class='ans' bindinput='bindAnswer' type='text' placeholder='答案'></textarea>
+      <button class='submit' bindtap='submitAnswer' type='primary' form-type='submit'>提<text class='space'></text>交</button>
     </form>
-  </view>
 </view>
