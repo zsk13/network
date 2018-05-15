@@ -5,7 +5,8 @@
     "pages/question/question",
     "pages/register/register",
     "pages/infoBinding/infoBinding",
-    "pages/homePage/homePage"
+    "pages/homePage/homePage",
+    "pages/courseList/courseList"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,8 +35,8 @@
         "text": "首页测试"
       },
       {
-        "pagePath": "pages/question/question",
-        "text": "问答"
+        "pagePath": "pages/courseList/courseList",
+        "text": "课程列表"
       },
       {
         "pagePath": "pages/register/register",
