@@ -22,12 +22,14 @@
     "list": [
       {
         "pagePath": "pages/homePage/homePage",
-        "iconPath-height": "40rpx",
-        "iconPath-width": "40rpx",
+        "iconPath": "static/images/home.png",
+        "selectedIconPath": "static/images/home-action.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/infoBinding/infoBinding",
+        "iconPath": "static/images/user.png",
+        "selectedIconPath": "static/images/user-action.png",
         "text": "个人信息"
       }
     ]

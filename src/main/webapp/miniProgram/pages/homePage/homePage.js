@@ -2,6 +2,7 @@
 var service = require('../../service/service.js');
 var util = require('../../utils/util.js');
 var user = require('../../service/user.js');
+const app = getApp()
 Page({
 
   /**
