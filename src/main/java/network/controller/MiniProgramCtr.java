@@ -145,13 +145,20 @@ public class MiniProgramCtr {
     @RequestMapping("/submitUserInfo")
     @ResponseBody
     public CommonBean submitUserInfo(String openid, String name, String sno) {
-        Users user = usersService.findByOpneId(openid);
-        user.setName(name);
-        user.setSno(sno);
-        usersService.updateUser(user);
         CommonBean bean = new CommonBean();
-        bean.setCode(200);
-        bean.setData(user);
+        Users user = usersService.findByOpneId(openid);
+        if(user!=null){
+            user.setName(name);
+            user.setSno(sno);
+            usersService.updateUser(user);
+            
+            bean.setCode(200);
+            bean.setData(user);
+        }else{
+            bean.setCode(500);
+            bean.setData("user not exist");
+        }
+
         return bean;
     }
 
